@@ -10,6 +10,7 @@
     display: flex; /* Usa flexbox para organizar los elementos internos */
     flex-direction: column; /* Organiza los elementos hijos en columna */
     align-items: center; /* Centra los elementos hijos horizontalmente */
+  
   }
   
   /* Estilos comunes para todos los botones de la barra lateral */
