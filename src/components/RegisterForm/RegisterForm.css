@@ -1,0 +1,57 @@
+.register-background {
+  width: 100%;
+  height: 100vh;
+  background-image: url('./FondoRegister.png'); /* Asegúrate de reemplazar con la ruta correcta a tu imagen */
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-wrapper h2 {
+  color: white; /* Título en blanco */
+  margin-bottom: 2rem; /* Espacio después del título */
+  text-align: left; /* Alinea el texto a la izquierda */
+  font-size: 40px; /* Aumenta el tamaño de la fuente según necesites */
+  padding-left: 20px; /* Añade relleno a la izquierda para desplazar el texto hacia la izquierda */
+}
+
+.register-wrapper {
+  background: rgba(159, 159, 159, 0.227); /* Fondo blanco con opacidad */
+  backdrop-filter: blur(8px); /* Efecto de desenfoque en el fondo */
+  border-radius: 15px;
+  padding: 40px;
+  width: 100%;
+  max-width: 500px; /* Ajusta esta medida según necesites */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Esto centrará todos los hijos de .register-form */
+}
+
+.register-form input {
+  width: 80%; /* Establece los inputs y botón a ocupar el 100% del ancho de su contenedor */
+  padding: 12px 20px;
+  margin-bottom: 12px; /* Espacio entre los inputs y el botón */
+  border: none;
+  border-radius: 20px;
+  background-color: #013220c6; /* Verde oscuro para el fondo de los inputs */
+  color: white; /* Color de texto blanco */
+}
+
+.register-form button {
+  width: 100%; /* Establece los inputs y botón a ocupar el 100% del ancho de su contenedor */
+  padding: 12px 20px;
+  margin-bottom: 10px; /* Espacio entre los inputs y el botón */
+  border: none;
+  border-radius: 20px;
+  background-color: #D3D3D3;
+}
+
+/* Se aplica específicamente al botón para anular el margen inferior del último input */
+.register-form button:last-child {
+  margin-bottom: 0; /* Remueve el margen inferior para el botón */
+}

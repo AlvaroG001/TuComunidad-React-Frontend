@@ -1,0 +1,66 @@
+.home-container {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .sidebar {
+    width: 80px; /* Ancho de la barra lateral */
+    background-color: #056f69; /* Color de fondo de la barra lateral */
+    padding-top: 35px; /* Espacio superior dentro de la barra lateral */
+    display: flex; /* Usa flexbox para organizar los elementos internos */
+    flex-direction: column; /* Organiza los elementos hijos en columna */
+    align-items: center; /* Centra los elementos hijos horizontalmente */
+  }
+  
+  /* Estilos comunes para todos los botones de la barra lateral */
+  .home-button,
+  .calendar-button,
+  .meeting-button,
+  .chat-button,
+  .settings-button,
+  .vote-button {
+    display: block; /* Asegura que la imagen use todo el ancho disponible */
+    width: 45px; /* Ajusta el ancho según sea necesario */
+    height: auto; /* Mantiene la proporción de la imagen */
+    cursor: pointer; /* Cambia el cursor para indicar que es clickeable */
+    margin-top: 25px;
+    margin-bottom: 1px; /* Reducir el margen inferior para acercar la etiqueta */
+  }
+  
+  .sidebar-label {
+    color: white;
+    text-align: center; /* Centra el texto horizontalmente */
+    margin-bottom: 5px; /* Reducir el espacio debajo de cada etiqueta de texto */
+    font-size: 12px;
+    font-weight: bold;
+  }
+  
+  .main-content {
+    flex-grow: 1; /* Ocupa el espacio restante */
+    background-color: #088980; /* El color de fondo principal */
+  }
+  
+  .main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    padding-left: 50px;
+    font-size: 17px;
+    color: white; /* Cambiado a white para consistencia */
+  }
+  
+  .logout-button {
+    padding: 10px 20px;
+    background-color: #eceaeab0; /* Botones con color más hacia el blanco */
+    color: white; /* Cambiado a white para consistencia */
+    cursor: pointer;
+    font-size: 14px;
+    border: none;
+    border-radius: 20px;
+  }
+  
+  .logout-button:hover {
+    background-color: #e0e0e0; /* Un color ligeramente más oscuro al pasar el ratón */
+  }
+  
