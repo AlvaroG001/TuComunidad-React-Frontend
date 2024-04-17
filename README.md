@@ -43,4 +43,4 @@ TuComunidad está abierto a contribuciones. Si tienes ideas para mejorar la apli
 TuComunidad emplea una API diseñada en un servidor local el cual hace falta instalarlo y correrlo para poder usar la pagina.
 Lo puede descargar en 
 Prueba rama migration server
-MIGRATION-SERVER
+CHATS
