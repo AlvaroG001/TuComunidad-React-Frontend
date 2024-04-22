@@ -11,7 +11,7 @@ function RegisterForm() {
   const [user, setUser] = useState({
     name: '',
     email: '',
-    comunity_id: '',
+    communityId: '',
     door: '',
     floor: '',
     isPresident: false,
@@ -44,12 +44,13 @@ function RegisterForm() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(user.email), // Envía solo el email como un JSON string
+      body: JSON.stringify({ email: user.email }), // Objeto con la propiedad email
     });
     if (!response.ok) throw new Error('Error al verificar el usuario');
-    const exists = await response.json(); // Directamente devuelve un booleano
+    const { exists } = await response.json();
     return exists;
-  };  
+  };
+  
 
   /**
    * Maneja el envío del formulario de registro.
@@ -71,17 +72,22 @@ function RegisterForm() {
         },
         body: JSON.stringify(user),
       });
-  
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+
+      console.log(user);
+
+      if (response.ok) {
+        console.log("Usuario registrado con éxito");
+        navigate('/login');
+      } else {
+        const errorText = await response.text();
+        throw new Error(`HTTP error! status: ${response.status} ${errorText}`);
       }
-  
-      console.log("Usuario registrado con éxito");
-      navigate('/login');
     } catch (error) {
       console.error("Error durante el registro:", error);
+      alert("Error durante el registro: " + error.message);
     }
   };
+  
   
 
   return (
@@ -110,8 +116,8 @@ function RegisterForm() {
           />
           <input 
             type="text" 
-            name="comunity_id" 
-            value={user.comunity_id} 
+            name="communityId" 
+            value={user.communityId} 
             onChange={handleChange} 
             placeholder="ID de comunidad" 
             required 
