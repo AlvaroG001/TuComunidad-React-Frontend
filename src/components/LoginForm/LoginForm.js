@@ -23,6 +23,7 @@ function LoginForm({ setIsAuthenticated }) {
       if (response.ok) {
         const userData = await response.json();
         localStorage.setItem('userData', JSON.stringify(userData));
+        console.log(userData);
         setIsAuthenticated(true);
         navigate('/home');
       } else {
