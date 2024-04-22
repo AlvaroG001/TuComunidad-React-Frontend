@@ -1,0 +1,117 @@
+/* Estilo para el encabezado principal en la sección de votaciones */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    padding-left: 50px;
+    color: #ffffff;
+}
+
+/* Botones del encabezado para crear votación y cerrar sesión */
+.header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio entre los botones */
+}
+
+.create-elections-button, .logout-button {
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #eceaeab0;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 14px;
+    border: none;
+    border-radius: 20px;
+    display: inline-block; /* Alineación como botones para los enlaces */
+    text-align: center;
+}
+
+.create-elections-button:hover, .logout-button:hover {
+    background-color: #e0e0e0;
+}
+
+/* Contenedor principal para la lista de votaciones y detalles */
+.elections-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+/* Lista de votaciones con estilo similar al de reuniones */
+.elections-list {
+    flex-basis: 45%;
+    background-color: #056f69; /* Fondo oscuro similar al de reuniones */
+    border-radius: 15px; /* Bordes redondeados */
+    padding: 20px;
+    overflow-y: auto; /* Desplazamiento vertical si es necesario */
+}
+
+.elections-h2 {
+    padding: 10px;
+    padding-left: 25px;
+    font-size: 20px;
+    color: white;
+}
+
+/* Detalles de la votación seleccionada */
+.election-details {
+    position: relative;
+    flex-basis: 45%;
+    background-color: #48a09c; /* Fondo claro para los detalles */
+    border-radius: 15px;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* Botones de lista para cada votación */
+.ListElections-button {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 0 0 15px 0;
+    background-color: #ffffff;
+    border: 2px solid #056f69;
+    border-radius: 25px;
+    color: #056f69;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.3s, color 0.3s, transform 0.2s;
+}
+
+.ListElections-button:hover {
+    background-color: #056460;
+    color: #ffffff;
+    transform: scale(1.05);
+}
+
+.ListElections-button:active {
+    transform: scale(0.95);
+}
+
+/* Estilos adicionales para los títulos y párrafos dentro de .election-details */
+.election-details h2, .election-details p {
+    color: #ffffff;
+    margin: 10px 0;
+}
+
+/* Botón para eliminar votación, con estilo similar al de reuniones */
+.delete-elections-button {
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #408d89bf;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 14px;
+    border: none;
+    border-radius: 20px;
+    display: inline-block;
+    text-align: center;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
