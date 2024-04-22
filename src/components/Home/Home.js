@@ -18,7 +18,7 @@ import settingsButtonImg from '../Logos/SettingsButton.png';
 function Home({ logout }) {
   const navigate = useNavigate();
   const [communityName, setCommunityName] = useState('Tu Comunidad');
-  const [isPresident, setIsPresident] = useState(false);
+  const [president, setPresident] = useState(false);
 
   useEffect(() => {
     const fetchCommunityName = async () => {
@@ -26,7 +26,7 @@ function Home({ logout }) {
       const userData = JSON.parse(userDataString);
       setCommunityName(userData ? userData.comunidad.name : null);
 
-      setIsPresident(userData?.isPresident);
+      setPresident(userData?.president);
     };
 
     fetchCommunityName();
@@ -64,7 +64,7 @@ function Home({ logout }) {
         </Link>
         <span className="sidebar-label">Chats</span>
 
-        {isPresident && (
+        {president && (
           <>
             <Link to="/settings">
               <img src={settingsButtonImg} alt="Settings" className="settings-button" />
