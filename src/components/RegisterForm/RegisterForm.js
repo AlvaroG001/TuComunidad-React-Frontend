@@ -44,12 +44,12 @@ function RegisterForm() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email: user.email }),
+      body: JSON.stringify(user.email), // Envía solo el email como un JSON string
     });
     if (!response.ok) throw new Error('Error al verificar el usuario');
-    const data = await response.json();
-    return data.exists;
-  };
+    const exists = await response.json(); // Directamente devuelve un booleano
+    return exists;
+  };  
 
   /**
    * Maneja el envío del formulario de registro.
@@ -71,17 +71,18 @@ function RegisterForm() {
         },
         body: JSON.stringify(user),
       });
-
+  
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-
+  
       console.log("Usuario registrado con éxito");
       navigate('/login');
     } catch (error) {
       console.error("Error durante el registro:", error);
     }
   };
+  
 
   return (
     <div className="register-background">
