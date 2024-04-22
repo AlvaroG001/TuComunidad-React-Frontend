@@ -38,7 +38,7 @@ function CreateChats() {
             <div className="create-meeting-wrapper">
                 <h2>Crear nuevo chat</h2>
                 <form onSubmit={handleSubmit} className="create-meeting-form">
-                   
+
                     <input
                         type="text"
                         name="sender"
@@ -59,7 +59,7 @@ function CreateChats() {
                         placeholder="Mensaje"
                         required
                     ></textarea>
-                        
+
                     <div className="form-actions">
                         <button type="submit" className="create-meeting-button">Enviar Mensaje</button>
                         <button type="button" className="cancel-button" onClick={() => navigate('/chats')}>Volver</button>

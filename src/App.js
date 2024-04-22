@@ -7,8 +7,6 @@ import Meetings from './components/Meetings/Meetings';
 import CreateMeetings from './components/Meetings/CreateMeetings'
 import Chats from './components/Chats/Chats'
 import CreateChats from './components/Chats/CreateChats'
-import Votaciones from './components/Votaciones/Votaciones';
-
 
 function App() {
   const [isAuthenticated, setIsAuthenticatedState] = useState(

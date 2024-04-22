@@ -22,14 +22,14 @@ function Chats({ logout }) {
     const [selectedChat, setSelectedChat] = useState(null);
 
     useEffect(() => {
-        const fetchMeetings = async () => {
+        const fetchChats = async () => {
             const userDataString = localStorage.getItem('userData');
             const userData = JSON.parse(userDataString);
 
             setIsPresident(userData?.isPresident);
         };
 
-        fetchMeetings();
+        fetchChats();
     }, []);
 
 
@@ -79,16 +79,16 @@ function Chats({ logout }) {
                 <header className="main-header">
                     <h1>Chat de la Comunidad</h1>
                     <div className="header-buttons">
-                        <Link to="/create-chats" className="create-meeting-button">
+                        <Link to="/create-chats" className="create-chat-button">
                             Nuevo Chat
                         </Link>
 
                         <button onClick={handleLogout} className="logout-button">Cerrar sesión</button>
                     </div>
                 </header>
-                <div className="meetings-container">
-                    <div className="meetings-list">
-                        <h2 className="meetings-h2">Últimos chats registrados</h2>
+                <div className="chats-container">
+                    <div className="chats-list">
+                        <h2 className="chats-h2">Últimos chats registrados</h2>
                         {chats.map(chat => (
                             <button key={chat._id} className="chat-button" onClick={() => setSelectedChat(chat)}>
                                 {chat.sender}: {chat.message}
@@ -96,7 +96,7 @@ function Chats({ logout }) {
                         ))}
                     </div>
                     {selectedChat && (
-                        <div className="meeting-details">
+                        <div className="chat-details">
                             <h2>Detalles del Chat</h2>
                             <p>Remitente: {selectedChat.sender}</p>
                             <p>Mensaje: {selectedChat.message}</p>
