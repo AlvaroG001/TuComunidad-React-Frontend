@@ -39,12 +39,9 @@ function LoginForm({ setIsAuthenticated }) {
         localStorage.setItem('userData', JSON.stringify(userData));
         setIsAuthenticated(true);
         navigate('/home');
-      } else if (response.status === 404) {
-        alert("Usuario no encontrado");
-      } else if (response.status === 401) {
-        alert("Contraseña incorrecta");
       } else {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorMessage = await response.text();
+        alert(errorMessage);
       }
     } catch (error) {
       console.error("Error al iniciar sesión:", error);

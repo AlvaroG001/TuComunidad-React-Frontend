@@ -44,12 +44,14 @@ function RegisterForm() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email: user.email }), // Objeto con la propiedad email
+      body: JSON.stringify({ email: user.email }), // Asegúrate de enviar correctamente el objeto con email
     });
     if (!response.ok) throw new Error('Error al verificar el usuario');
-    const { exists } = await response.json();
-    return exists;
+    const data = await response.json();
+    return data;
   };
+
+
   
 
   /**
@@ -60,11 +62,12 @@ function RegisterForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const exists = await checkUserExists();
-      if (exists) {
+      const userExists = await checkUserExists();
+      if (userExists) {
         alert("El usuario con ese correo electrónico ya existe.");
         return;
       }
+  
       const response = await fetch('http://localhost:9000/api/users', {
         method: 'POST',
         headers: {
@@ -72,21 +75,18 @@ function RegisterForm() {
         },
         body: JSON.stringify(user),
       });
-
-      console.log(user);
-
-      if (response.ok) {
-        console.log("Usuario registrado con éxito");
-        navigate('/login');
-      } else {
-        const errorText = await response.text();
-        throw new Error(`HTTP error! status: ${response.status} ${errorText}`);
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
+  
+      console.log("Usuario registrado con éxito");
+      navigate('/login');
     } catch (error) {
       console.error("Error durante el registro:", error);
-      alert("Error durante el registro: " + error.message);
     }
   };
+   
   
   
 
