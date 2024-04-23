@@ -4,9 +4,11 @@ import LoginForm from './components/LoginForm/LoginForm';
 import RegisterForm from './components/RegisterForm/RegisterForm';
 import Home from './components/Home/Home';
 import Meetings from './components/Meetings/Meetings';
-import CreateMeetings from './components/Meetings/CreateMeetings';
-import Chats from './components/Chats/Chats';
-import CreateChats from './components/Chats/CreateChats';
+import CreateMeetings from './components/Meetings/CreateMeetings'
+import Chats from './components/Chats/Chats'
+import CreateChats from './components/Chats/CreateChats'
+import Elections from './components/Elections/Elections'
+import CreateElections from './components/Elections/CreateElections'
 import Reservations from './components/Reservations/Reservations';
 
 function App() {
@@ -46,6 +48,8 @@ function App() {
         <Route path="/chats" element={isAuthenticated ? <Chats logout={logout} /> : <Navigate to="/login" />} />
         <Route path="/create-chats" element={isAuthenticated ? <CreateChats logout={logout} /> : <Navigate to="/login" />} />
 
+        <Route path="/votes" element={isAuthenticated ? <Elections logout={logout} /> : <Navigate to="/login" />} />
+        <Route path="/create-elections" element={isAuthenticated ? <CreateElections logout={logout} /> : <Navigate to="/login" />} />
 
         <Route path="/" element={isAuthenticated ? <Navigate to="/home" /> : <Navigate to="/login" />} />
         <Route path="*" element={<NoMatch />} />
