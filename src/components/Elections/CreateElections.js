@@ -5,9 +5,9 @@ import './CreateElections.css'; // Asegúrate de importar el CSS
 function CreateElections() {
     const navigate = useNavigate();
     const [election, setElection] = useState({
-        title: '',
-        description: '',
-        date: ''
+        titulo: '',
+        informacion: '',
+        fecha: ''
     });
 
     const handleChange = (e) => {
@@ -18,22 +18,27 @@ function CreateElections() {
         e.preventDefault();
         const userDataString = localStorage.getItem('userData');
         const userData = JSON.parse(userDataString);
-        const comunityId = userData.comunity_id; // Asume que esto es parte del modelo de datos
+        const communityId = userData.comunidad.id; // Asumimos que userData tiene la propiedad 'comunidad'
 
-        const newElection = { ...election, comunity_id: comunityId  };
+        const newElection = { ...election, community_id: communityId };
 
         try {
-            await fetch('http://localhost:9000/api/votaciones', {
+            const response = await fetch('http://localhost:9000/api/votaciones', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(newElection)
             });
-            alert('Votación creada con éxito');
-            navigate('/votes'); // Redirige al usuario a la página de votaciones
+            if (response.ok) {
+                alert('Votación creada con éxito');
+                navigate('/votes'); // Redirige al usuario a la página de votaciones
+            } else {
+                throw new Error('Failed to create election');
+            }
         } catch (error) {
             console.error('Error al crear la votación:', error);
+            alert('Error al crear la votación: ' + error.message);
         }
     };
 
@@ -44,15 +49,15 @@ function CreateElections() {
                 <form onSubmit={handleSubmit} className="create-election-form">
                     <input
                         type="text"
-                        name="title"
-                        value={election.title}
+                        name="titulo"
+                        value={election.titulo}
                         onChange={handleChange}
                         placeholder="Título de la votación"
                         required
                     />
                     <textarea
-                        name="description"
-                        value={election.description}
+                        name="informacion"
+                        value={election.informacion}
                         onChange={handleChange}
                         className="create-election-textarea"
                         placeholder="Descripción de la votación"
@@ -60,8 +65,8 @@ function CreateElections() {
                     ></textarea>
                     <input
                         type="date"
-                        name="date"
-                        value={election.date}
+                        name="fecha"
+                        value={election.fecha}
                         onChange={handleChange}
                         required
                     />
