@@ -3,65 +3,43 @@ import { useNavigate } from 'react-router-dom';
 import background from './FondoLogin.png';
 import './LoginForm.css';
 
-/**
- * Componente LoginForm.
- * 
- * @param {function} setIsAuthenticated - Función para establecer el estado de autenticación.
- * @returns {JSX.Element} Componente de formulario de inicio de sesión.
- */
 function LoginForm({ setIsAuthenticated }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isPasswordVisible, setPasswordVisibility] = useState(false);
   const navigate = useNavigate();
 
-  /**
-   * Maneja el evento de inicio de sesión.
-   * 
-   * @param {Event} event - Evento del formulario.
-   */
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('http://localhost:9000/api/users/auth', {
+      const response = await fetch('http://localhost:9000/api/usuarios/auth', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          email: email,
-          password: password
-        })
+        body: JSON.stringify({ email, password })
       });
-  
+
       if (response.ok) {
         const userData = await response.json();
         localStorage.setItem('userData', JSON.stringify(userData));
+        console.log(userData);
         setIsAuthenticated(true);
         navigate('/home');
-      } else if (response.status === 404) {
-        alert("Usuario no encontrado");
-      } else if (response.status === 401) {
-        alert("Contraseña incorrecta");
       } else {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorMessage = await response.text();
+        alert(errorMessage);
       }
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
+      alert("Error al conectar con el servidor");
     }
   };
-  
 
-  /**
-   * Cambia la visibilidad de la contraseña.
-   */
   const togglePasswordVisibility = () => {
     setPasswordVisibility(!isPasswordVisible);
   };
 
-  /**
-   * Redirige al usuario a la página de registro.
-   */
   const goToRegister = () => {
     navigate('/register');
   };
@@ -72,7 +50,6 @@ function LoginForm({ setIsAuthenticated }) {
         <div className="left-container">
           <h1>TuComunidad</h1>
           <p>Gestiona fácilmente tu comunidad, conecta con tus vecinos y transforma tu entorno en un lugar aún mejor.</p>
-          {/* Iconos de redes sociales irían aquí */}
         </div>
         <div className="right-container">
           <form onSubmit={handleLogin} className="login-form">

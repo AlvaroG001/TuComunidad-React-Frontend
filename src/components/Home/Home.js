@@ -18,28 +18,15 @@ import settingsButtonImg from '../Logos/SettingsButton.png';
 function Home({ logout }) {
   const navigate = useNavigate();
   const [communityName, setCommunityName] = useState('Tu Comunidad');
-  const [isPresident, setIsPresident] = useState(false);
+  const [president, setPresident] = useState(false);
 
   useEffect(() => {
     const fetchCommunityName = async () => {
       const userDataString = localStorage.getItem('userData');
       const userData = JSON.parse(userDataString);
-      const comunityId = userData ? userData.comunity_id : null;
+      setCommunityName(userData ? userData.comunidad.name : null);
 
-      setIsPresident(userData?.isPresident);
-
-      if (comunityId) {
-        try {
-          const response = await fetch(`http://localhost:9000/api/comunidades/${comunityId}`);
-          const data = await response.json();
-          if (data && data.name) {
-            setCommunityName(data.name);
-          }
-        } catch (error) {
-          console.error('Error al obtener la comunidad:', error);
-          // Maneja el error como consideres apropiado
-        }
-      }
+      setPresident(userData?.president);
     };
 
     fetchCommunityName();
@@ -77,7 +64,7 @@ function Home({ logout }) {
         </Link>
         <span className="sidebar-label">Chats</span>
 
-        {isPresident && (
+        {president && (
           <>
             <Link to="/settings">
               <img src={settingsButtonImg} alt="Settings" className="settings-button" />

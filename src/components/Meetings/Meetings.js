@@ -9,63 +9,58 @@ import voteButtonImg from '../Logos/VoteButton.png';
 import chatButtonImg from '../Logos/ChatButton.png';
 import settingsButtonImg from '../Logos/SettingsButton.png';
 
-/**
- * Componente Meetings.
- * 
- * @param {function} logout - Función para cerrar sesión.
- * @returns {JSX.Element} Componente de la página de reuniones.
- */
 function Meetings({ logout }) {
     const navigate = useNavigate();
-    const [isPresident, setIsPresident] = useState(false);
+    const [president, setPresident] = useState(false);
     const [meetings, setMeetings] = useState([]);
     const [selectedMeeting, setSelectedMeeting] = useState(null);
 
-    /**
-     * Maneja la eliminación de una reunión.
-     * 
-     * @param {string} meetingId - ID de la reunión a eliminar.
-     */
     const handleDeleteMeeting = async (meetingId) => {
         if(window.confirm('¿Estás seguro de que quieres eliminar esta reunión?')) {
             try {
-                await fetch(`http://localhost:9000/api/reuniones/${meetingId}`, {
+                const response = await fetch(`http://localhost:9000/api/reuniones/${meetingId}`, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                 });
-                alert('Reunión eliminada con éxito');
-                navigate(0); // Recarga la página
+                if (response.ok) {
+                    alert('Reunión eliminada con éxito');
+                    fetchMeetings(); // Recargar las reuniones después de borrar una
+                    if (selectedMeeting && selectedMeeting.id === meetingId) {
+                        setSelectedMeeting(null); // Limpiar la selección si la reunión eliminada estaba seleccionada
+                    }
+                }
             } catch (error) {
                 console.error('Error al eliminar la reunión:', error);
             }
         }
     };
 
-    useEffect(() => {
-        const fetchMeetings = async () => {
-            const userDataString = localStorage.getItem('userData');
-            const userData = JSON.parse(userDataString);
-            const comunityId = userData.comunity_id;
+    const fetchMeetings = async () => {
+        const userDataString = localStorage.getItem('userData');
+        const userData = JSON.parse(userDataString);
+        const communityId = userData.comunidad.id; // Asegúrate de que el objeto y la propiedad sean correctos
         
-            setIsPresident(userData?.isPresident);
+        setPresident(userData?.president);
     
-            try {
-                const response = await fetch(`http://localhost:9000/api/reuniones?comunity_id=${comunityId}`);
+        try {
+            const response = await fetch(`http://localhost:9000/api/reuniones?communityId=${communityId}`);
+            if (response.ok) {
                 const data = await response.json();
                 setMeetings(data.slice(-5)); // Guarda las últimas 5 reuniones
-            } catch (error) {
-                console.error('Error al obtener las reuniones:', error);
+            } else {
+                throw new Error("Error al cargar las reuniones");
             }
-        };
+        } catch (error) {
+            console.error('Error al obtener las reuniones:', error);
+        }
+    };
 
+    useEffect(() => {
         fetchMeetings();
     }, []);
 
-    /**
-     * Maneja el cierre de sesión del usuario.
-     */
     const handleLogout = () => {
         logout();
         navigate('/login');
@@ -95,7 +90,7 @@ function Meetings({ logout }) {
                 </Link>
                 <span className="sidebar-label">Chats</span>
 
-                {isPresident && (
+                {president && (
                     <>
                         <Link to="/settings">
                             <img src={settingsButtonImg} alt="Settings" className="settings-button" />
@@ -109,7 +104,7 @@ function Meetings({ logout }) {
                 <header className="main-header">
                     <h1>Próximas reuniones</h1>
                     <div className="header-buttons">
-                        {isPresident && (
+                        {president && (
                             <Link to="/create-meetings" className="create-meeting-button">
                                 Nueva Reunión
                             </Link>
@@ -122,15 +117,15 @@ function Meetings({ logout }) {
                     <div className="meetings-list">
                         <h2 className="meetings-h2">Últimas reuniones registradas</h2>
                         {meetings.map(meeting => (
-                            <button key={meeting._id} className="ListMeeting-button" onClick={() => setSelectedMeeting(meeting)}>
+                            <button key={meeting.id} className="ListMeeting-button" onClick={() => setSelectedMeeting(meeting)}>
                                 El {meeting.day} de {meeting.month} del {meeting.year} -- {meeting.hour}
                             </button>
                         ))}
                     </div>
                     {selectedMeeting && (
                         <div className="meeting-details">
-                            {isPresident && (
-                                <button className="delete-meeting-button" onClick={() => handleDeleteMeeting(selectedMeeting._id)}>
+                            {president && (
+                                <button className="delete-meeting-button" onClick={() => handleDeleteMeeting(selectedMeeting.id)}>
                                     Eliminar Reunión
                                 </button>
                             )}

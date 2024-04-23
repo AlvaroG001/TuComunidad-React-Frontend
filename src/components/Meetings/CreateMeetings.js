@@ -1,15 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './CreateMeetings.css'; // Asegúrate de importar el CSS
+import './CreateMeetings.css';
 
-/**
- * Componente CreateMeetings.
- * 
- * @returns {JSX.Element} Componente para crear nuevas reuniones.
- */
 function CreateMeetings() {
     const navigate = useNavigate();
-    const [isTextareaFocused, setIsTextareaFocused] = useState(false);
     const [meeting, setMeeting] = useState({
         day: '',
         hour: '',
@@ -18,45 +12,43 @@ function CreateMeetings() {
         information: ''
     });
 
-    /**
-     * Maneja el cambio en los campos del formulario.
-     * 
-     * @param {Event} e - Evento de cambio.
-     */
     const handleChange = (e) => {
         setMeeting({ ...meeting, [e.target.name]: e.target.value });
     };
 
-    /**
-     * Maneja el envío del formulario de creación de reuniones.
-     * 
-     * @param {Event} e - Evento de envío de formulario.
-     */
     const handleSubmit = async (e) => {
         e.preventDefault();
         const userDataString = localStorage.getItem('userData');
         const userData = JSON.parse(userDataString);
-        const comunityId = userData.comunity_id;
+        const communityId = userData.comunidad.id; // Asumiendo que la propiedad se llama comunidad y está almacenada así en userData
 
-        const newMeeting = { ...meeting, comunity_id: comunityId };
+        const newMeeting = {
+            ...meeting,
+            comunidad: { id: communityId }  // Ajuste para estructurar correctamente según el modelo del backend
+        };
 
         try {
-            await fetch('http://localhost:9000/api/reuniones', {
+            const response = await fetch('http://localhost:9000/api/reuniones', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(newMeeting)
             });
-            alert('Reunión creada con éxito');
-            navigate('/meetings'); // Redirige al usuario a la página de reuniones
+            if (response.ok) {
+                alert('Reunión creada con éxito');
+                navigate('/meetings'); // Redirige al usuario a la página de reuniones
+            } else {
+                throw new Error(await response.text());
+            }
         } catch (error) {
             console.error('Error al crear la reunión:', error);
+            alert('Error al crear la reunión: ' + error.message);
         }
     };
 
     return (
-        <div className="create-meeting-background"> {/* Cambiado de create-meeting-container a create-meeting-background */}
+        <div className="create-meeting-background">
             <div className="create-meeting-wrapper">
                 <h2>Crear nueva reunión</h2>
                 <form onSubmit={handleSubmit} className="create-meeting-form">
@@ -68,15 +60,13 @@ function CreateMeetings() {
                         name="information"
                         value={meeting.information}
                         onChange={handleChange}
-                        onFocus={() => setIsTextareaFocused(true)}
-                        onBlur={() => setIsTextareaFocused(false)}
-                        className={`create-meeting-textarea ${isTextareaFocused ? 'textarea-focused' : ''}`}
+                        className="create-meeting-textarea"
                         placeholder="Información de la reunión"
                         required
                     ></textarea>
                     <div className="form-actions">
                         <button type="submit" className="create-meeting-button">Crear reunión</button>
-                        <button type="button" className="cancel-button" onClick={() => navigate('/meetings')}>Cancelar</button>
+                        <button type="button" onClick={() => navigate('/meetings')} className="cancel-button">Cancelar</button>
                     </div>
                 </form>
             </div>
