@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Chats.css'; // Asegúrate de importar el CSS
 
 import homeButtonImg from '../Logos/HomeButton.png';
@@ -16,7 +16,6 @@ import settingsButtonImg from '../Logos/SettingsButton.png';
  * @returns {JSX.Element} Componente de la página de reuniones.
  */
 function Chats({ logout }) {
-    const navigate = useNavigate();
     const [isPresident, setIsPresident] = useState(false);
     const [chats, setChats] = useState([]);
     const [selectedChat, setSelectedChat] = useState(null);
@@ -31,15 +30,6 @@ function Chats({ logout }) {
 
         fetchChats();
     }, []);
-
-
-    /**
-     * Maneja el cierre de sesión del usuario.
-     */
-    const handleLogout = () => {
-        logout();
-        navigate('/login');
-    };
 
 
     return (
@@ -83,7 +73,7 @@ function Chats({ logout }) {
                             Nuevo Chat
                         </Link>
 
-                        <button onClick={handleLogout} className="logout-button">Cerrar sesión</button>
+                        <button onClick={logout} className="logout-button">Cerrar sesión</button>
                     </div>
                 </header>
                 <div className="chats-container">
