@@ -20,10 +20,10 @@ function CreateElections() {
         const userData = JSON.parse(userDataString);
         const comunityId = userData.comunity_id; // Asume que esto es parte del modelo de datos
 
-        const newElection = { ...election, comunityId };
+        const newElection = { ...election, comunity_id: comunityId  };
 
         try {
-            await fetch('http://localhost:9000/api/elections', {
+            await fetch('http://localhost:9000/api/votaciones', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ function CreateElections() {
                 body: JSON.stringify(newElection)
             });
             alert('Votación creada con éxito');
-            navigate('/elections'); // Redirige al usuario a la página de votaciones
+            navigate('/votes'); // Redirige al usuario a la página de votaciones
         } catch (error) {
             console.error('Error al crear la votación:', error);
         }
@@ -67,7 +67,7 @@ function CreateElections() {
                     />
                     <div className="form-actions">
                         <button type="submit" className="create-election-button">Crear Votación</button>
-                        <button type="button" className="cancel-button" onClick={() => navigate('/elections')}>Cancelar</button>
+                        <button type="button" className="cancel-button" onClick={() => navigate('/votes')}>Cancelar</button>
                     </div>
                 </form>
             </div>

@@ -23,10 +23,10 @@ function Elections({ logout }) {
             setIsPresident(userData?.isPresident);
 
             try {
-                const response = await fetch('http://localhost:9000/api/elections');
+                const response = await fetch('http://localhost:9000/api/votaciones');
                 const data = await response.json();
                 setElections(data);
-                setSelectedElection(data[0]);
+                setSelectedElection(data[0]); 
                 checkIfUserHasVoted(data[0]._id);
             } catch (error) {
                 console.error('Error fetching elections:', error);
@@ -40,7 +40,7 @@ function Elections({ logout }) {
     const checkIfUserHasVoted = async (electionId) => {
         const userId = localStorage.getItem('userId');
         try {
-            const response = await fetch(`http://localhost:9000/api/votes/check/${userId}/${electionId}`);
+            const response = await fetch(`http://localhost:9000/api/votaciones/check/${userId}/${electionId}`);
             const { hasVoted } = await response.json();
             setHasVoted(hasVoted);
         } catch (error) {
@@ -52,7 +52,7 @@ function Elections({ logout }) {
     const handleVote = async (voteType) => {
         const userId = localStorage.getItem('userId');
         try {
-            await fetch('http://localhost:9000/api/votes', {
+            await fetch('http://localhost:9000/api/votaciones', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
