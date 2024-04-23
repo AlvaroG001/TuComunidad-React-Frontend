@@ -15,67 +15,90 @@ function Elections({ logout }) {
     const [selectedElection, setSelectedElection] = useState(null);
     const [hasVoted, setHasVoted] = useState(false);
 
-    useEffect(() => {
+
+    const fetchElections = async () => {
         const userDataString = localStorage.getItem('userData');
         const userData = JSON.parse(userDataString);
+        const communityId = userData.comunidad.id; // Asegúrate de que el objeto y la propiedad sean correctos
+        
         setPresident(userData?.president);
     
-        const fetchElections = async () => {
-            try {
-                const response = await fetch(`http://localhost:9000/api/votaciones`);
+        try {
+            const response = await fetch(`http://localhost:9000/api/votaciones?communityId=${communityId}`);
+            if (response.ok) {
                 const data = await response.json();
-                console.log(data);
-                setElections(data);
-                if (data.length > 0) {
-                    setSelectedElection(data[0]);
-                    checkIfUserHasVoted(data[0].id);
-                }
-            } catch (error) {
-                console.error('Error fetching elections:', error);
+                console.log(data)
+                setElections(data.slice(-5)); // Guarda las últimas 5 votaciones
+            } else {
+                throw new Error("Error al cargar las votaciones");
             }
-        };
+        } catch (error) {
+            console.error('Error al obtener las votaciones:', error);
+        }
+    };
+
+    useEffect(() => {
 
         fetchElections();
+
     }, []);
 
-    const checkIfUserHasVoted = async (electionId) => {
+    const checkIfUserHasVoted = async (electionVotantes) => {
         const userDataString = localStorage.getItem('userData');
         const userData = JSON.parse(userDataString);
         const userId = userData.id;
-        try {
-            const response = await fetch(`http://localhost:9000/api/votaciones/${electionId}/vote/check/${userId}`);
-            const data = await response.json();
-            setHasVoted(data.hasVoted);
-        } catch (error) {
-            console.error('Error checking vote status:', error);
-        }
+
+        // Comprueba si el userId está en el array de votantes
+        const userHasVoted = electionVotantes.includes(userId);
+
+        // Actualiza el estado basado en si el usuario ha votado o no
+        setHasVoted(userHasVoted);
     };
 
     const handleVote = async (voteType) => {
         const userDataString = localStorage.getItem('userData');
         const userData = JSON.parse(userDataString);
         const userId = userData.id;
+        console.log(userId);
+
+        const voteOptions = {
+            'agree': 1,
+            'disagree': 2,
+            'abstain': 3
+        };
+        const voteOption = voteOptions[voteType];
+        // Crear una copia de la elección actual para modificarla
+        let updatedElection = { ...selectedElection };
+        updatedElection.votantes = [...updatedElection.votantes, userId];  // Añadir el ID del usuario al array de votantes
+        updatedElection.respuestas = [...updatedElection.respuestas, voteOption];  // Añadir la opción de voto al array de respuestas
+
         try {
             const response = await fetch(`http://localhost:9000/api/votaciones/${selectedElection.id}/vote`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ usuarioId: userId, opcion: voteType })
+                body: JSON.stringify(updatedElection)  // Enviar la elección actualizada
             });
             if (response.ok) {
                 setHasVoted(true);
                 alert('Your vote has been recorded.');
-                setSelectedElection(await response.json());
+                setSelectedElection(updatedElection);  // Actualizar la elección en el estado
+            } else {
+                throw new Error('Failed to record the vote');
             }
         } catch (error) {
             console.error('Error submitting vote:', error);
         }
+
+        fetchElections();
     };
+
+
 
     const selectElection = (election) => {
         setSelectedElection(election);
-        checkIfUserHasVoted(election.id);
+        checkIfUserHasVoted(election.votantes);
     };
 
     const deleteElection = async (electionId) => {

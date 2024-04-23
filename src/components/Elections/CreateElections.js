@@ -20,7 +20,7 @@ function CreateElections() {
         const userData = JSON.parse(userDataString);
         const communityId = userData.comunidad.id; // Asumimos que userData tiene la propiedad 'comunidad'
 
-        const newElection = { ...election, community_id: communityId };
+        const newElection = { ...election, comunidad: { id: communityId } };
 
         try {
             const response = await fetch('http://localhost:9000/api/votaciones', {
