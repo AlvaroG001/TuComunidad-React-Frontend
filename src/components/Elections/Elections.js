@@ -21,17 +21,21 @@ function Elections({ logout }) {
             const userDataString = localStorage.getItem('userData');
             const userData = JSON.parse(userDataString);
             setIsPresident(userData?.isPresident);
-
+        
+            const url = `http://localhost:9000/api/votaciones?comunity_id=${userData.comunity_id}`;
             try {
-                const response = await fetch('http://localhost:9000/api/votaciones');
+                const response = await fetch(url);
                 const data = await response.json();
                 setElections(data);
-                setSelectedElection(data[0]); 
-                checkIfUserHasVoted(data[0]._id);
+                if (data.length > 0) {
+                    setSelectedElection(data[0]);
+                    checkIfUserHasVoted(data[0]._id);
+                }
             } catch (error) {
                 console.error('Error fetching elections:', error);
             }
         };
+        
 
         fetchElections();
     }, []);
