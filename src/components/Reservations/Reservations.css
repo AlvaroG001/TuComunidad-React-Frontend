@@ -1,0 +1,117 @@
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    padding-left: 50px;
+    color: #ffffff;
+}
+
+.header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio entre los botones */
+}
+
+.create-reservation-button, .logout-button {
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #eceaeab0;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 14px;
+    border: none;
+    border-radius: 20px;
+    display: inline-block; /* Importante para los enlaces comportarse como botones */
+    text-align: center;
+}
+
+.create-reservation-button:hover, .logout-button:hover {
+    background-color: #e0e0e0;
+}
+
+
+
+.reservations-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.reservations-list {
+    flex-basis: 45%;
+    background-color: #056f69; /* Color de fondo para la lista de reuniones */
+    border-radius: 15px; /* Bordes redondeados */
+    padding: 20px; /* Espacio interior para no tocar los bordes */
+    overflow-y: auto; /* Habilita el desplazamiento si la lista es muy larga */
+}
+.reservations-h2 {
+    padding: 10px;
+    padding-left:25px;
+    font-size: 20px;
+    color: white;
+}
+
+
+
+
+.reservation-details {
+    position: relative;
+    flex-basis: 45%;
+    background-color: #48a09c; /* Color de fondo para los detalles de la reunión */
+    border-radius: 15px; /* Bordes redondeados */
+    padding: 20px; /* Espacio interior */
+    overflow-y: auto; /* Habilita el desplazamiento si el contenido es muy largo */
+}
+
+
+
+
+.ListReservation-button {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 0 0 15px 0; /* Asegura un margen uniforme entre botones */
+    background-color: #ffffff; /* Fondo blanco para los botones */
+    border: 2px solid #056f69; /* Borde sólido con el color principal */
+    border-radius: 25px; /* Bordes redondeados suaves */
+    color: #056f69; /* Color de texto que combina con el fondo de la lista */
+    cursor: pointer; /* Indica que el elemento es clickeable */
+    font-size: 16px; /* Tamaño de letra legible */
+    font-weight: bold; /* Texto en negrita para mayor presencia */
+    transition: background-color 0.3s, color 0.3s, transform 0.2s; /* Transición suave para hover y click */
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Espaciado interno entre el contenido del botón */
+}
+
+.ListReservation-button:hover {
+    background-color: #056460; /* Color de fondo al pasar el ratón */
+    color: #ffffff; /* Color de texto blanco para contraste */
+    transform: scale(1.05); /* Efecto de crecimiento sutil al pasar el ratón */
+}
+
+.ListReservation-button:active {
+    transform: scale(0.95); /* Efecto de reducción al hacer clic */
+}
+
+/* Estilos adicionales para los títulos y párrafos dentro de .meeting-details */
+.reservation-details h2, .meeting-details p {
+    color: #ffffff; /* Texto blanco para contraste */
+    margin: 10px 0; /* Espacio vertical entre elementos */
+}
+
+.delete-reservation-button {
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #408d89bf; /* Ajusta el color de fondo según tu diseño */
+    color: #ffffff; /* Color del texto */
+    cursor: pointer;
+    font-size: 14px;
+    border: none;
+    border-radius: 20px;
+    display: inline-block; /* Importante para los enlaces comportarse como botones */
+    text-align: center;
+    position: absolute; /* Posicionamiento absoluto dentro del contenedor relativo */
+    top: 10px; /* Ajusta la distancia desde la parte superior del contenedor */
+    right: 10px; /* Ajusta para alinear el botón a la derecha */
+}
