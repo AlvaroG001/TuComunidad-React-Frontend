@@ -1,0 +1,66 @@
+.create-chat-background {
+    width: 100%;
+    height: 100vh;
+    background-color: #056f69; /* Color de fondo de la barra lateral */
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-chat-wrapper h2 {
+    color: white; /* Título en blanco */
+    margin-bottom: 2rem; /* Espacio después del título */
+    text-align: left; /* Alinea el texto a la izquierda */
+    font-size: 40px; /* Aumenta el tamaño de la fuente */
+    padding-left: 20px; /* Añade relleno a la izquierda para desplazar el texto */
+}
+
+.create-chat-wrapper {
+    background: rgba(159, 159, 159, 0.227); /* Fondo semi-transparente */
+    backdrop-filter: blur(8px); /* Efecto de desenfoque */
+    border-radius: 15px;
+    padding: 40px;
+    width: 100%;
+    max-width: 500px; /* Ajusta según necesites */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.create-chat-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra todos los hijos */
+}
+
+.create-chat-form input, .create-chat-form textarea {
+    width: 80%; /* Establece los inputs y textarea a ocupar el 80% del ancho */
+    padding: 12px 20px;
+    margin-bottom: 12px; /* Espacio entre los elementos */
+    border: none;
+    border-radius: 20px;
+    background-color: #013220c6; /* Verde oscuro para el fondo */
+    color: white; /* Color de texto blanco */
+}
+
+.create-chat-form button {
+    width: 80%;
+    padding: 12px 20px;
+    margin-top: 20px; /* Aumentamos el margen superior para separar del textarea */
+    border: none;
+    border-radius: 20px;
+    background-color: #D3D3D3;
+    color: #333;
+    cursor: pointer;
+}
+
+.create-chat-form button:hover {
+    background-color: #BFBFBF; /* Color al pasar el mouse por encima */
+}
+
+.create-chat-form textarea {
+    transition: all 0.3s ease; /* Suaviza la transición al cambiar de tamaño */
+}
+
+.textarea-focused {
+    height: 100px; /* Tamaño más grande cuando está enfocado */
+}

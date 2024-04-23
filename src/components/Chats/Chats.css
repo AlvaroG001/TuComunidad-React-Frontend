@@ -13,7 +13,7 @@
     gap: 10px; /* Espacio entre los botones */
 }
 
-.create-reservation-button, .logout-button {
+.create-chat-button, .logout-button {
     text-decoration: none;
     padding: 10px 20px;
     background-color: #eceaeab0;
@@ -26,26 +26,26 @@
     text-align: center;
 }
 
-.create-reservation-button:hover, .logout-button:hover {
+.create-chat-button:hover, .logout-button:hover {
     background-color: #e0e0e0;
 }
 
 
 
-.reservations-container {
+.chats-container {
     display: flex;
     justify-content: space-around;
     padding: 20px;
 }
 
-.reservations-list {
+.chats-list {
     flex-basis: 45%;
     background-color: #056f69; /* Color de fondo para la lista de reuniones */
     border-radius: 15px; /* Bordes redondeados */
     padding: 20px; /* Espacio interior para no tocar los bordes */
     overflow-y: auto; /* Habilita el desplazamiento si la lista es muy larga */
 }
-.reservations-h2 {
+.chats-h2 {
     padding: 10px;
     padding-left:25px;
     font-size: 20px;
@@ -55,7 +55,7 @@
 
 
 
-.reservation-details {
+.chat-details {
     position: relative;
     flex-basis: 45%;
     background-color: #48a09c; /* Color de fondo para los detalles de la reunión */
@@ -67,7 +67,7 @@
 
 
 
-.ListReservation-button {
+.ListChat-button {
     width: 100%;
     padding: 12px 20px;
     margin: 0 0 15px 0; /* Asegura un margen uniforme entre botones */
@@ -84,23 +84,23 @@
     justify-content: space-between; /* Espaciado interno entre el contenido del botón */
 }
 
-.ListReservation-button:hover {
+.ListChat-button:hover {
     background-color: #056460; /* Color de fondo al pasar el ratón */
     color: #ffffff; /* Color de texto blanco para contraste */
     transform: scale(1.05); /* Efecto de crecimiento sutil al pasar el ratón */
 }
 
-.ListReservation-button:active {
+.ListChat-button:active {
     transform: scale(0.95); /* Efecto de reducción al hacer clic */
 }
 
 /* Estilos adicionales para los títulos y párrafos dentro de .meeting-details */
-.reservation-details h2, .meeting-details p {
+.chat-details h2, .chat-details p {
     color: #ffffff; /* Texto blanco para contraste */
     margin: 10px 0; /* Espacio vertical entre elementos */
 }
 
-.delete-reservation-button {
+.delete-chat-button {
     text-decoration: none;
     padding: 10px 20px;
     background-color: #408d89bf; /* Ajusta el color de fondo según tu diseño */
