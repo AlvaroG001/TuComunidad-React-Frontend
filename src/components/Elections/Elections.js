@@ -15,6 +15,9 @@ function Elections({ logout }) {
     const [selectedElection, setSelectedElection] = useState(null);
     const [hasVoted, setHasVoted] = useState(false);
 
+    const [agreeCount, setAgreeCount] = useState();
+    const [disagreeCount, setDisagreeCount] = useState();
+    const [abstainCount, setAbstainCount] = useState();
 
     const fetchElections = async () => {
         const userDataString = localStorage.getItem('userData');
@@ -37,11 +40,21 @@ function Elections({ logout }) {
         }
     };
 
+
     useEffect(() => {
 
         fetchElections();
-
-    }, []);
+        if (selectedElection) {
+            // Obtener la cantidad de votos de cada tipo
+            const agreeCount = selectedElection.respuestas.filter(respuesta => respuesta === '1').length;
+            const disagreeCount = selectedElection.respuestas.filter(respuesta => respuesta === '2').length;
+            const abstainCount = selectedElection.respuestas.filter(respuesta => respuesta === '3').length;
+    
+            setAgreeCount(agreeCount);
+            setDisagreeCount(disagreeCount);
+            setAbstainCount(abstainCount);
+        }
+    }, [selectedElection]);
 
     const checkIfUserHasVoted = async (electionVotantes) => {
         const userDataString = localStorage.getItem('userData');
@@ -79,27 +92,36 @@ function Elections({ logout }) {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(updatedElection)  // Enviar la elección actualizada
-            });
+            }); 
             if (response.ok) {
                 setHasVoted(true);
                 alert('Your vote has been recorded.');
                 setSelectedElection(updatedElection);  // Actualizar la elección en el estado
+                
             } else {
                 throw new Error('Failed to record the vote');
             }
         } catch (error) {
             console.error('Error submitting vote:', error);
         }
+        
+        setAgreeCount(updatedElection.respuestas.filter(respuesta => respuesta === '1').length);
+        setDisagreeCount(updatedElection.respuestas.filter(respuesta => respuesta === '2').length);
+        setAbstainCount(updatedElection.respuestas.filter(respuesta => respuesta === '3').length);
 
         fetchElections();
     };
 
-
-
     const selectElection = (election) => {
         setSelectedElection(election);
-        checkIfUserHasVoted(election.votantes);
+        checkIfUserHasVoted(election.votantes);            
+        setAgreeCount(election.respuestas.filter(respuesta => respuesta === '1').length);
+        console.log(agreeCount);
+        setDisagreeCount(election.respuestas.filter(respuesta => respuesta === '2').length);
+        setAbstainCount(election.respuestas.filter(respuesta => respuesta === '3').length);  
     };
+
+    
 
     const deleteElection = async (electionId) => {
         try {
@@ -187,6 +209,15 @@ function Elections({ logout }) {
                         {president && (
                             <button onClick={() => deleteElection(selectedElection.id)}>Eliminar Votación</button>
                         )}
+
+                        {president && (
+                            <div>
+                                <h2>Resultados de la Votación</h2>
+                                <p>Estoy de acuerdo: {agreeCount}</p>
+                                <p>No estoy de acuerdo: {disagreeCount}</p>
+                                <p>Me abstengo: {abstainCount}</p>
+                            </div>
+                        )} 
                     </>
                 )}
             </div>
