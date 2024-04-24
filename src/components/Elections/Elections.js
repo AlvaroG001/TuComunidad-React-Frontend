@@ -44,16 +44,7 @@ function Elections({ logout }) {
     useEffect(() => {
 
         fetchElections();
-        if (selectedElection) {
-            // Obtener la cantidad de votos de cada tipo
-            const agreeCount = selectedElection.respuestas.filter(respuesta => respuesta === '1').length;
-            const disagreeCount = selectedElection.respuestas.filter(respuesta => respuesta === '2').length;
-            const abstainCount = selectedElection.respuestas.filter(respuesta => respuesta === '3').length;
-    
-            setAgreeCount(agreeCount);
-            setDisagreeCount(disagreeCount);
-            setAbstainCount(abstainCount);
-        }
+
     }, [selectedElection]);
 
     const checkIfUserHasVoted = async (electionVotantes) => {
@@ -61,10 +52,8 @@ function Elections({ logout }) {
         const userData = JSON.parse(userDataString);
         const userId = userData.id;
 
-        // Comprueba si el userId está en el array de votantes
         const userHasVoted = electionVotantes.includes(userId);
 
-        // Actualiza el estado basado en si el usuario ha votado o no
         setHasVoted(userHasVoted);
     };
 
@@ -72,8 +61,7 @@ function Elections({ logout }) {
         const userDataString = localStorage.getItem('userData');
         const userData = JSON.parse(userDataString);
         const userId = userData.id;
-        console.log(userId);
-
+    
         const voteOptions = {
             'agree': 1,
             'disagree': 2,
@@ -84,7 +72,16 @@ function Elections({ logout }) {
         let updatedElection = { ...selectedElection };
         updatedElection.votantes = [...updatedElection.votantes, userId];  // Añadir el ID del usuario al array de votantes
         updatedElection.respuestas = [...updatedElection.respuestas, voteOption];  // Añadir la opción de voto al array de respuestas
-
+    
+        // Actualizar los contadores localmente antes de enviar la solicitud
+        const updatedAgreeCount = agreeCount + (voteType === 'agree' ? 1 : 0);
+        const updatedDisagreeCount = disagreeCount + (voteType === 'disagree' ? 1 : 0);
+        const updatedAbstainCount = abstainCount + (voteType === 'abstain' ? 1 : 0);
+    
+        setAgreeCount(updatedAgreeCount);
+        setDisagreeCount(updatedDisagreeCount);
+        setAbstainCount(updatedAbstainCount);
+    
         try {
             const response = await fetch(`http://localhost:9000/api/votaciones/${selectedElection.id}/vote`, {
                 method: 'POST',
@@ -105,18 +102,15 @@ function Elections({ logout }) {
             console.error('Error submitting vote:', error);
         }
         
-        setAgreeCount(updatedElection.respuestas.filter(respuesta => respuesta === '1').length);
-        setDisagreeCount(updatedElection.respuestas.filter(respuesta => respuesta === '2').length);
-        setAbstainCount(updatedElection.respuestas.filter(respuesta => respuesta === '3').length);
-
         fetchElections();
     };
+    
+    
 
     const selectElection = (election) => {
         setSelectedElection(election);
         checkIfUserHasVoted(election.votantes);            
         setAgreeCount(election.respuestas.filter(respuesta => respuesta === '1').length);
-        console.log(agreeCount);
         setDisagreeCount(election.respuestas.filter(respuesta => respuesta === '2').length);
         setAbstainCount(election.respuestas.filter(respuesta => respuesta === '3').length);  
     };
