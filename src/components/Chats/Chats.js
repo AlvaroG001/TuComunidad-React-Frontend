@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import './Chats.css'; // Asegúrate de importar el CSS
+import './Chats.css';
 
 import homeButtonImg from '../Logos/HomeButton.png';
 import calendarButtonImg from '../Logos/CalendarButton.png';
@@ -9,28 +9,70 @@ import voteButtonImg from '../Logos/VoteButton.png';
 import chatButtonImg from '../Logos/ChatButton.png';
 import settingsButtonImg from '../Logos/SettingsButton.png';
 
-/**
- * Componente Meetings.
- * 
- * @param {function} logout - Función para cerrar sesión.
- * @returns {JSX.Element} Componente de la página de reuniones.
- */
 function Chats({ logout }) {
-    const [isPresident, setIsPresident] = useState(false);
+    const [isPresident, setPresident] = useState(false);
     const [chats, setChats] = useState([]);
     const [selectedChat, setSelectedChat] = useState(null);
 
     useEffect(() => {
         const fetchChats = async () => {
             const userDataString = localStorage.getItem('userData');
+            if (!userDataString) {
+                console.log("No user data available in local storage");
+                return;
+            }
+    
             const userData = JSON.parse(userDataString);
-
-            setIsPresident(userData?.isPresident);
+            const communityId = userData?.comunidad?.id;
+    
+            if (!communityId) {
+                console.error('No se encontró la información de la comunidad del usuario');
+                return;
+            }
+    
+            setPresident(userData?.president);
+    
+            try {
+                const response = await fetch(`http://localhost:9000/api/chats?communityId=${communityId}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    setChats(data);
+                } else {
+                    throw new Error("Failed to fetch chats");
+                }
+            } catch (error) {
+                console.error('Error fetching chats:', error);
+            }
         };
-
+    
         fetchChats();
     }, []);
+    
 
+
+    const deleteChat = async (chatId) => {
+        try {
+            const response = await fetch(`http://localhost:9000/api/chats/${chatId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.ok) {
+                alert('Chat eliminado con éxito');
+                setChats(chats.filter(c => c.id !== chatId)); // Actualizar la lista de chats
+                if (selectedChat && selectedChat.id === chatId) {
+                    setSelectedChat(null); // Quitar la selección si el chat eliminado estaba seleccionado
+                }
+            } else {
+                throw new Error('Error al eliminar el chat');
+            }
+        } catch (error) {
+            console.error('Error al eliminar el chat:', error);
+            alert('Error al eliminar el chat: ' + error.message);
+        }
+    };
 
     return (
         <div className="home-container">
@@ -72,7 +114,6 @@ function Chats({ logout }) {
                         <Link to="/create-chats" className="create-chat-button">
                             Nuevo Chat
                         </Link>
-
                         <button onClick={logout} className="logout-button">Cerrar sesión</button>
                     </div>
                 </header>
@@ -80,7 +121,7 @@ function Chats({ logout }) {
                     <div className="chats-list">
                         <h2 className="chats-h2">Últimos chats registrados</h2>
                         {chats.map(chat => (
-                            <button key={chat._id} className="chat-button" onClick={() => setSelectedChat(chat)}>
+                            <button key={chat.id || chat._id} className="chat-button" onClick={() => setSelectedChat(chat)}>
                                 {chat.sender}: {chat.message}
                             </button>
                         ))}
@@ -91,6 +132,9 @@ function Chats({ logout }) {
                             <p>Remitente: {selectedChat.sender}</p>
                             <p>Mensaje: {selectedChat.message}</p>
                             <p>Fecha: {selectedChat.timestamp}</p>
+                            {isPresident && (
+                                <button onClick={() => deleteChat(selectedChat.id)}>Eliminar Chat</button>
+                            )}
                         </div>
                     )}
                 </div>

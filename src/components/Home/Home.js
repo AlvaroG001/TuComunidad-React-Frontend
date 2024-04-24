@@ -22,11 +22,22 @@ function Home({ logout }) {
 
   useEffect(() => {
     const fetchCommunityName = async () => {
-      const userDataString = localStorage.getItem('userData');
-      const userData = JSON.parse(userDataString);
-      setCommunityName(userData ? userData.comunidad.name : null);
-
-      setPresident(userData?.president);
+      try {
+        const userDataString = localStorage.getItem('userData');
+        const userData = JSON.parse(userDataString);
+        if (userData && userData.comunidad && userData.comunidad.name) {
+          setCommunityName(userData.comunidad.name);
+        } else {
+          throw new Error('El nombre de la comunidad no está disponible.');
+        }
+        if (userData && userData.president !== undefined) {
+          setPresident(userData.president);
+        } else {
+          throw new Error('El estado de presidente no está disponible.');
+        }
+      } catch (error) {
+        console.error('Error al obtener los datos del usuario:', error);
+      }
     };
 
     fetchCommunityName();
