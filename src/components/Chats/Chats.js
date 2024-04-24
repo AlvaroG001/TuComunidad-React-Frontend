@@ -13,42 +13,61 @@ function Chats({ logout }) {
     const [isPresident, setPresident] = useState(false);
     const [chats, setChats] = useState([]);
     const [selectedChat, setSelectedChat] = useState(null);
+    const [replyMessage, setReplyMessage] = useState('');
+
+    const fetchChats = async () => {
+        const userDataString = localStorage.getItem('userData');
+        const userData = JSON.parse(userDataString);
+        const communityId = userData?.comunidad?.id;
+        setPresident(userData?.president);
+
+        try {
+            const response = await fetch(`http://localhost:9000/api/chats?communityId=${communityId}`);
+            if (response.ok) {
+                const data = await response.json();
+                setChats(data);
+            } else {
+                console.error("Failed to fetch chats");
+            }
+        } catch (error) {
+            console.error('Error fetching chats:', error);
+        }
+    };
 
     useEffect(() => {
-        const fetchChats = async () => {
-            const userDataString = localStorage.getItem('userData');
-            if (!userDataString) {
-                console.log("No user data available in local storage");
-                return;
-            }
-    
-            const userData = JSON.parse(userDataString);
-            const communityId = userData?.comunidad?.id;
-    
-            if (!communityId) {
-                console.error('No se encontró la información de la comunidad del usuario');
-                return;
-            }
-    
-            setPresident(userData?.president);
-    
-            try {
-                const response = await fetch(`http://localhost:9000/api/chats?communityId=${communityId}`);
-                if (response.ok) {
-                    const data = await response.json();
-                    setChats(data);
-                } else {
-                    throw new Error("Failed to fetch chats");
-                }
-            } catch (error) {
-                console.error('Error fetching chats:', error);
-            }
-        };
-    
         fetchChats();
     }, []);
-    
 
+    const selectChat = (chat) => {
+        setSelectedChat(chat);
+        setReplyMessage('');
+    };
+
+    const sendReply = async (e) => {
+        e.preventDefault();
+        if (!selectedChat) return;
+
+        try {
+            const response = await fetch(`http://localhost:9000/api/chats/${selectedChat.id}/reply`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: replyMessage, sender: 'Current User' })
+            });
+
+            if (response.ok) {
+                alert('Reply sent successfully');
+                setReplyMessage('');
+                fetchChats();
+            } else {
+                throw new Error('Failed to send reply');
+            }
+        } catch (error) {
+            console.error('Error sending reply:', error);
+            alert('Error sending reply: ' + error.message);
+        }
+    };
 
     const deleteChat = async (chatId) => {
         try {
@@ -61,10 +80,8 @@ function Chats({ logout }) {
 
             if (response.ok) {
                 alert('Chat eliminado con éxito');
-                setChats(chats.filter(c => c.id !== chatId)); // Actualizar la lista de chats
-                if (selectedChat && selectedChat.id === chatId) {
-                    setSelectedChat(null); // Quitar la selección si el chat eliminado estaba seleccionado
-                }
+                setChats(chats.filter(c => c.id !== chatId));
+                setSelectedChat(null);
             } else {
                 throw new Error('Error al eliminar el chat');
             }
@@ -97,7 +114,6 @@ function Chats({ logout }) {
                     <img src={chatButtonImg} alt="Chat" className="chat-button" />
                 </Link>
                 <span className="sidebar-label">Chats</span>
-
                 {isPresident && (
                     <>
                         <Link to="/settings">
@@ -121,9 +137,11 @@ function Chats({ logout }) {
                     <div className="chats-list">
                         <h2 className="chats-h2">Últimos chats registrados</h2>
                         {chats.map(chat => (
-                            <button key={chat.id || chat._id} className="chat-button" onClick={() => setSelectedChat(chat)}>
-                                {chat.sender}: {chat.message}
-                            </button>
+                            <div key={chat.id} className="chat-entry" onClick={() => selectChat(chat)}>
+                                <div className="chat-message">
+                                    {chat.sender}: {chat.message}
+                                </div>
+                            </div>
                         ))}
                     </div>
                     {selectedChat && (
@@ -132,6 +150,15 @@ function Chats({ logout }) {
                             <p>Remitente: {selectedChat.sender}</p>
                             <p>Mensaje: {selectedChat.message}</p>
                             <p>Fecha: {selectedChat.timestamp}</p>
+                            <form onSubmit={sendReply}>
+                                <input
+                                    type="text"
+                                    value={replyMessage}
+                                    onChange={e => setReplyMessage(e.target.value)}
+                                    placeholder="Escribe una respuesta..."
+                                />
+                                <button type="submit">Enviar</button>
+                            </form>
                             {isPresident && (
                                 <button onClick={() => deleteChat(selectedChat.id)}>Eliminar Chat</button>
                             )}

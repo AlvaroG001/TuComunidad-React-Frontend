@@ -1,3 +1,4 @@
+/* Estilos para el encabezado de la página de chats */
 .main-header {
     display: flex;
     justify-content: space-between;
@@ -30,44 +31,41 @@
     background-color: #e0e0e0;
 }
 
-
-
+/* Estilos para el contenedor principal de la página de chats */
 .chats-container {
     display: flex;
     justify-content: space-around;
     padding: 20px;
 }
 
+/* Estilos para la lista de chats */
 .chats-list {
     flex-basis: 45%;
-    background-color: #056f69; /* Color de fondo para la lista de reuniones */
+    background-color: #056f69; /* Color de fondo para la lista de chats */
     border-radius: 15px; /* Bordes redondeados */
     padding: 20px; /* Espacio interior para no tocar los bordes */
     overflow-y: auto; /* Habilita el desplazamiento si la lista es muy larga */
 }
+
 .chats-h2 {
     padding: 10px;
-    padding-left:25px;
+    padding-left: 25px;
     font-size: 20px;
     color: white;
 }
 
-
-
-
+/* Estilos para los detalles de un chat seleccionado */
 .chat-details {
     position: relative;
     flex-basis: 45%;
-    background-color: #48a09c; /* Color de fondo para los detalles de la reunión */
+    background-color: #48a09c; /* Color de fondo para los detalles del chat */
     border-radius: 15px; /* Bordes redondeados */
     padding: 20px; /* Espacio interior */
     overflow-y: auto; /* Habilita el desplazamiento si el contenido es muy largo */
 }
 
-
-
-
-.ListChat-button {
+/* Estilos para los botones dentro de la lista de chats */
+.reply-button {
     width: 100%;
     padding: 12px 20px;
     margin: 0 0 15px 0; /* Asegura un margen uniforme entre botones */
@@ -84,22 +82,23 @@
     justify-content: space-between; /* Espaciado interno entre el contenido del botón */
 }
 
-.ListChat-button:hover {
+.reply-button:hover {
     background-color: #056460; /* Color de fondo al pasar el ratón */
     color: #ffffff; /* Color de texto blanco para contraste */
     transform: scale(1.05); /* Efecto de crecimiento sutil al pasar el ratón */
 }
 
-.ListChat-button:active {
+.reply-button:active {
     transform: scale(0.95); /* Efecto de reducción al hacer clic */
 }
 
-/* Estilos adicionales para los títulos y párrafos dentro de .meeting-details */
+/* Estilos adicionales para los títulos y párrafos dentro de .chat-details */
 .chat-details h2, .chat-details p {
     color: #ffffff; /* Texto blanco para contraste */
     margin: 10px 0; /* Espacio vertical entre elementos */
 }
 
+/* Estilos para el botón de eliminar chat */
 .delete-chat-button {
     text-decoration: none;
     padding: 10px 20px;
