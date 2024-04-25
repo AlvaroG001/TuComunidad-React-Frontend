@@ -61,7 +61,7 @@ function Home({ logout }) {
         <Link to="/reservations">
           <img src={calendarButtonImg} alt="Calendar" className="calendar-button" />
         </Link>
-        <span className="sidebar-label">Reservas</span> 
+        <span className="sidebar-label">Reservas</span>
         <Link to="/meetings">
           <img src={meetingButtonImg} alt="Meeting" className="meeting-button" />
         </Link>
