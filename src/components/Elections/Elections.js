@@ -198,7 +198,8 @@ function Elections({ logout }) {
                     <div className="elections-details">
                         <h2 className="vote-title" >{selectedElection.titulo}</h2>
                         <p className="election-info">{selectedElection.informacion}</p>
-                        <p className="election-info"><h4>Cierre de la votación: </h4>{formatDate(selectedElection.fecha)}</p>
+                        <h4 className="election-info">Cierre de la votación: </h4>
+                        <p className="election-info">{formatDate(selectedElection.fecha)}</p>
                         {!hasVoted ? (
                             <div className="vote-container">
                                 <button className="vote-button-election" onClick={() => handleVote('agree')}>Estoy de acuerdo</button>
