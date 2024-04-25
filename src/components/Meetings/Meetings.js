@@ -51,7 +51,12 @@ function Meetings({ logout }) {
             const response = await fetch(`http://localhost:9000/api/reuniones?communityId=${communityId}`);
             if (response.ok) {
                 const data = await response.json();
-                setMeetings(data.slice(-5)); // Guarda las últimas 5 reuniones
+
+                // Asegúrate de que los datos se ordenen de más reciente (id más alto) a más antiguo antes de hacer el slice
+                const sortedData = data.sort((a, b) => b.id - a.id);
+                setMeetings(sortedData.slice(0, 5)); // Guarda las últimas 5 votaciones (las más recientes)
+                setSelectedMeeting(sortedData[0]); // Selecciona la votación más reciente como la votación seleccionada por defecto
+
             } else {
                 throw new Error("Error al cargar las reuniones");
             }

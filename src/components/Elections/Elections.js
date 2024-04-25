@@ -22,16 +22,20 @@ function Elections({ logout }) {
     const fetchElections = async () => {
         const userDataString = localStorage.getItem('userData');
         const userData = JSON.parse(userDataString);
-        const communityId = userData.comunidad.id; // Asegúrate de que el objeto y la propiedad sean correctos
-        
+        const communityId = userData.comunidad.id;
+    
         setPresident(userData?.president);
     
         try {
             const response = await fetch(`http://localhost:9000/api/votaciones?communityId=${communityId}`);
             if (response.ok) {
                 const data = await response.json();
-                console.log(data)
-                setElections(data.slice(-5)); // Guarda las últimas 5 votaciones
+                console.log(data);
+    
+                // Asegúrate de que los datos se ordenen de más reciente (id más alto) a más antiguo antes de hacer el slice
+                const sortedData = data.sort((a, b) => b.id - a.id);
+                setElections(sortedData.slice(0, 5)); // Guarda las últimas 5 votaciones (las más recientes)
+                setSelectedElection(sortedData[0]); // Selecciona la votación más reciente como la votación seleccionada por defecto
             } else {
                 throw new Error("Error al cargar las votaciones");
             }
@@ -39,13 +43,14 @@ function Elections({ logout }) {
             console.error('Error al obtener las votaciones:', error);
         }
     };
+    
 
 
     useEffect(() => {
 
         fetchElections();
 
-    }, [selectedElection]);
+    }, []);
 
     const checkIfUserHasVoted = async (electionVotantes) => {
         const userDataString = localStorage.getItem('userData');
