@@ -19,7 +19,7 @@ function Chats({ logout }) {
 
         fetchChats();
 
-    }, []);
+    }, [selectedChat]);
 
     const fetchChats = async () => {
         const userDataString = localStorage.getItem('userData');
@@ -39,27 +39,32 @@ function Chats({ logout }) {
         const userData = JSON.parse(userDataString);
         const userId = userData.id
 
-        const updatedChat = {
-            ...selectedChat,
-            usuarios: [...selectedChat.usuarios, userId],
-            chats: [...selectedChat.chats, newMessage]
-        };
-        console.log(updatedChat);
-
-        const response = await fetch(`http://localhost:9000/api/chats/${selectedChat.id}/chat`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(updatedChat)
-        });
-
-        if (response.ok) {
-            setNewMessage('');
-            fetchChats();
+        if(newMessage === ""){
+            return   
         } else {
-            alert('Error al actualizar el chat');
-        }
+            const updatedChat = {
+                ...selectedChat,
+                usuarios: [...selectedChat.usuarios, userId],
+                chats: [...selectedChat.chats, newMessage]
+            };
+            console.log(newMessage);
+    
+            const response = await fetch(`http://localhost:9000/api/chats/${selectedChat.id}/chat`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedChat)
+            });
+    
+            if (response.ok) {
+                setNewMessage('');
+                setSelectedChat(updatedChat);
+                fetchChats();
+            } else {
+                alert('Error al actualizar el chat');
+            }
+        }           
     };
 
     return (
