@@ -34,6 +34,7 @@ function Chats({ logout }) {
         const response = await fetch(`http://localhost:9000/api/chats?communityId=${communityId}`);
         const data = await response.json();
         setChats(data);
+        setSelectedChat(data[data.length-1])
         console.log(data)
     };
 

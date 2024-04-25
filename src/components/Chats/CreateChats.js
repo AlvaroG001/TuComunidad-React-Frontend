@@ -1,43 +1,35 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './CreateChats.css'; // Asegúrate de importar el CSS
+import './CreateChats.css';
 
-function CreateChats() {
+function CreateChat() {
     const navigate = useNavigate();
     const [chat, setChat] = useState({
-        sender: '',
-        message: ''
+        titulo: '',
+        message: '',
+        usuarios: [], // Inicializa un arreglo vacío para los usuarios
+        chats: []    // Inicializa un arreglo vacío para los chats
     });
 
-    /**
-     * Maneja los cambios en los campos de entrada del formulario.
-     * 
-     * @param {Event} e - Evento de cambio.
-     */
     const handleChange = (e) => {
         setChat({ ...chat, [e.target.name]: e.target.value });
     };
 
-    /**
-     * Maneja el envío del formulario de creación de chats.
-     * 
-     * @param {Event} e - Evento de envío de formulario.
-     */
     const handleSubmit = async (e) => {
         e.preventDefault();
         const userDataString = localStorage.getItem('userData');
         const userData = JSON.parse(userDataString);
-
-        // Asegurarse de que userData y userData.comunidad están definidos
-        if (!userData || !userData.comunidad) {
-            console.error('No se encontró la información de la comunidad del usuario');
-            return;  // Salir de la función si no se encuentran los datos necesarios
-        }
-
-        const communityId = userData.comunidad.id;
-
-        // Crear el objeto del nuevo chat incluyendo el community_id
-        const newChat = { ...chat, community_id: communityId };
+        const communityId = userData.comunidad.id; // Asegúrate que userData tiene la propiedad 'comunidad'
+        const sender = userData.name; // Asumimos que userData tiene un atributo 'name' para el remitente
+        
+        const newChat = { 
+            ...chat, 
+            comunidad: { id: communityId }, 
+            fecha: new Date().toISOString(),
+            sender: sender, // Añade el remitente al chat
+            usuarios: chat.usuarios, // Podría incluir una lógica para añadir usuarios
+            chats: chat.chats // Podría incluir una lógica para manejar mensajes de seguimiento
+        };
 
         try {
             const response = await fetch('http://localhost:9000/api/chats', {
@@ -51,7 +43,8 @@ function CreateChats() {
                 alert('Chat creado con éxito');
                 navigate('/chats'); // Redirige al usuario a la página de chats
             } else {
-                throw new Error('Failed to create chat');
+                const errorData = await response.json();
+                throw new Error('Error al crear chat: ' + errorData.message);
             }
         } catch (error) {
             console.error('Error al crear el chat:', error);
@@ -59,31 +52,31 @@ function CreateChats() {
         }
     };
 
-
     return (
-        <div className="create-meeting-background">
-            <div className="create-meeting-wrapper">
+        <div className="create-election-background">
+            <div className="create-election-wrapper">
                 <h2>Crear nuevo chat</h2>
-                <form onSubmit={handleSubmit} className="create-meeting-form">
+                <form onSubmit={handleSubmit} className="create-election-form">
                     <input
                         type="text"
-                        name="sender"
-                        value={chat.sender}
+                        name="titulo"
+                        value={chat.titulo}
                         onChange={handleChange}
-                        placeholder="Remitente"
+                        placeholder="Título del chat"
                         required
                     />
                     <textarea
                         name="message"
                         value={chat.message}
                         onChange={handleChange}
-                        className="create-meeting-textarea"
-                        placeholder="Mensaje"
+                        className="create-election-textarea"
+                        placeholder="Mensaje inicial"
                         required
                     ></textarea>
+                    {/* Aquí podrías añadir inputs para manejar los usuarios y los mensajes de chat si es necesario */}
                     <div className="form-actions">
-                        <button type="submit" className="create-meeting-button">Enviar Mensaje</button>
-                        <button type="button" className="cancel-button" onClick={() => navigate('/chats')}>Volver</button>
+                        <button type="submit" className="create-election-button">Crear Chat</button>
+                        <button type="button" className="cancel-button" onClick={() => navigate('/chats')}>Cancelar</button>
                     </div>
                 </form>
             </div>
@@ -91,4 +84,4 @@ function CreateChats() {
     );
 }
 
-export default CreateChats;
+export default CreateChat;
