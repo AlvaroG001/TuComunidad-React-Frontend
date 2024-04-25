@@ -22,7 +22,7 @@ function Chats({ logout }) {
 
         fetchChats();
 
-    }, [selectedChat]);
+    }, []);
 
     const fetchChats = async () => {      
         const userDataString1 = localStorage.getItem('userData');
