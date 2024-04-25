@@ -26,3 +26,127 @@
     overflow-y: auto; /* Habilita el desplazamiento si la lista es muy larga */
 }
 
+.chats-container {
+    display: flex; /* Establece el contenedor como un contenedor flexible */
+    justify-content: space-between; /* Distribuye los elementos a lo largo del contenedor con espacio entre ellos */
+    padding: 20px; /* Agrega un espacio interno de 20px alrededor del contenedor */
+    height: 80%; /* Ajusta la altura según sea necesario */
+}
+
+.active-chat {
+    flex: 3; /* Ocupa 3/4 del espacio disponible en el contenedor */
+    position: relative;
+    flex-basis: 45%;
+    background-color: #1a6d5552;
+    border-radius: 15px;
+    padding: 20px;
+    overflow-y: auto; /* Agrega un scroll vertical cuando el contenido es largo */
+}
+
+
+.chat-details {
+    flex: 1; /* Ocupa 1/4 del espacio disponible en el contenedor */
+    position: relative;
+    flex-basis: 25%; /* Ocupa 1/4 del espacio disponible en el contenedor */
+    background-color: #48a09c; /* Color de fondo para los detalles de la reunión */
+    border-radius: 15px; /* Bordes redondeados */
+    padding: 20px; /* Espacio interior */
+    margin-left: 10px; /* Margen izquierdo para separación */
+    overflow-y: auto; /* Habilita el desplazamiento si el contenido es muy largo */    
+}
+
+.input-boton{
+    display: flex;
+}
+
+.input-boton.input{
+    flex: 1;
+}
+
+.input-boton.button{
+    flex: 1;
+}
+
+.chat-titulo-container {
+    background-color: #ffff; /* Fondo verde */
+    padding: 10px 15px; /* Espacio interior para separar el texto del borde */
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+.chat-titulo {
+    color: #136b4e; /* Color de texto blanco */
+    margin-bottom: 15px; /* Margen inferior */
+    text-align: center; /* Centra el texto horizontalmente */
+}
+
+.mensaje-usuario{
+    text-align: center;
+}
+
+/*.perfil-user{
+
+}*/
+
+.chat-message {
+    margin-bottom: 15px; /* Margen inferior */
+}
+
+.chat-message p {
+    color: #ffff; /* Color de texto blanco */
+    margin-bottom: 5px; /* Margen inferior */
+}
+
+.chat {
+    background-color: #63fac852; /* Verde */
+    padding: 10px; /* Espacio interior */
+    margin-bottom: 10px; /* Margen inferior */
+    border-radius: 8px; /* Bordes redondeados */
+    margin-right: 150px;
+}
+
+.chat h3 {
+    color: #ffff; /* Color de texto blanco */
+    margin-bottom: 5px; /* Margen inferior */
+}
+
+.chat p {
+    color: #ffffff; /* Color de texto blanco */
+    margin-bottom: 5px; /* Margen inferior */
+}
+
+input[type="text"] {
+    width: calc(100% - 20px); /* Ancho del input menos el padding */
+    padding: 13px; /* Espacio interior */
+    margin-bottom: 10px; /* Margen inferior */
+    border: 1px solid #55efc352; /* Borde sólido con color verde */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+button {
+    padding: 10px 20px; /* Espacio interior */
+    background-color: #00b894; /* Verde claro */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    color: #fff; /* Color de texto blanco */
+    cursor: pointer; /* Indica que el elemento es clickeable */
+    transition: background-color 0.3s, color 0.3s; /* Transición suave para hover y click */
+}
+
+button:hover {     
+    background-color: #00796b;/* Verde oscuro al pasar el ratón */
+}
+
+.active-chat::-webkit-scrollbar {
+    width: 12px; /* Ancho del scroll */
+  }
+  
+.active-chat::-webkit-scrollbar-thumb {
+    background-color: #55efc352; /* Color del thumb */
+    border-radius: 10px; /* Bordes redondeados del thumb */
+}
+
+.active-chat {
+    scrollbar-width:unset; /* Estilo del scroll */
+    scrollbar-color: #55efc352 transparent; /* Color del thumb y track */
+}
+
