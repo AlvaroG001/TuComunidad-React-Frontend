@@ -15,18 +15,21 @@ function Chats({ logout }) {
     const [selectedChat, setSelectedChat] = useState(null);
     const [newMessage, setNewMessage] = useState('');
 
+    const userDataString = localStorage.getItem('userData');
+    const userData = JSON.parse(userDataString);
+
     useEffect(() => {
 
         fetchChats();
 
     }, [selectedChat]);
 
-    const fetchChats = async () => {
-        const userDataString = localStorage.getItem('userData');
-        const userData = JSON.parse(userDataString);
-        const communityId = userData.comunidad.id;
+    const fetchChats = async () => {      
+        const userDataString1 = localStorage.getItem('userData');
+        const userData1 = JSON.parse(userDataString1);  
+        const communityId = userData1.comunidad.id;
 
-        setPresident(userData?.president);
+        setPresident(userData1?.president);
 
         const response = await fetch(`http://localhost:9000/api/chats?communityId=${communityId}`);
         const data = await response.json();
@@ -35,8 +38,6 @@ function Chats({ logout }) {
     };
 
     const handleUpdateChat = async () => {
-        const userDataString = localStorage.getItem('userData');
-        const userData = JSON.parse(userDataString);
         const userId = userData.id
 
         if(newMessage === ""){
@@ -113,8 +114,9 @@ function Chats({ logout }) {
                     </div>
                 </header>
                 <div className="meetings-container">
-                    <div className="active-chat">
+                    
                         {selectedChat && (
+                            <div className="active-chat">
                             <>
                                 <h2>{selectedChat.titulo}</h2>
                                 <div className="chat-message">
@@ -135,12 +137,13 @@ function Chats({ logout }) {
                                 />
                                 <button onClick={handleUpdateChat}>Enviar</button>
                             </>
+                            </div>
                         )}
-                    </div>
-                    <div className="meetings-list">
-                        <h3>Últimos Chats</h3>
+                    
+                    <div className="meeting-details">
+                        <h3 className="meetings-h2">Chats de "{userData.comunidad.name}"</h3>
                         {chats.slice(0, 5).map(chat => (
-                            <button key={chat.id} onClick={() => { setSelectedChat(chat); console.log(); }}>
+                            <button className="ListChat-button" key={chat.id} onClick={() => { setSelectedChat(chat); console.log(); }}>
                                 {chat.titulo}
                             </button>
                         ))}

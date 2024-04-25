@@ -42,8 +42,7 @@ function App() {
         <Route path="/meetings" element={isAuthenticated ? <Meetings logout={logout} /> : <Navigate to="/login" />} />
         <Route path="/create-meetings" element={isAuthenticated ? <CreateMeetings logout={logout} /> : <Navigate to="/login" />} />
 
-        <Route path="/reservations" element={isAuthenticated ? <Reservations logout={logout} /> : <Navigate to="/login" />} />
-        
+        <Route path="/reservations" element={isAuthenticated ? <Reservations logout={logout} /> : <Navigate to="/login" />} />        
 
         <Route path="/chats" element={isAuthenticated ? <Chats logout={logout} /> : <Navigate to="/login" />} />
         <Route path="/create-chats" element={isAuthenticated ? <CreateChats logout={logout} /> : <Navigate to="/login" />} />

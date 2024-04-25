@@ -105,7 +105,6 @@ function Elections({ logout }) {
         fetchElections();
     };
     
-    
 
     const selectElection = (election) => {
         setSelectedElection(election);
@@ -114,7 +113,6 @@ function Elections({ logout }) {
         setDisagreeCount(election.respuestas.filter(respuesta => respuesta === '2').length);
         setAbstainCount(election.respuestas.filter(respuesta => respuesta === '3').length);  
     };
-
     
 
     const deleteElection = async (electionId) => {

@@ -1,0 +1,28 @@
+.ListChat-button {
+    width: 100%;
+    padding: 12px 20px;
+    /*margin: 0 0 15px 0; /* Asegura un margen uniforme entre botones */
+    background-color: transparent; /* Fondo transparente para los botones */
+    border-top: 2px dashed rgba(255, 255, 255, 0); /* Borde superior blanco y continuo */
+    border-bottom: 2px dashed rgba(255, 255, 255, 0.267); /* Borde inferior blanco y continuo */
+    border-left: none; /* Borde izquierdo transparente */
+    border-right: none; /* Borde derecho transparente */
+    border-radius: 0; /* Bordes rectangulares */
+    color: #ffff; /* Color de texto que combina con el fondo de la lista */
+    cursor: pointer; /* Indica que el elemento es clickeable */
+    font-size: 16px; /* Tamaño de letra legible */
+    font-weight: bold; /* Texto en negrita para mayor presencia */
+    transition: background-color 0.3s, color 0.3s, transform 0.2s; /* Transición suave para hover y click */
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Espaciado interno entre el contenido del botón */
+}
+
+.chat-list {
+    flex-basis: 45%;
+    background-color: #056f69; /* Color de fondo para la lista de reuniones */
+    border-radius: 15px; /* Bordes redondeados */
+    padding: 20px; /* Espacio interior para no tocar los bordes */
+    overflow-y: auto; /* Habilita el desplazamiento si la lista es muy larga */
+}
+

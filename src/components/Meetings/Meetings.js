@@ -15,6 +15,9 @@ function Meetings({ logout }) {
     const [meetings, setMeetings] = useState([]);
     const [selectedMeeting, setSelectedMeeting] = useState(null);
 
+    const userDataString = localStorage.getItem('userData');
+    const userData = JSON.parse(userDataString);
+
     const handleDeleteMeeting = async (meetingId) => {
         if(window.confirm('¿Estás seguro de que quieres eliminar esta reunión?')) {
             try {
@@ -37,12 +40,12 @@ function Meetings({ logout }) {
         }
     };
 
-    const fetchMeetings = async () => {
-        const userDataString = localStorage.getItem('userData');
-        const userData = JSON.parse(userDataString);
-        const communityId = userData.comunidad.id; // Asegúrate de que el objeto y la propiedad sean correctos
+    const fetchMeetings = async () => {  
+        const userDataString1 = localStorage.getItem('userData');
+        const userData1 = JSON.parse(userDataString1);      
+        const communityId = userData1.comunidad.id; // Asegúrate de que el objeto y la propiedad sean correctos
         
-        setPresident(userData?.president);
+        setPresident(userData1?.president);
     
         try {
             const response = await fetch(`http://localhost:9000/api/reuniones?communityId=${communityId}`);
@@ -115,7 +118,7 @@ function Meetings({ logout }) {
 
                 <div className="meetings-container">
                     <div className="meetings-list">
-                        <h2 className="meetings-h2">Últimas reuniones registradas</h2>
+                        <h2 className="meetings-h2">Reuniones programadas en "{userData.comunidad.name}"</h2>
                         {meetings.map(meeting => (
                             <button key={meeting.id} className="ListMeeting-button" onClick={() => setSelectedMeeting(meeting)}>
                                 El {meeting.day} de {meeting.month} del {meeting.year} -- {meeting.hour}
