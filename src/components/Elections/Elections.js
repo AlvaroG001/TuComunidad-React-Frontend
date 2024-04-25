@@ -35,7 +35,7 @@ function Elections({ logout }) {
                 // Asegúrate de que los datos se ordenen de más reciente (id más alto) a más antiguo antes de hacer el slice
                 const sortedData = data.sort((a, b) => b.id - a.id);
                 setElections(sortedData.slice(0, 5)); // Guarda las últimas 5 votaciones (las más recientes)
-                setSelectedElection(sortedData[0]); // Selecciona la votación más reciente como la votación seleccionada por defecto
+                setSelectedElection(sortedData[0]);
             } else {
                 throw new Error("Error al cargar las votaciones");
             }
@@ -107,7 +107,6 @@ function Elections({ logout }) {
             console.error('Error submitting vote:', error);
         }
         
-        fetchElections();
     };
     
 
@@ -134,6 +133,7 @@ function Elections({ logout }) {
                 if (selectedElection.id === electionId) {
                     setSelectedElection(null); // Quitar la selección si la votación eliminada estaba seleccionada
                 }
+                fetchElections();
             } else {
                 throw new Error('Failed to delete election');
             }
@@ -141,6 +141,11 @@ function Elections({ logout }) {
             console.error('Error al eliminar la votación:', error);
             alert('Error al eliminar la votación: ' + error.message);
         }
+    };
+    
+    const formatDate = (dateString) => {
+        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+        return new Date(dateString).toLocaleDateString("es-ES", options);
     };
 
  return (
@@ -181,52 +186,53 @@ function Elections({ logout }) {
             <header className="main-header">
                 <h1>Votaciones de la Comunidad</h1>
                 <div className="header-buttons"> 
-                <Link to="/create-elections" className="create-elections-button">
+                <Link to="/create-elections" className="create-meeting-button">
                     Crear Votación
                 </Link>
                 
                    <button onClick={logout} className="logout-button">Cerrar sesión</button>
                 </div>
             </header>
-            <div className="election-details">
+            <div className="elections-container">
                 {selectedElection && (
-                    <>
-                        <h2>{selectedElection.titulo}</h2>
-                        <p>{selectedElection.informacion}</p>
-                        <p>{selectedElection.fecha}</p>
+                    <div className="elections-details">
+                        <h2 className="vote-title" >{selectedElection.titulo}</h2>
+                        <p className="election-info">{selectedElection.informacion}</p>
+                        <p className="election-info"><h4>Cierre de la votación: </h4>{formatDate(selectedElection.fecha)}</p>
                         {!hasVoted ? (
-                            <div>
-                                <button onClick={() => handleVote('agree')}>Estoy de acuerdo</button>
-                                <button onClick={() => handleVote('disagree')}>No estoy de acuerdo</button>
-                                <button onClick={() => handleVote('abstain')}>Me abstengo</button>
+                            <div className="vote-container">
+                                <button className="vote-button-election" onClick={() => handleVote('agree')}>Estoy de acuerdo</button>
+                                <button className="vote-button-election" onClick={() => handleVote('disagree')}>No estoy de acuerdo</button>
+                                <button className="vote-button-election" onClick={() => handleVote('abstain')}>Me abstengo</button>
                             </div>
                         ) : (
-                            <p>Thanks for voting!</p>
+                            <h3 className='thanks'>Thanks for voting!</h3>
                         )}
                         {president && (
-                            <button onClick={() => deleteElection(selectedElection.id)}>Eliminar Votación</button>
+                            <button className= "delete-election-button" onClick={() => deleteElection(selectedElection.id)}>Eliminar Votación</button>
                         )}
 
                         {president && (
-                            <div>
-                                <h2>Resultados de la Votación</h2>
-                                <p>Estoy de acuerdo: {agreeCount}</p>
-                                <p>No estoy de acuerdo: {disagreeCount}</p>
-                                <p>Me abstengo: {abstainCount}</p>
+                            <div className="voting-results">
+                                <h3>Resultados de la Votación</h3>
+                                <p>Estoy de acuerdo  =  {agreeCount}</p>
+                                <p>No estoy de acuerdo  =  {disagreeCount}</p>
+                                <p>Me abstengo  =  {abstainCount}</p>
                             </div>
                         )} 
-                    </>
+                    </div>
                 )}
-            </div>
 
-            <div className="elections-list">
-                <h2>Previous Elections</h2>
-                {elections.map(election => (
-                    <button key={election.id} onClick={() => selectElection(election)}>
-                        {election.titulo} - {election.fecha}
-                    </button>
-                ))}
+                <div className="elections-list">
+                    <h2>Votaciones pedientes</h2>
+                    {elections.map(election => (
+                        <button className="ListMeeting-button" key={election.id} onClick={() => selectElection(election)}>
+                            {election.titulo}
+                        </button>
+                    ))}
+                </div>
             </div>
+            
         </main>
     </div>
 );
