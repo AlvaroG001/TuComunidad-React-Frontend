@@ -88,6 +88,11 @@
     color: #ffff; /* Color de texto blanco */
 }
 
+.sent-message {
+    background-color: #DCF8C6; /* Color de fondo para mensajes enviados */
+    margin-left: auto; /* Mueve el mensaje hacia la derecha */
+}
+
 .perfil-user{
     width: 50px;
 
@@ -108,6 +113,24 @@
     margin-bottom: 10px; /* Margen inferior */
     border-radius: 8px; /* Bordes redondeados */
     margin-right: 150px;
+}
+
+.chat-left {
+    background-color: #46fde580;
+    margin-left: 20px;
+    margin-right: 400px;
+    padding: 5px; /* Reducimos el espacio interior */
+    margin-bottom: 10px; /* Margen inferior */
+    border-radius: 8px; /* Bordes redondeados */
+    max-width: 70%; /* Anchura máxima del mensaje */
+    word-wrap: break-word; /* Permitir saltos de línea */
+}
+
+.chat-right {
+    background-color: #087768;
+    margin-right: 20px;
+    margin-left: 400px;
+    align-self: flex-end;
 }
 
 .chat h3 {

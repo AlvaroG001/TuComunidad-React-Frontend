@@ -36,11 +36,11 @@ function Chats({ logout }) {
             const response = await fetch(`http://localhost:9000/api/chats?communityId=${communityId}`);
             if(response.ok){
                 const data = await response.json();
-
+                // setChats(data);
                 // Asegúrate de que los datos se ordenen de más reciente (id más alto) a más antiguo antes de hacer el slice
                 const sortedData = data.sort((a, b) => b.id - a.id);
                 setChats(sortedData.slice(0, 5)); // Guarda las últimas 5 votaciones (las más recientes)
-                setSelectedChat(sortedData[0]); // Selecciona la votación más reciente como la votación seleccionada por defecto
+                // setSelectedChat(sortedData[0]); // Selecciona la votación más reciente como la votación seleccionada por defecto
 
             } else {
                 throw new Error('Error al cargar los chats');
@@ -75,6 +75,7 @@ function Chats({ logout }) {
             if (response.ok) {
                 setNewMessage('');
                 setSelectedChat(updatedChat);
+                fetchChats();
             } else {
                 alert('Error al actualizar el chat');
             }
@@ -141,12 +142,15 @@ function Chats({ logout }) {
                                 <div className="chat-message">
                                     <p>{selectedChat.message}</p>
                                 </div>
-                                {selectedChat.usuarios.map((usuario, index) => (
-                                    <div key={index} className="chat">
+                                {selectedChat.chats.map((mensaje, index) => (
+                                <div key={index}  className={`chat ${selectedChat.usuarios[index] === userData.id ? 'chat-right' : 'chat-left'}`}>
+                                    <div className="chat-usuario">
+                                        <img src={perfilImg} alt="Perfil" className="perfil-user"/>
                                         <h3>Usuario: {selectedChat.usuarios[index]}</h3>
-                                        <p className="mensaje-usuario">Mensaje: {selectedChat.chats[index]}</p>
                                     </div>
-                                ))}
+                                    <p className="mensaje-usuario">{mensaje}</p>
+                                </div>
+                            ))}
                                 <div className="input-boton">
                                 <input
                                     type="text"
