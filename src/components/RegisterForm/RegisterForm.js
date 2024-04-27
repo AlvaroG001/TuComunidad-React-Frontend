@@ -26,47 +26,27 @@ function RegisterForm() {
       }
   };
 
-  const checkUserExists = async () => {
-      const response = await fetch(`http://localhost:9000/api/usuarios/check-email`, {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email: user.email })
-      });
-      if (!response.ok) throw new Error('Error al verificar el usuario');
-      return response.json();
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const userExists = await checkUserExists();
-      if (userExists) {
-          alert("El usuario con ese correo electrónico ya existe.");
-          return;
-      }
-      const response = await fetch('http://localhost:9000/api/usuarios', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(user)
+      const response = await fetch('http://localhost:9000/register', { // Asegúrate de que esta URL coincide con el backend
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user)
       });
 
       if (response.ok) {
-          console.log("Usuario registrado con éxito");
-          alert("Usuario registrado con éxito.");
-          navigate('/login');
-      } else if (response.status === 400) {
-          const errorMessage = await response.text();
-          alert(errorMessage); // Muestra un mensaje de error específico sobre la comunidad no encontrada
+        alert('User registered successfully.');
+        navigate('/login');
       } else {
-          throw new Error(`HTTP error! status: ${response.status}`);
+        const errorMessage = await response.text();
+        alert(errorMessage);
       }
     } catch (error) {
-        console.error("Error durante el registro:", error);
-        alert("Ha ocurrido un error durante el registro. Por favor, verifica los datos e inténtalo de nuevo.");
+      console.error("Registration error:", error);
+      alert("Registration error");
     }
   };
 

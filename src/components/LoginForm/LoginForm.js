@@ -11,30 +11,37 @@ function LoginForm({ setIsAuthenticated }) {
 
   const handleLogin = async (event) => {
     event.preventDefault();
+    const formData = new URLSearchParams();
+    formData.append('username', email);
+    formData.append('password', password);
+
     try {
-      const response = await fetch('http://localhost:9000/api/usuarios/auth', {
+      const response = await fetch('http://localhost:9000/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: JSON.stringify({ email, password })
+        body: formData
       });
 
       if (response.ok) {
         const userData = await response.json();
-        localStorage.setItem('userData', JSON.stringify(userData));
-        console.log(userData);
+        sessionStorage.setItem('userData', JSON.stringify(userData));
         setIsAuthenticated(true);
         navigate('/home');
       } else {
-        const errorMessage = await response.text();
-        alert(errorMessage);
+        const errorText = await response.text();
+        alert(`Authentication failed! Server responded with: ${errorText}`);
       }
     } catch (error) {
-      console.error("Error al iniciar sesión:", error);
-      alert("Error al conectar con el servidor");
+      console.error("Login error:", error);
+      alert("Login error: " + error.message);
     }
   };
+
+
+
+
 
   const togglePasswordVisibility = () => {
     setPasswordVisibility(!isPasswordVisible);
