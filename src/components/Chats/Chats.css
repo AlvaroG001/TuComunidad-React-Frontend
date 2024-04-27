@@ -83,9 +83,15 @@
     text-align: center;
 }
 
-/*.perfil-user{
+.chat-usuario{
+    display: flex; 
+    color: #ffff; /* Color de texto blanco */
+}
 
-}*/
+.perfil-user{
+    width: 50px;
+
+}
 
 .chat-message {
     margin-bottom: 15px; /* Margen inferior */
@@ -149,4 +155,3 @@ button:hover {
     scrollbar-width:unset; /* Estilo del scroll */
     scrollbar-color: #55efc352 transparent; /* Color del thumb y track */
 }
-

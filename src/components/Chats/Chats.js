@@ -134,9 +134,11 @@ function Chats({ logout }) {
                             <div className="chat-titulo-container">
                                 <h2 className="chat-titulo">{selectedChat.titulo}</h2>
                             </div>
-                                <div className="chat-message">
+                                <div className="chat-usuario">
                                     <img src={perfilImg} alt="Perfil" className="perfil-user"/>
                                     <p><strong>{selectedChat.sender}</strong></p>
+                                </div>
+                                <div className="chat-message">
                                     <p>{selectedChat.message}</p>
                                 </div>
                                 {selectedChat.usuarios.map((usuario, index) => (
