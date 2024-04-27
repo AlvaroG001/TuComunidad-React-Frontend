@@ -67,16 +67,20 @@
     flex: 1;
 }
 
-.chat-titulo-container {
-    background-color: #ffff; /* Fondo verde */
-    padding: 10px 15px; /* Espacio interior para separar el texto del borde */
-    border-radius: 10px; /* Bordes redondeados */
-}
-
 .chat-titulo {
-    color: #136b4e; /* Color de texto blanco */
-    margin-bottom: 15px; /* Margen inferior */
-    text-align: center; /* Centra el texto horizontalmente */
+    font-size: 24px; /* Tamaño de fuente grande para destacar */
+    color: #056f69; /* Color oscuro para el texto, asegurando contraste */
+    font-weight: bold; /* Fuente en negrita para darle presencia */
+    text-align: center; /* Alineación central para darle prominencia */
+    margin-bottom: 20px; /* Espacio debajo del título para separar del contenido */
+    padding: 10px; /* Espacio interior para una mejor visualización */
+    border-bottom: 3px solid #048f79; /* Línea sutil debajo para destacar */
+    background-color: #f8f8f8; /* Fondo claro para contraste */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil para profundidad */
+    border-radius: 10px; /* Bordes redondeados suaves */
+    max-width: 80%; /* Ancho máximo para contención */
+    margin-left: auto; /* Margen automático para centrado horizontal */
+    margin-right: auto; /* Margen automático para centrado horizontal */
 }
 
 .mensaje-usuario{
@@ -88,12 +92,18 @@
     color: #ffff; /* Color de texto blanco */
 }
 
+.chat-usuario p{
+    margin-left: 15px;
+    margin-top: 35px;
+}
+
 .sent-message {
     background-color: #DCF8C6; /* Color de fondo para mensajes enviados */
     margin-left: auto; /* Mueve el mensaje hacia la derecha */
 }
 
 .perfil-user{
+    margin-top: 15px;
     width: 50px;
 
 }

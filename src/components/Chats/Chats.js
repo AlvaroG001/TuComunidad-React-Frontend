@@ -132,9 +132,7 @@ function Chats({ logout }) {
                         {selectedChat && (
                             <div className="active-chat">
                             <>
-                            <div className="chat-titulo-container">
                                 <h2 className="chat-titulo">{selectedChat.titulo}</h2>
-                            </div>
                                 <div className="chat-usuario">
                                     <img src={perfilImg} alt="Perfil" className="perfil-user"/>
                                     <p><strong>{selectedChat.sender}</strong></p>

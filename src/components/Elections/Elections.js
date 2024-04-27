@@ -31,7 +31,10 @@ function Elections({ logout }) {
             if (response.ok) {
                 const data = await response.json();
                 console.log(data)
-                setElections(data.slice(-5)); // Guarda las últimas 5 votaciones
+
+                const sortedData = data.sort((a, b) => b.id - a.id);
+                setElections(sortedData.slice(0, 5));
+
             } else {
                 throw new Error("Error al cargar las votaciones");
             }
@@ -92,7 +95,7 @@ function Elections({ logout }) {
             });
             if (response.ok) {
                 setHasVoted(true);
-                alert('Your vote has been recorded.');
+                alert('Tu voto ha sido registrado.');
                 setSelectedElection(updatedElection);  // Actualizar la elección en el estado
 
             } else {
@@ -205,7 +208,7 @@ function Elections({ logout }) {
                                     <button className="vote-button-election" onClick={() => handleVote('abstain')}>Me abstengo</button>
                                 </div>
                             ) : (
-                                <h3 className='thanks'>Thanks for voting!</h3>
+                                <h3 className='thanks'>Gracias por su voto!</h3>
                             )}
                             {president && (
                                 <button className="delete-election-button" onClick={() => deleteElection(selectedElection.id)}>Eliminar Votación</button>
