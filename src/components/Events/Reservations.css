@@ -1,0 +1,198 @@
+.home-container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 80px;
+    background-color: #056f69;
+    padding-top: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home-button,
+.calendar-button,
+.meeting-button,
+.vote-button,
+.chat-button,
+.settings-button {
+    width: 45px;
+    height: auto;
+    cursor: pointer;
+    margin-top: 25px;
+    margin-bottom: 1px;
+}
+
+.sidebar-label {
+    color: white;
+    text-align: center;
+    margin-bottom: 5px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.main-content {
+    flex-grow: 1;
+    background-color: #088980;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    font-size: 17px;
+    color: white;
+}
+
+.logout-button,
+.delete-event-button,
+.add-event-button {
+    padding: 10px 20px;
+    background-color: #eceaeab0;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    border: none;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+}
+
+.logout-button:hover,
+.delete-event-button:hover,
+.add-event-button:hover {
+    background-color: #e0e0e0;
+}
+
+.facilities-menu {
+    flex: 1;
+    background-color: #f9f9f9;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.calendar-container {
+    flex: 5;
+    justify-content: space-between;
+    padding: 20px;
+    height: 80%;
+}
+
+.reservations-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.reservations-details {
+    flex: 1; /* Ocupa 1/4 del espacio disponible en el contenedor */
+    position: relative;
+    flex-basis: 25%; /* Ocupa 1/4 del espacio disponible en el contenedor */
+    background-color: #48a09c; /* Color de fondo para los detalles de la reunión */
+    border-radius: 15px; /* Bordes redondeados */
+    padding: 20px; /* Espacio interior */
+    margin-left: 10px; /* Margen izquierdo para separación */
+    overflow-y: auto; /* Habilita el desplazamiento si el contenido es muy largo */    
+}
+
+.event-details {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para el selector de instalaciones */
+.select-facility {
+    padding: 5px 10px;
+    background-color: transparent;
+    color: white;
+    border: 2px solid #00b894;
+    /* Color del borde cuando no está seleccionado */
+    transition: all 0.3s ease-in-out;
+}
+
+.select-facility:hover {
+    background-color: #00b894;
+    /* Cambio de fondo al pasar el ratón */
+    color: #fff;
+    /* Texto blanco para mayor contraste */
+}
+
+.select-facility-active {
+    background-color: #00b894;
+    /* Fondo más oscuro cuando está seleccionado */
+    color: white;
+    border-color: #00796b;
+    /* Borde más oscuro para resaltar la selección activa */
+}
+
+.reservations-details {
+    position: relative;
+    flex: 5;
+    background-color: #48a09c; /* Color de fondo para los detalles de la reunión */
+    border-radius: 15px; /* Bordes redondeados */
+    padding: 20px; /* Espacio interior */
+    overflow-y: auto; /* Habilita el desplazamiento si el contenido es muy largo */
+}
+
+.facility-list {
+    flex-basis: 45%;
+    background-color: #056f69; /* Color de fondo para la lista de reuniones */
+    border-radius: 15px; /* Bordes redondeados */
+    padding: 20px; /* Espacio interior para no tocar los bordes */
+    overflow-y: auto; /* Habilita el desplazamiento si la lista es muy larga */
+}
+
+.facility-item {
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #ddd;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.facility-item:hover, .facility-item.selected-facility {
+    background-color: #ccc; /* Cambio de color al pasar el ratón o estar seleccionado */
+}
+
+.content-layout {
+    display: flex;
+    flex-grow: 1;
+}
+
+.Modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 600px;
+    width: 90%; /* Se ajusta al 90% del ancho de la pantalla hasta un máximo de 600px */
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Asegura que el modal esté sobre otros elementos */
+}
+
+.Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999; /* Menos que el modal para que actúe como fondo */
+}
