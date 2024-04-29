@@ -18,19 +18,18 @@
     justify-content: space-between; /* Espaciado interno entre el contenido del botón */
 }
 
-.chat-list {
-    flex-basis: 45%;
-    background-color: #056f69; /* Color de fondo para la lista de reuniones */
-    border-radius: 15px; /* Bordes redondeados */
-    padding: 20px; /* Espacio interior para no tocar los bordes */
-    overflow-y: auto; /* Habilita el desplazamiento si la lista es muy larga */
-}
+
 
 .chats-container {
     display: flex; /* Establece el contenedor como un contenedor flexible */
-    justify-content: space-between; /* Distribuye los elementos a lo largo del contenedor con espacio entre ellos */
+    justify-content: center; /* Distribuye los elementos a lo largo del contenedor con espacio entre ellos */
     padding: 20px; /* Agrega un espacio interno de 20px alrededor del contenedor */
+    justify-content: space-around;    
     height: 80%; /* Ajusta la altura según sea necesario */
+}
+
+.chats-container.active {
+    justify-content: space-between; /* Distribuye los elementos a lo largo del contenedor con espacio entre ellos */
 }
 
 .active-chat {
@@ -40,18 +39,19 @@
     background-color: #1a6d5552;
     border-radius: 15px;
     padding: 20px;
+    margin-bottom: 10px;
     overflow-y: auto; /* Agrega un scroll vertical cuando el contenido es largo */
 }
 
 
 .chat-details {
     flex: 1; /* Ocupa 1/4 del espacio disponible en el contenedor */
-    position: relative;
     flex-basis: 25%; /* Ocupa 1/4 del espacio disponible en el contenedor */
     background-color: #48a09c; /* Color de fondo para los detalles de la reunión */
     border-radius: 15px; /* Bordes redondeados */
     padding: 20px; /* Espacio interior */
     margin-left: 10px; /* Margen izquierdo para separación */
+    margin-bottom: 400px;
     overflow-y: auto; /* Habilita el desplazamiento si el contenido es muy largo */    
 }
 
@@ -85,6 +85,7 @@
 
 .mensaje-usuario{
     text-align: center;
+    margin-top: 0px;
 }
 
 .chat-usuario{
@@ -92,9 +93,20 @@
     color: #ffff; /* Color de texto blanco */
 }
 
-.chat-usuario p{
+.chat-usuario h3{
     margin-left: 15px;
     margin-top: 35px;
+}
+
+.chat-usuario-inside{
+    display: flex; 
+    color: #ffff; /* Color de texto blanco */
+    margin-top: 1px;
+}
+
+.chat-usuario-inside p{
+    margin-left: 5px;
+    margin-top: 10px;
 }
 
 .sent-message {
@@ -104,8 +116,13 @@
 
 .perfil-user{
     margin-top: 15px;
-    width: 50px;
+    width: 60px;
+}
 
+.perfil-user-inside{
+    margin-top: 1px;
+    width: 40px;
+    height: 40px;
 }
 
 .chat-message {
@@ -126,7 +143,7 @@
 }
 
 .chat-left {
-    background-color: #46fde580;
+    background-color: #46fde536;
     margin-left: 20px;
     margin-right: 400px;
     padding: 5px; /* Reducimos el espacio interior */
@@ -153,22 +170,27 @@
     margin-bottom: 5px; /* Margen inferior */
 }
 
-input[type="text"] {
-    width: calc(100% - 20px); /* Ancho del input menos el padding */
+.mensaje-input {
+    width: calc(100% - 20px); /* Ancho del textarea menos el padding */
     padding: 13px; /* Espacio interior */
     margin-bottom: 10px; /* Margen inferior */
     border: 1px solid #55efc352; /* Borde sólido con color verde */
     border-radius: 5px; /* Bordes redondeados */
+    resize: none; /* Evita que el usuario redimensione el textarea */
+    overflow-y: auto; /* Agrega un scroll vertical si es necesario */
+    font-family: inherit; /* Utiliza la misma fuente que el resto del texto */
 }
 
-button {
+.boton-enviar {
     padding: 10px 20px; /* Espacio interior */
-    background-color: #00b894; /* Verde claro */
+    background-color: #084437; /* Verde claro */
     border: none; /* Sin borde */
     border-radius: 5px; /* Bordes redondeados */
     color: #fff; /* Color de texto blanco */
     cursor: pointer; /* Indica que el elemento es clickeable */
     transition: background-color 0.3s, color 0.3s; /* Transición suave para hover y click */
+    margin-left: 5px;    
+    height: 63px;
 }
 
 button:hover {     

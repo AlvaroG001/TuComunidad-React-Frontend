@@ -135,28 +135,30 @@ function Chats({ logout }) {
                                 <h2 className="chat-titulo">{selectedChat.titulo}</h2>
                                 <div className="chat-usuario">
                                     <img src={perfilImg} alt="Perfil" className="perfil-user"/>
-                                    <p><strong>{selectedChat.sender}</strong></p>
+                                    <h3>{selectedChat.sender}</h3>
                                 </div>
                                 <div className="chat-message">
                                     <p>{selectedChat.message}</p>
                                 </div>
                                 {selectedChat.chats.map((mensaje, index) => (
                                 <div key={index}  className={`chat ${selectedChat.usuarios[index] === userData.id ? 'chat-right' : 'chat-left'}`}>
-                                    <div className="chat-usuario">
-                                        <img src={perfilImg} alt="Perfil" className="perfil-user"/>
-                                        <h3>Usuario: {selectedChat.usuarios[index]}</h3>
+                                    <div className="chat-usuario-inside">
+                                        <img src={perfilImg} alt="Perfil" className="perfil-user-inside"/>
+                                        <p><strong>Usuario: {selectedChat.usuarios[index]}</strong></p>
                                     </div>
                                     <p className="mensaje-usuario">{mensaje}</p>
                                 </div>
                             ))}
                                 <div className="input-boton">
-                                <input
-                                    type="text"
+                                <textarea
+                                    name="mensaje"
                                     value={newMessage}
                                     onChange={e => setNewMessage(e.target.value)}
+                                    className="mensaje-input"
                                     placeholder="Escribe un mensaje..."
-                                />
-                                <button onClick={handleUpdateChat}>Enviar</button>
+                                    required
+                                ></textarea>
+                                <button onClick={handleUpdateChat} className="boton-enviar">Enviar</button>
                                 </div>
                             </>
                             </div>
@@ -164,7 +166,7 @@ function Chats({ logout }) {
                     
                     <div className="chat-details">
                         <h3 className="meetings-h2">Chats de "{userData.comunidad.name}"</h3>
-                        {chats.slice(0, 5).map(chat => (
+                        {chats.map(chat => (
                             <button className="ListChat-button" key={chat.id} onClick={() => { setSelectedChat(chat); console.log(); }}>
                                 {chat.titulo}
                             </button>
