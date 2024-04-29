@@ -1,66 +1,179 @@
 .home-container {
-    display: flex;
-    height: 100vh;
-  }
-  
-  .sidebar {
-    width: 80px; /* Ancho de la barra lateral */
-    background-color: #056f69; /* Color de fondo de la barra lateral */
-    padding-top: 35px; /* Espacio superior dentro de la barra lateral */
-    display: flex; /* Usa flexbox para organizar los elementos internos */
-    flex-direction: column; /* Organiza los elementos hijos en columna */
-    align-items: center; /* Centra los elementos hijos horizontalmente */
-  }
-  
-  /* Estilos comunes para todos los botones de la barra lateral */
-  .home-button,
-  .calendar-button,
-  .meeting-button,
-  .chat-button,
-  .settings-button,
-  .vote-button {
-    display: block; /* Asegura que la imagen use todo el ancho disponible */
-    width: 45px; /* Ajusta el ancho según sea necesario */
-    height: auto; /* Mantiene la proporción de la imagen */
-    cursor: pointer; /* Cambia el cursor para indicar que es clickeable */
-    margin-top: 25px;
-    margin-bottom: 1px; /* Reducir el margen inferior para acercar la etiqueta */
-  }
-  
-  .sidebar-label {
-    color: white;
-    text-align: center; /* Centra el texto horizontalmente */
-    margin-bottom: 5px; /* Reducir el espacio debajo de cada etiqueta de texto */
-    font-size: 12px;
-    font-weight: bold;
-  }
-  
-  .main-content {
-    flex-grow: 1; /* Ocupa el espacio restante */
-    background-color: #088980; /* El color de fondo principal */
-  }
-  
-  .main-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    padding-left: 50px;
-    font-size: 17px;
-    color: white; /* Cambiado a white para consistencia */
-  }
-  
-  .logout-button {
-    padding: 10px 20px;
-    background-color: #eceaeab0; /* Botones con color más hacia el blanco */
-    color: white; /* Cambiado a white para consistencia */
-    cursor: pointer;
-    font-size: 14px;
-    border: none;
-    border-radius: 20px;
-  }
-  
-  .logout-button:hover {
-    background-color: #e0e0e0; /* Un color ligeramente más oscuro al pasar el ratón */
-  }
-  
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+}
+
+.home-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('../Logos/Fondo.png'); /* Asegúrate de reemplazar con la ruta correcta a tu imagen */
+  background-size: cover;
+  background-position: center;
+  filter: blur(15px);
+  z-index: -1; /* Coloca el fondo detrás del contenido */
+}
+
+
+.sidebar {
+  width: 80px;
+  background-color: #056F6A;
+  /* Un color más sólido para mejorar la visibilidad */
+  padding-top: 35px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  /* Añade sombra para un efecto de profundidad */
+  transition: width 0.3s;
+  /* Suave transición al cambiar el ancho */
+}
+
+/* Efecto de hover para los botones para indicar interactividad */
+.home-button,
+.calendar-button,
+.meeting-button,
+.chat-button,
+.settings-button,
+.vote-button {
+  display: block;
+  width: 45px;
+  height: auto;
+  cursor: pointer;
+  margin-top: 25px;
+  margin-bottom: 1px;
+  transition: transform 0.3s;
+  /* Transición para efecto de pulsación */
+}
+
+.home-button:hover,
+.calendar-button:hover,
+.meeting-button:hover,
+.chat-button:hover,
+.settings-button:hover,
+.vote-button:hover {
+  transform: scale(1.1);
+  /* Aumenta el tamaño al pasar el mouse */
+}
+
+.sidebar-label {
+  color: #FFFFFF;
+  /* Mantiene el texto blanco para contraste */
+  text-align: center;
+  margin-bottom: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  /* Sombras en texto para mejorar la legibilidad */
+}
+
+/* Expandir la barra lateral al pasar el mouse */
+.sidebar:hover {
+  width: 87px;
+  /* Ancho más grande al pasar el mouse */
+}
+
+
+.main-content {
+  flex-grow: 1;
+  /* Ocupa el espacio restante */
+}
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  padding-left: 50px;
+  font-size: 17px;
+  color: white;
+  /* Cambiado a white para consistencia */
+}
+
+.logout-button {
+  padding: 10px 20px;
+  background-color: #eceaeab0;
+  /* Botones con color más hacia el blanco */
+  color: white;
+  /* Cambiado a white para consistencia */
+  cursor: pointer;
+  font-size: 14px;
+  border: none;
+  border-radius: 20px;
+}
+
+.logout-button:hover {
+  background-color: #e0e0e0;
+  /* Un color ligeramente más oscuro al pasar el ratón */
+}
+
+
+
+
+
+
+
+
+
+.media-container {
+  display: flex;
+  gap: 30px; /* Espacio entre los bloques */
+  margin: 30px; /* Margen para separar del resto del contenido */
+  margin-top: 0px;
+}
+
+.meetingsAndElections,
+.chatsAndReservations{
+  flex: 1;
+}
+
+
+
+.meetings,
+.elections,
+.chats,
+.reservations {
+  margin-top: 30px;
+  display: flex;
+  background: #045551;
+  padding: 20px; /* Padding interno */
+  border-radius: 25px; /* Bordes redondeados para los sub-contenedores */
+}
+
+.media-container h2{
+  flex-grow: 1;
+  color: #FFFFFF;
+  font-size: 16px;
+  margin-top: 5px;
+  margin-left: 10px;
+}
+
+.buttonMeeting,
+.buttonChat,
+.buttonElection,
+.buttonReservation {
+  flex: 1;
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #0b8c8640; /* Color principal de los botones */
+  color: rgb(192, 188, 188);
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s;
+  font-weight: bold; /* Texto en negrita para resaltar */
+  text-transform: uppercase; /* Mayúsculas para mantener uniformidad */
+}
+
+button:hover {
+  background-color: #024d4c; /* Oscurecimiento al pasar el mouse */
+  transform: scale(1.05); /* Efecto de crecimiento al pasar el mouse */
+}
+
+

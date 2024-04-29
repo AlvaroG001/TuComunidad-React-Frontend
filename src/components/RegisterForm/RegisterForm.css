@@ -1,7 +1,7 @@
 .register-background {
   width: 100%;
   height: 100vh;
-  background-image: url('./FondoRegister.png'); /* Asegúrate de reemplazar con la ruta correcta a tu imagen */
+  background-image: url('../Logos/Fondo.png'); /* Asegúrate de reemplazar con la ruta correcta a tu imagen */
   background-size: cover;
   display: flex;
   justify-content: center;

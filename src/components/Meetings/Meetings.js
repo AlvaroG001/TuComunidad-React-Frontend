@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation} from 'react-router-dom';
 import './Meetings.css';
 
 import homeButtonImg from '../Logos/HomeButton.png';
@@ -11,6 +11,7 @@ import settingsButtonImg from '../Logos/SettingsButton.png';
 
 function Meetings({ logout }) {
     const navigate = useNavigate();
+    const location = useLocation();
     const [president, setPresident] = useState(false);
     const [meetings, setMeetings] = useState([]);
     const [selectedMeeting, setSelectedMeeting] = useState(null);
@@ -55,7 +56,7 @@ function Meetings({ logout }) {
                 // Asegúrate de que los datos se ordenen de más reciente (id más alto) a más antiguo antes de hacer el slice
                 const sortedData = data.sort((a, b) => b.id - a.id);
                 setMeetings(sortedData.slice(0, 5)); // Guarda las últimas 5 votaciones (las más recientes)
-                setSelectedMeeting(sortedData[0]); // Selecciona la votación más reciente como la votación seleccionada por defecto
+                // setSelectedMeeting(sortedData[0]); // Selecciona la votación más reciente como la votación seleccionada por defecto
 
             } else {
                 throw new Error("Error al cargar las reuniones");
@@ -65,9 +66,14 @@ function Meetings({ logout }) {
         }
     };
 
+
     useEffect(() => {
         fetchMeetings();
-    }, []);
+        if (location.state?.meeting) {
+            setSelectedMeeting(location.state.meeting);
+        }
+    }, [location]);
+
 
     const handleLogout = () => {
         logout();

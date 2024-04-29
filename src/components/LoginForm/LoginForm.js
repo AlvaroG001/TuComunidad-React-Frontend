@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import background from './FondoLogin.png';
+import background from '../Logos/Fondo.png';
 import './LoginForm.css';
 
 function LoginForm({ setIsAuthenticated }) {

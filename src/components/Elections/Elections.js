@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import './Elections.css';
 
 import homeButtonImg from '../Logos/HomeButton.png';
@@ -10,6 +10,7 @@ import chatButtonImg from '../Logos/ChatButton.png';
 import settingsButtonImg from '../Logos/SettingsButton.png';
 
 function Elections({ logout }) {
+    const location = useLocation();
     const [president, setPresident] = useState(false);
     const [elections, setElections] = useState([]);
     const [selectedElection, setSelectedElection] = useState(null);
@@ -30,7 +31,6 @@ function Elections({ logout }) {
             const response = await fetch(`http://localhost:9000/api/votaciones?communityId=${communityId}`);
             if (response.ok) {
                 const data = await response.json();
-                console.log(data)
 
                 const sortedData = data.sort((a, b) => b.id - a.id);
                 setElections(sortedData.slice(0, 5));
@@ -41,21 +41,34 @@ function Elections({ logout }) {
         } catch (error) {
             console.error('Error al obtener las votaciones:', error);
         }
+
     };
+
+    const selectElection = useCallback((election) => {
+        console.log(election);
+        setSelectedElection(election);
+        checkIfUserHasVoted(election?.votantes);
+        setAgreeCount(election?.respuestas.filter(respuesta => respuesta === '1').length);
+        setDisagreeCount(election?.respuestas.filter(respuesta => respuesta === '2').length);
+        setAbstainCount(election?.respuestas.filter(respuesta => respuesta === '3').length);
+    }, []);
 
 
     useEffect(() => {
-
         fetchElections();
+        if (location.state?.election) {
+            selectElection(location.state.election);
+            setSelectedElection(location.state.election);
+        }
+    }, [location, selectElection]);
 
-    }, [selectedElection]);
 
     const checkIfUserHasVoted = async (electionVotantes) => {
         const userDataString = localStorage.getItem('userData');
         const userData = JSON.parse(userDataString);
         const userId = userData.id;
 
-        const userHasVoted = electionVotantes.includes(userId);
+        const userHasVoted = electionVotantes?.includes(userId);
 
         setHasVoted(userHasVoted);
     };
@@ -110,13 +123,7 @@ function Elections({ logout }) {
 
 
 
-    const selectElection = (election) => {
-        setSelectedElection(election);
-        checkIfUserHasVoted(election.votantes);
-        setAgreeCount(election.respuestas.filter(respuesta => respuesta === '1').length);
-        setDisagreeCount(election.respuestas.filter(respuesta => respuesta === '2').length);
-        setAbstainCount(election.respuestas.filter(respuesta => respuesta === '3').length);
-    };
+
 
 
 
