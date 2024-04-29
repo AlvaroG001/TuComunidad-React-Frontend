@@ -9,15 +9,16 @@
 
 .elections-list {
     flex: 2;
-    background-color: #056f69; /* Color de fondo para la lista de reuniones */
+    background-color: #05605c; /* Color de fondo para la lista de reuniones */
     border-radius: 15px; /* Bordes redondeados */
     padding: 20px; /* Espacio interior para no tocar los bordes */
     overflow-y: auto; /* Habilita el desplazamiento si la lista es muy larga */
     margin-left: 20px;
     overflow-x: auto; /* Habilita el desplazamiento si la lista es muy larga */
+    margin-bottom: auto;
 
 }
-.meetings-list h2{
+.elections-list h2{
     color: #ffffff; /* Texto blanco para contraste */
     margin-bottom: 10px 0; /* Espacio vertical entre elementos */
     margin-left: 20px;
