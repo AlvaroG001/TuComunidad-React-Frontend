@@ -14,10 +14,13 @@
     padding: 20px; /* Espacio interior para no tocar los bordes */
     overflow-y: auto; /* Habilita el desplazamiento si la lista es muy larga */
     margin-left: 20px;
+    overflow-x: auto; /* Habilita el desplazamiento si la lista es muy larga */
+
 }
-.elections-list h2{
+.meetings-list h2{
     color: #ffffff; /* Texto blanco para contraste */
     margin-bottom: 10px 0; /* Espacio vertical entre elementos */
+    margin-left: 20px;
 }
 
 .elections-details {

@@ -51,7 +51,7 @@
     border-radius: 15px; /* Bordes redondeados */
     padding: 20px; /* Espacio interior */
     margin-left: 10px; /* Margen izquierdo para separación */
-    margin-bottom: 400px;
+    margin-bottom: auto;
     overflow-y: auto; /* Habilita el desplazamiento si el contenido es muy largo */    
 }
 

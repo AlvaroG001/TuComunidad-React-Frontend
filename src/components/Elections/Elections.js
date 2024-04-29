@@ -232,7 +232,7 @@ function Elections({ logout }) {
                         </div>
                     )}
 
-                    <div className="elections-list">
+                    <div className="meetings-list">
                         <h2>Votaciones pedientes</h2>
                         {elections.map(election => (
                             <button className="ListMeeting-button" key={election.id} onClick={() => selectElection(election)}>

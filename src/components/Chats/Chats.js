@@ -25,45 +25,46 @@ function Chats({ logout }) {
 
     }, []);
 
-    const fetchChats = async () => {      
+    const fetchChats = async () => {
         const userDataString1 = localStorage.getItem('userData');
-        const userData1 = JSON.parse(userDataString1);  
+        const userData1 = JSON.parse(userDataString1);
         const communityId = userData1.comunidad.id;
 
         setPresident(userData1?.president);
 
-        try{
+        try {
             const response = await fetch(`http://localhost:9000/api/chats?communityId=${communityId}`);
-            if(response.ok){
+            if (response.ok) {
                 const data = await response.json();
                 // setChats(data);
                 // Asegúrate de que los datos se ordenen de más reciente (id más alto) a más antiguo antes de hacer el slice
                 const sortedData = data.sort((a, b) => b.id - a.id);
                 setChats(sortedData.slice(0, 5)); // Guarda las últimas 5 votaciones (las más recientes)
-                // setSelectedChat(sortedData[0]); // Selecciona la votación más reciente como la votación seleccionada por defecto
+                console.log(selectedChat?.usuarios[0]);
+
 
             } else {
                 throw new Error('Error al cargar los chats');
             }
-        } catch (error){
+        } catch (error) {
             console.error('Error al obtener los chat:', error);
         }
-        
+
     };
 
     const handleUpdateChat = async () => {
-        const userId = userData.id
+        const userName = userData.name
 
-        if(newMessage === ""){
-            return   
+        if (newMessage === "") {
+            return
         } else {
             const updatedChat = {
                 ...selectedChat,
-                usuarios: [...selectedChat.usuarios, userId],
+                usuarios: [...selectedChat.usuarios, userName],
                 chats: [...selectedChat.chats, newMessage]
             };
             console.log(newMessage);
-    
+
             const response = await fetch(`http://localhost:9000/api/chats/${selectedChat.id}/chat`, {
                 method: 'POST',
                 headers: {
@@ -71,7 +72,7 @@ function Chats({ logout }) {
                 },
                 body: JSON.stringify(updatedChat)
             });
-    
+
             if (response.ok) {
                 setNewMessage('');
                 setSelectedChat(updatedChat);
@@ -79,7 +80,7 @@ function Chats({ logout }) {
             } else {
                 alert('Error al actualizar el chat');
             }
-        }           
+        }
     };
 
     return (
@@ -128,42 +129,42 @@ function Chats({ logout }) {
                     </div>
                 </header>
                 <div className="chats-container">
-                    
-                        {selectedChat && (
-                            <div className="active-chat">
+
+                    {selectedChat && (
+                        <div className="active-chat">
                             <>
                                 <h2 className="chat-titulo">{selectedChat.titulo}</h2>
                                 <div className="chat-usuario">
-                                    <img src={perfilImg} alt="Perfil" className="perfil-user"/>
+                                    <img src={perfilImg} alt="Perfil" className="perfil-user" />
                                     <h3>{selectedChat.sender}</h3>
                                 </div>
                                 <div className="chat-message">
                                     <p>{selectedChat.message}</p>
                                 </div>
                                 {selectedChat.chats.map((mensaje, index) => (
-                                <div key={index}  className={`chat ${selectedChat.usuarios[index] === userData.id ? 'chat-right' : 'chat-left'}`}>
-                                    <div className="chat-usuario-inside">
-                                        <img src={perfilImg} alt="Perfil" className="perfil-user-inside"/>
-                                        <p><strong>Usuario: {selectedChat.usuarios[index]}</strong></p>
+                                    <div key={index} className={`chat ${selectedChat.usuarios[index] === userData.name ? 'chat-right' : 'chat-left'}`}>
+                                        <div className="chat-usuario-inside">
+                                            <img src={perfilImg} alt="Perfil" className="perfil-user-inside" />
+                                            <p><strong>{selectedChat.usuarios[index]}</strong></p>
+                                        </div>
+                                        <p className="mensaje-usuario">{mensaje}</p>
                                     </div>
-                                    <p className="mensaje-usuario">{mensaje}</p>
-                                </div>
-                            ))}
+                                ))}
                                 <div className="input-boton">
-                                <textarea
-                                    name="mensaje"
-                                    value={newMessage}
-                                    onChange={e => setNewMessage(e.target.value)}
-                                    className="mensaje-input"
-                                    placeholder="Escribe un mensaje..."
-                                    required
-                                ></textarea>
-                                <button onClick={handleUpdateChat} className="boton-enviar">Enviar</button>
+                                    <textarea
+                                        name="mensaje"
+                                        value={newMessage}
+                                        onChange={e => setNewMessage(e.target.value)}
+                                        className="mensaje-input"
+                                        placeholder="Escribe un mensaje..."
+                                        required
+                                    ></textarea>
+                                    <button onClick={handleUpdateChat} className="boton-enviar">Enviar</button>
                                 </div>
                             </>
-                            </div>
-                        )}
-                    
+                        </div>
+                    )}
+
                     <div className="chat-details">
                         <h3 className="meetings-h2">Chats de "{userData.comunidad.name}"</h3>
                         {chats.map(chat => (
