@@ -16,7 +16,7 @@
   background-image: url('../Logos/Fondo.png'); /* Asegúrate de reemplazar con la ruta correcta a tu imagen */
   background-size: cover;
   background-position: center;
-  filter: blur(15px);
+  filter: blur(10px);
   z-index: -1; /* Coloca el fondo detrás del contenido */
 }
 
@@ -135,45 +135,190 @@
 
 
 
-.meetings,
-.elections,
-.chats,
-.reservations {
-  margin-top: 30px;
+
+.meetings {
+  background: #045551; /* Color de fondo consistente */
+  padding: 25px; /* Mayor padding para un aspecto más espacioso */
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* Sombra para más profundidad */
+  color: #FFFFFF; /* Texto en blanco para contraste */
+}
+
+.meetings h2 {
+  font-size: 15px; /* Mayor tamaño de fuente */
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px; /* Más espacio debajo del encabezado */
+  margin-top: 0px;
+}
+
+.buttons-container-meetings {
   display: flex;
-  background: #045551;
-  padding: 20px; /* Padding interno */
-  border-radius: 25px; /* Bordes redondeados para los sub-contenedores */
+  flex-direction: column;
 }
 
-.media-container h2{
-  flex-grow: 1;
-  color: #FFFFFF;
-  font-size: 16px;
-  margin-top: 5px;
-  margin-left: 10px;
-}
-
-.buttonMeeting,
-.buttonChat,
-.buttonElection,
-.buttonReservation {
-  flex: 1;
-  margin-top: 10px;
-  padding: 8px 16px;
-  background-color: #0b8c8640; /* Color principal de los botones */
-  color: rgb(192, 188, 188);
+.buttonMeeting {
+  padding: 15px 20px; /* Padding adicional para comodidad */
+  margin-bottom: 10px;
   border: none;
-  border-radius: 15px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s;
-  font-weight: bold; /* Texto en negrita para resaltar */
-  text-transform: uppercase; /* Mayúsculas para mantener uniformidad */
+  border-radius: 10px; /* Esquinas más suaves */
+  background: #6a898716; /* Fondo sutilmente translúcido */
+  color: #FFFFFF; /* Texto en blanco para contraste */
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Alineación vertical */
+  transition: background-color 0.25s ease, box-shadow 0.25s; /* Transiciones suaves */
 }
 
-button:hover {
-  background-color: #024d4c; /* Oscurecimiento al pasar el mouse */
-  transform: scale(1.05); /* Efecto de crecimiento al pasar el mouse */
+.buttonMeeting span {
+  background: #85adaa11; /* Fondo consistente para las fechas */
+  color: #FFFFFF;
+  padding: 4px 10px; /* Padding para una mejor legibilidad */
+  border-radius: 10px; /* Bordes redondeados */
+  margin-left: 5px;
+}
+
+.buttonMeeting:hover {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra adicional en hover */
+}
+
+.buttonMeeting:last-child {
+  margin-bottom: 0; /* Evita margen adicional en el último botón */
 }
 
 
+
+
+
+
+.elections {
+  background: #045551; /* Color de fondo para la sección de votaciones */
+  padding: 25px; /* Espaciado interno para darle amplitud */
+  border-radius: 10px; /* Esquinas redondeadas */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* Sombra suave para profundidad */
+  color: #FFFFFF; /* Texto blanco para contraste */
+  margin-top: 20px; /* Espacio debajo de la sección */
+}
+
+.elections h2 {
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px; /* Espaciado debajo del título */
+  margin-top: 0px;
+}
+
+.buttons-container-elections {
+  display: flex;
+  flex-direction: column;
+}
+
+.buttonElection {
+  background: #056c67; /* Fondo translúcido */
+  color: #FFFFFF; /* Texto blanco */
+  padding: 15px 20px; /* Espaciado dentro de cada botón */
+  margin-bottom: 10px; /* Espacio entre botones */
+  border: none;
+  border-radius: 10px; /* Esquinas redondeadas */
+  display: flex;
+  justify-content: space-between; /* Espaciado entre el título de la votación y la fecha */
+  align-items: center;
+  cursor: pointer; /* Indica que es clickeable */
+  transition: background-color 0.25s ease; /* Transición suave de color de fondo */
+  position: relative; /* Posicionamiento relativo para posicionar el pseudo-elemento */
+  padding-left: 35px; /* Ajuste el padding izquierdo para hacer espacio para el círculo */
+}
+
+.buttonElection::before {
+  content: ''; /* El pseudo-elemento necesita la propiedad 'content' */
+  position: absolute; /* Posicionamiento absoluto respecto al botón */
+  left: 10px; /* Posición desde la izquierda del botón */
+  top: 50%; /* Alineación vertical centrada */
+  transform: translateY(-50%); /* Centrado exacto */
+  width: 10px; /* Ancho del círculo */
+  height: 10px; /* Altura del círculo */
+  background-color: #cbdccc; /* Color de fondo del círculo, puedes cambiarlo */
+  border-radius: 50%; /* Hace el círculo perfectamente redondo */
+  margin-left: 4px;
+}
+
+.buttonElection span {
+  background: #044c48; /* Fondo para la fecha, un tono más oscuro para diferenciar */
+  color: #FFFFFF;
+  padding: 4px 10px; /* Espaciado interno para las fechas */
+  border-radius: 10px; /* Esquinas redondeadas para las fechas */
+  margin-left: 5px; /* Espacio a la izquierda de la fecha */
+}
+
+.buttonElection:hover {
+  background: rgba(255, 255, 255, 0.2); /* Cambio de color en hover */
+}
+
+.buttonElection:last-child {
+  margin-bottom: 0; /* No hay margen adicional en el último elemento */
+}
+
+
+
+
+
+.chats {
+  background: #045551; /* Color de fondo */
+  padding: 25px; /* Padding para dar espacio alrededor */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* Sombra para dar profundidad */
+  color: #FFFFFF; /* Color del texto en blanco para contraste */
+  margin: 20px; /* Margen alrededor de la sección para evitar que toque otros elementos */
+  margin-top: 0px;
+}
+
+.chats h2 {
+  font-size: 15px; /* Tamaño de fuente para el título */
+  font-weight: bold; /* Peso de la fuente para que destaque */
+  text-align: center; /* Centrar el título */
+  margin-bottom: 20px; /* Espacio debajo del título */
+  margin-top: 0px;
+}
+.buttonChat .text-container h3 {
+  margin: 0; /* Establece el margen del h3 a cero para que se pegue al borde izquierdo */
+}
+
+.buttons-container-chats {
+  display: flex; /* Usar flexbox para organizar los botones */
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan en la siguiente línea */
+  gap: 20px; /* Espacio entre los botones */
+  justify-content: center; /* Centrar los botones en el contenedor si hay espacio extra */
+}
+
+.buttonChat {
+  display: flex; /* Flex para alinear imagen y texto */
+  align-items: center; /* Alineación vertical de los elementos */
+  width: calc(50% - 20px); /* Calcular el ancho para dos botones por fila, restando el espacio del gap */
+  padding: 15px; /* Padding dentro del botón */
+  border-radius: 10px; /* Bordes redondeados */
+  background: #69aba984; /* Fondo translúcido */
+  border: none; /* Quitar el borde */
+  color: white;
+  transition: background-color 0.25s ease;
+}
+
+.buttonChat img.perfil-user {
+  width: 65px; /* Tamaño de la imagen de perfil */
+  height: 70px; /* Mantener la imagen cuadrada */
+  border-radius: 50%; /* Hacer la imagen redonda */
+  margin-right: 10px; /* Espacio a la derecha de la imagen */
+  margin-top: 0px;
+}
+
+.buttonChat .text-container {
+  display: flex; /* Flex para organizar texto verticalmente */
+  flex-direction: column; /* Texto en columna */
+}
+
+.arrow {
+  font-size: 30px; /* Tamaño del símbolo ">" */
+  color: #FFFFFF; /* Color del símbolo */
+  margin-left: auto; /* Alinear el símbolo ">" a la derecha */
+  margin-right: 10px; /* Margen a la derecha del símbolo ">" */
+}

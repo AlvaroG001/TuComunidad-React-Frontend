@@ -1,6 +1,5 @@
 
 
-
 .elections-container {
     display: flex;
     justify-content: space-around;
@@ -8,13 +7,11 @@
 }
 
 .elections-list {
-    flex: 2;
+    flex-basis: 40%;
     background-color: #05605c; /* Color de fondo para la lista de reuniones */
     border-radius: 15px; /* Bordes redondeados */
     padding: 20px; /* Espacio interior para no tocar los bordes */
     overflow-y: auto; /* Habilita el desplazamiento si la lista es muy larga */
-    margin-left: 20px;
-    overflow-x: auto; /* Habilita el desplazamiento si la lista es muy larga */
     margin-bottom: auto;
 
 }
@@ -26,11 +23,12 @@
 
 .elections-details {
     position: relative;
-    flex: 5;
+    flex-basis: 60%;
     background-color: #48a09c; /* Color de fondo para los detalles de la reunión */
     border-radius: 15px; /* Bordes redondeados */
     padding: 20px; /* Espacio interior */
     overflow-y: auto; /* Habilita el desplazamiento si el contenido es muy largo */
+    margin-right: 20px;
 }
 
 .election-info {
@@ -85,7 +83,7 @@
     display: flex;
     justify-content: center; /* Centra los botones horizontalmente */
     align-items: center;
-    padding: 20px;
+    padding: 10px;
     flex-wrap: wrap; /* Permite que los botones se ajusten en múltiples líneas si es necesario */
 }
 
@@ -94,7 +92,7 @@
     font-size: 30px;
     font-weight: bold;
     text-align: center;
-    margin-top: 50px;
+    margin-top: 10px;
 }
 
 .delete-election-button {
@@ -113,18 +111,18 @@
     right: 10px; /* Mantiene el botón alineado a la derecha */
 }
 .voting-results {
-    padding: 5px;
+    padding: 0px;
     border-radius: 5px;
 }
 
 .voting-results h3 {
     color: #ffffffbf;
     font-size: 18px;
-    margin-bottom: 8px;
+    margin-bottom: 0px;
 }
 
 .voting-results p {
     color: #ffffff90;
     font-size: 16px;
-    margin-bottom: 4px;
+    margin-bottom: 0px;
 }

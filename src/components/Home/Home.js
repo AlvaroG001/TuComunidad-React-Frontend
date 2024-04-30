@@ -145,6 +145,11 @@ function Home({ logout }) {
 
   }, []);
 
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+    return new Date(dateString).toLocaleDateString("es-ES", options);
+  };
+
   const handleLogout = () => {
     logout();
     navigate('/login');
@@ -206,20 +211,23 @@ function Home({ logout }) {
           <div className='meetingsAndElections'>
             <div className='meetings'>
               <h2>REUNIONES</h2>
-              <div className='buttons-container'>
+              <div className='buttons-container-meetings'>
                 {meetings.map(meeting => (
                   <button className='buttonMeeting' key={meeting.id} onClick={() => handleMeetingClick(meeting)}>
-                    El {meeting.day} de {meeting.month} del {meeting.year}
+                    {meeting.information}
+                    <span>{meeting.day} de {meeting.month} de {meeting.year}</span>
                   </button>
                 ))}
               </div>
             </div>
+
             <div className='elections'>
               <h2>VOTACIONES</h2>
-              <div className='buttons-container'>
+              <div className='buttons-container-elections'>
                 {elections.map((election, index) => (
                   <button className='buttonElection' key={election.id} onClick={() => handleElectionClick(election)}>
                     {election.titulo}
+                    <span>{formatDate(election.fecha)}</span>
                   </button>
                 ))}
               </div>
@@ -229,16 +237,21 @@ function Home({ logout }) {
           <div className='chatsAndReservations'>
             <div className='chats'>
               <h2>CHATS</h2>
-              <div className='buttons-container'>
+              <div className='buttons-container-chats'>
                 {chats.map((chat, index) => (
                   <button className='buttonChat' key={chat.id} onClick={() => navigate('/chats')}>
                     <img src={perfilImg} alt="Perfil" className="perfil-user" />
-                    <h3>{chat.usuarios[index]}</h3>
-                    <p>{chat.titulo}</p>
+                    <div className="text-container">
+                      <h3>{chat.sender}</h3>
+                      <p>{chat.titulo}</p>
+                    </div>
+                    <span className="arrow">&gt;</span>
                   </button>
                 ))}
               </div>
             </div>
+
+
             <div className='reservations'>
               <h2>INSTALACIONES</h2>
               <div className='buttons-container'>

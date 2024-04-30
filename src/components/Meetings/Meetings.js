@@ -128,6 +128,7 @@ function Meetings({ logout }) {
                 </header>
 
                 <div className="meetings-container">
+                    
                     <div className="meetings-list">
                         <h2 className="meetings-h2">Reuniones programadas en "{userData.comunidad.name}"</h2>
                         {meetings.map(meeting => (
@@ -136,6 +137,7 @@ function Meetings({ logout }) {
                             </button>
                         ))}
                     </div>
+
                     {selectedMeeting && (
                         <div className="meeting-details">
                             {president && (

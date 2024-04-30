@@ -201,7 +201,9 @@ function Elections({ logout }) {
                         <button onClick={logout} className="logout-button">Cerrar sesión</button>
                     </div>
                 </header>
+
                 <div className="elections-container">
+
                     {selectedElection && (
                         <div className="elections-details">
                             <h2 className="vote-title" >{selectedElection.titulo}</h2>
@@ -240,6 +242,7 @@ function Elections({ logout }) {
                             </button>
                         ))}
                     </div>
+
                 </div>
 
             </main>
