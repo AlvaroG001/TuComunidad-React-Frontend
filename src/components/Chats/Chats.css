@@ -54,6 +54,13 @@
     margin-bottom: auto;    
 }
 
+.chat-details h3{
+    color: #ffffff; /* Texto blanco para contraste */
+    margin-bottom: 10px 0; /* Espacio vertical entre elementos */
+    margin-left: 20px;
+    font-size: 23px;
+}
+
 .input-boton{
     display: flex;
     margin-left: 15px;

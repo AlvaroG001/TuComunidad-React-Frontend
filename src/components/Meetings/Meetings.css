@@ -52,16 +52,26 @@
     margin-left: 20px;
 }
 
+
 .meeting-details {
     position: relative;
     flex-basis: 45%;
     background-color: #48a09c; /* Color de fondo para los detalles de la reunión */
     border-radius: 15px; /* Bordes redondeados */
-    padding: 20px; /* Espacio interior */
+    padding: 30px; /* Espacio interior */
     overflow-y: auto; /* Habilita el desplazamiento si el contenido es muy largo */
 }
 
+.meeting-details h2{
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    color: #ffffff; /* Texto blanco para contraste */
 
+}
+
+.meeting-details p{
+    color: #ffffff; /* Texto blanco para contraste */
+
+}
 
 
 .ListMeeting-button {
@@ -91,11 +101,7 @@
     transform: scale(0.95); /* Efecto de reducción al hacer clic */
 }
 
-/* Estilos adicionales para los títulos y párrafos dentro de .meeting-details */
-.meeting-details h2, .meeting-details p {
-    color: #ffffff; /* Texto blanco para contraste */
-    margin: 10px 0; /* Espacio vertical entre elementos */
-}
+
 
 .delete-meeting-button {
     text-decoration: none;
@@ -103,7 +109,7 @@
     background-color: #408d89bf; /* Ajusta el color de fondo según tu diseño */
     color: #ffffff; /* Color del texto */
     cursor: pointer;
-    font-size: 14px;
+    font-size: 11px;
     border: none;
     border-radius: 20px;
     display: inline-block; /* Importante para los enlaces comportarse como botones */

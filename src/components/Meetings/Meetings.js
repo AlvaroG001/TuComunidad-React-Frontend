@@ -7,7 +7,7 @@ import calendarButtonImg from '../Logos/CalendarButton.png';
 import meetingButtonImg from '../Logos/MeetingButton.png';
 import voteButtonImg from '../Logos/VoteButton.png';
 import chatButtonImg from '../Logos/ChatButton.png';
-import settingsButtonImg from '../Logos/SettingsButton.png';
+// import settingsButtonImg from '../Logos/SettingsButton.png';
 
 function Meetings({ logout }) {
     const navigate = useNavigate();
@@ -116,7 +116,7 @@ function Meetings({ logout }) {
 
             <main className="main-content">
                 <header className="main-header">
-                    <h1>Próximas reuniones</h1>
+                    <h1>Reuniones programadas - {userData.comunidad.name}</h1>
                     <div className="header-buttons">
                         {president && (
                             <Link to="/create-meetings" className="create-meeting-button">
@@ -130,10 +130,10 @@ function Meetings({ logout }) {
                 <div className="meetings-container">
                     
                     <div className="meetings-list">
-                        <h2 className="meetings-h2">Reuniones programadas en "{userData.comunidad.name}"</h2>
+                        <h2 className="meetings-h2">Reuniones programadas {/*en "{userData.comunidad.name}"*/}</h2>
                         {meetings.map(meeting => (
                             <button key={meeting.id} className="ListMeeting-button" onClick={() => setSelectedMeeting(meeting)}>
-                                El {meeting.day} de {meeting.month} del {meeting.year} -- {meeting.hour}
+                                {meeting.titulo}
                             </button>
                         ))}
                     </div>
@@ -142,10 +142,11 @@ function Meetings({ logout }) {
                         <div className="meeting-details">
                             {president && (
                                 <button className="delete-meeting-button" onClick={() => handleDeleteMeeting(selectedMeeting.id)}>
-                                    Eliminar Reunión
+                                    Eliminar
                                 </button>
                             )}
-                            <h2>Detalles de la Reunión</h2>
+                           
+                            <h2>{selectedMeeting.titulo}</h2>
                             <p>Día: {selectedMeeting.day}</p>
                             <p>Hora: {selectedMeeting.hour}</p>
                             <p>Mes: {selectedMeeting.month}</p>

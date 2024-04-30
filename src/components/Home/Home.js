@@ -8,13 +8,13 @@ import calendarButtonImg from '../Logos/CalendarButton.png';
 import meetingButtonImg from '../Logos/MeetingButton.png';
 import voteButtonImg from '../Logos/VoteButton.png';
 import chatButtonImg from '../Logos/ChatButton.png';
-import settingsButtonImg from '../Logos/SettingsButton.png';
+// import settingsButtonImg from '../Logos/SettingsButton.png';
 
 
 function Home({ logout }) {
   const navigate = useNavigate();
   const [communityName, setCommunityName] = useState('Tu Comunidad');
-  const [president, setPresident] = useState(false);
+  // const [president, setPresident] = useState(false);
 
   const [meetings, setMeetings] = useState([]);
 
@@ -36,7 +36,7 @@ function Home({ logout }) {
         throw new Error('El nombre de la comunidad no está disponible.');
       }
       if (userData && userData.president !== undefined) {
-        setPresident(userData.president);
+        // setPresident(userData.president);
       } else {
         throw new Error('El estado de presidente no está disponible.');
       }
@@ -50,7 +50,7 @@ function Home({ logout }) {
     const userData1 = JSON.parse(userDataString1);
     const communityId = userData1.comunidad.id; // Asegúrate de que el objeto y la propiedad sean correctos
 
-    setPresident(userData1?.president);
+    // setPresident(userData1?.president);
 
     try {
       const response = await fetch(`http://localhost:9000/api/reuniones?communityId=${communityId}`);
@@ -73,7 +73,7 @@ function Home({ logout }) {
     const userData = JSON.parse(userDataString);
     const communityId = userData.comunidad.id; // Asegúrate de que el objeto y la propiedad sean correctos
 
-    setPresident(userData?.president);
+    // setPresident(userData?.president);
 
     try {
       const response = await fetch(`http://localhost:9000/api/votaciones?communityId=${communityId}`);
@@ -97,7 +97,7 @@ function Home({ logout }) {
     const userData1 = JSON.parse(userDataString1);
     const communityId = userData1.comunidad.id;
 
-    setPresident(userData1?.president);
+    // setPresident(userData1?.president);
 
     try {
       const response = await fetch(`http://localhost:9000/api/chats?communityId=${communityId}`);
@@ -206,7 +206,7 @@ function Home({ logout }) {
 
       <main className="main-content">
         <header className="main-header">
-          <h1>Bienvenido a "{communityName}"</h1>
+          <h1>Bienvenido a - {communityName}</h1>
           <button onClick={handleLogout} className="logout-button">Cerrar sesión</button>
         </header>
 

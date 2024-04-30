@@ -7,7 +7,7 @@ import calendarButtonImg from '../Logos/CalendarButton.png';
 import meetingButtonImg from '../Logos/MeetingButton.png';
 import voteButtonImg from '../Logos/VoteButton.png';
 import chatButtonImg from '../Logos/ChatButton.png';
-import settingsButtonImg from '../Logos/SettingsButton.png';
+// import settingsButtonImg from '../Logos/SettingsButton.png';
 
 function Elections({ logout }) {
     const location = useLocation();
@@ -20,15 +20,18 @@ function Elections({ logout }) {
     const [disagreeCount, setDisagreeCount] = useState();
     const [abstainCount, setAbstainCount] = useState();
 
-    const fetchElections = async () => {
-        const userDataString = localStorage.getItem('userData');
-        const userData = JSON.parse(userDataString);
-        const communityId = userData.comunidad.id; // Asegúrate de que el objeto y la propiedad sean correctos
+    const userDataString = localStorage.getItem('userData');
+    const userData = JSON.parse(userDataString);
 
-        setPresident(userData?.president);
+    const fetchElections = async () => {
+        const userDataString1 = localStorage.getItem('userData');
+        const userData1 = JSON.parse(userDataString1);
+        const communityId1 = userData1.comunidad.id; // Asegúrate de que el objeto y la propiedad sean correctos
+
+        setPresident(userData1?.president);
 
         try {
-            const response = await fetch(`http://localhost:9000/api/votaciones?communityId=${communityId}`);
+            const response = await fetch(`http://localhost:9000/api/votaciones?communityId=${communityId1}`);
             if (response.ok) {
                 const data = await response.json();
 
@@ -74,8 +77,6 @@ function Elections({ logout }) {
     };
 
     const handleVote = async (voteType) => {
-        const userDataString = localStorage.getItem('userData');
-        const userData = JSON.parse(userDataString);
         const userId = userData.id;
 
         const voteOptions = {
@@ -187,7 +188,7 @@ function Elections({ logout }) {
 
             <main className="main-content">
                 <header className="main-header">
-                    <h1>Votaciones de la Comunidad</h1>
+                    <h1>Votaciones pedientes - {userData.comunidad.name}</h1>
                     <div className="header-buttons">
                         <Link to="/create-elections" className="create-meeting-button">
                             Crear Votación

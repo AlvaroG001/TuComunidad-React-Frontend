@@ -8,7 +8,7 @@ import calendarButtonImg from '../Logos/CalendarButton.png';
 import meetingButtonImg from '../Logos/MeetingButton.png';
 import voteButtonImg from '../Logos/VoteButton.png';
 import chatButtonImg from '../Logos/ChatButton.png';
-import settingsButtonImg from '../Logos/SettingsButton.png';
+// import settingsButtonImg from '../Logos/SettingsButton.png';
 
 function Chats({ logout }) {
     const location = useLocation();
@@ -79,7 +79,7 @@ function Chats({ logout }) {
             }
         }
     };
-    
+
     return (
         <div className="home-container">
             <aside className="sidebar">
@@ -115,7 +115,7 @@ function Chats({ logout }) {
             </aside>
             <main className="main-content">
                 <header className="main-header">
-                    <h1>Chat de la Comunidad</h1>
+                    <h1>Chats - {userData.comunidad.name}</h1>
                     <div className="header-buttons">
                         {president && (
                             <Link to="/create-chats" className="create-meeting-button">
@@ -137,39 +137,39 @@ function Chats({ logout }) {
                                     </div>
                                     <div className="chat-message">
                                         <p>{selectedChat.message}</p>
-                                    </div>                                
+                                    </div>
                                 </div>
 
                                 <div className="conversation">
-                                {selectedChat.chats.map((mensaje, index) => (                                    
-                                    <div key={index} className={`chat ${selectedChat.usuarios[index] === userData.name ? 'chat-right' : 'chat-left'}`}>
-                                        <div className="chat-usuario-inside">
-                                            <img src={perfilImg} alt="Perfil" className="perfil-user-inside" />
-                                            <p><strong>{selectedChat.usuarios[index]}</strong></p>
+                                    {selectedChat.chats.map((mensaje, index) => (
+                                        <div key={index} className={`chat ${selectedChat.usuarios[index] === userData.name ? 'chat-right' : 'chat-left'}`}>
+                                            <div className="chat-usuario-inside">
+                                                <img src={perfilImg} alt="Perfil" className="perfil-user-inside" />
+                                                <p><strong>{selectedChat.usuarios[index]}</strong></p>
+                                            </div>
+                                            <pre className="chat-pre">
+                                                <p className="mensaje-usuario">{mensaje}</p>
+                                            </pre>
                                         </div>
-                                        <pre className="chat-pre">
-                                            <p className="mensaje-usuario">{mensaje}</p>
-                                        </pre>
-                                    </div>
-                                ))}
+                                    ))}
                                 </div>
                                 <div className="input-boton">
-                                <textarea
-                                    name="mensaje"
-                                    value={newMessage}
-                                    onChange={e => setNewMessage(e.target.value)}
-                                    onKeyDown={e => {
-                                        if (e.key === 'Enter' && !e.shiftKey) {
-                                            e.preventDefault();
-                                            handleUpdateChat();
-                                        } else if (e.key === 'Enter' && e.shiftKey) {
-                                            // Aquí puedes manejar el comportamiento de Shift+Enter si es necesario
-                                        }
-                                    }}
-                                    className="mensaje-input" // Asegúrate de agregar esta clase
-                                    placeholder="Escribe un mensaje..."
-                                    required
-                                ></textarea>
+                                    <textarea
+                                        name="mensaje"
+                                        value={newMessage}
+                                        onChange={e => setNewMessage(e.target.value)}
+                                        onKeyDown={e => {
+                                            if (e.key === 'Enter' && !e.shiftKey) {
+                                                e.preventDefault();
+                                                handleUpdateChat();
+                                            } else if (e.key === 'Enter' && e.shiftKey) {
+                                                // Aquí puedes manejar el comportamiento de Shift+Enter si es necesario
+                                            }
+                                        }}
+                                        className="mensaje-input" // Asegúrate de agregar esta clase
+                                        placeholder="Escribe un mensaje..."
+                                        required
+                                    ></textarea>
                                     <button onClick={handleUpdateChat} className="boton-enviar">Enviar</button>
                                 </div>
                             </>
@@ -177,7 +177,7 @@ function Chats({ logout }) {
                     )}
 
                     <div className="chat-details">
-                        <h3 className="meetings-h2">Chats de "{userData.comunidad.name}"</h3>
+                        <h3>Últimas conversaciones</h3>
                         {chats.map(chat => (
                             <button className="ListChat-button" key={chat.id} onClick={() => { setSelectedChat(chat); console.log(); }}>
                                 {chat.titulo}

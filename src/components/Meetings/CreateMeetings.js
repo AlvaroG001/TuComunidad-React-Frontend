@@ -5,6 +5,7 @@ import './CreateMeetings.css';
 function CreateMeetings() {
     const navigate = useNavigate();
     const [meeting, setMeeting] = useState({
+        titulo: '',
         day: '',
         hour: '',
         month: '',
@@ -52,6 +53,7 @@ function CreateMeetings() {
             <div className="create-meeting-wrapper">
                 <h2>Crear nueva reunión</h2>
                 <form onSubmit={handleSubmit} className="create-meeting-form">
+                    <input type="text" name="titulo" value={meeting.titulo} onChange={handleChange} placeholder="Título" required />
                     <input type="text" name="day" value={meeting.day} onChange={handleChange} placeholder="Día" required />
                     <input type="text" name="hour" value={meeting.hour} onChange={handleChange} placeholder="Hora" required />
                     <input type="text" name="month" value={meeting.month} onChange={handleChange} placeholder="Mes" required />
