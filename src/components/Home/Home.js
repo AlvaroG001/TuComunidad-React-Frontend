@@ -58,7 +58,7 @@ function Home({ logout }) {
         const data = await response.json();
 
         const sortedData = data.sort((a, b) => b.id - a.id);
-        setMeetings(sortedData.slice(0, 4));
+        setMeetings(sortedData.slice(0, 3));
 
       } else {
         throw new Error("Error al cargar las reuniones");
@@ -82,7 +82,7 @@ function Home({ logout }) {
         console.log(data)
 
         const sortedData = data.sort((a, b) => b.id - a.id);
-        setElections(sortedData.slice(0, 4));
+        setElections(sortedData.slice(0, 3));
 
       } else {
         throw new Error("Error al cargar las votaciones");
