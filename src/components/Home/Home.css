@@ -123,7 +123,7 @@
 
 .media-container {
   display: flex;
-  gap: 30px; /* Espacio entre los bloques */
+  
   margin: 30px; /* Margen para separar del resto del contenido */
   margin-top: 0px;
 }
@@ -162,7 +162,7 @@
   margin-bottom: 10px;
   border: none;
   border-radius: 10px; /* Esquinas más suaves */
-  background: #6a898716; /* Fondo sutilmente translúcido */
+  background: #6a898742; /* Fondo sutilmente translúcido */
   color: #FFFFFF; /* Texto en blanco para contraste */
   display: flex;
   justify-content: space-between;
@@ -215,7 +215,7 @@
 }
 
 .buttonElection {
-  background: #056c67; /* Fondo translúcido */
+  background: #067670; /* Fondo translúcido */
   color: #FFFFFF; /* Texto blanco */
   padding: 15px 20px; /* Espaciado dentro de cada botón */
   margin-bottom: 10px; /* Espacio entre botones */
@@ -297,7 +297,7 @@
   width: calc(50% - 20px); /* Calcular el ancho para dos botones por fila, restando el espacio del gap */
   padding: 15px; /* Padding dentro del botón */
   border-radius: 10px; /* Bordes redondeados */
-  background: #69aba984; /* Fondo translúcido */
+  background: #5f9b99; /* Fondo translúcido */
   border: none; /* Quitar el borde */
   color: white;
   transition: background-color 0.25s ease;
@@ -321,4 +321,46 @@
   color: #FFFFFF; /* Color del símbolo */
   margin-left: auto; /* Alinear el símbolo ">" a la derecha */
   margin-right: 10px; /* Margen a la derecha del símbolo ">" */
+}
+
+
+
+
+
+.reservations {
+  background: #045551; /* Color de fondo */
+  padding: 25px; /* Espaciado interno */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* Sombra para profundidad */
+  color: #FFFFFF; /* Texto en blanco para contraste */
+  margin: 20px; /* Margen para separar del resto del contenido */
+  margin-top: 0px;
+}
+
+.reservations h2 {
+  font-size: 15px; /* Tamaño de fuente para el título */
+  font-weight: bold; /* Peso de la fuente */
+  text-align: center; /* Alineación centrada */
+  margin-bottom: 20px; /* Espaciado debajo del título */
+  margin-top: 0px; /* Espaciado superior */
+}
+
+.buttons-container {
+  display: grid; /* Grid para organizar los botones */
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Columnas automáticas con tamaño mínimo y máximo */
+  gap: 15px; /* Espacio entre los botones */
+}
+
+.buttonReservation {
+  padding: 15px 20px; /* Padding interno */
+  border: none; /* Sin borde */
+  border-radius: 10px; /* Bordes redondeados */
+  background: #6a89873c; /* Fondo translúcido */
+  color: #FFFFFF; /* Texto en blanco para contraste */
+  cursor: pointer; /* Cursor apuntador al pasar el ratón */
+  transition: background-color 0.25s ease; /* Transición suave de color de fondo */
+}
+
+.buttonReservation:hover {
+  background: rgba(255, 255, 255, 0.2); /* Cambio de color al pasar el ratón */
 }
