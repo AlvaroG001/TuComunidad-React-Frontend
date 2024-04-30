@@ -20,9 +20,7 @@ function Chats({ logout }) {
     const userData = JSON.parse(userDataString);
 
     useEffect(() => {
-
         fetchChats();
-
     }, []);
 
     const fetchChats = async () => {
@@ -36,27 +34,21 @@ function Chats({ logout }) {
             const response = await fetch(`http://localhost:9000/api/chats?communityId=${communityId}`);
             if (response.ok) {
                 const data = await response.json();
-                // setChats(data);
-                // Asegúrate de que los datos se ordenen de más reciente (id más alto) a más antiguo antes de hacer el slice
                 const sortedData = data.sort((a, b) => b.id - a.id);
-                setChats(sortedData.slice(0, 5)); // Guarda las últimas 5 votaciones (las más recientes)
-                console.log(selectedChat?.usuarios[0]);
-
-
+                setChats(sortedData.slice(0, 5));
             } else {
                 throw new Error('Error al cargar los chats');
             }
         } catch (error) {
             console.error('Error al obtener los chat:', error);
         }
-
     };
 
     const handleUpdateChat = async () => {
-        const userName = userData.name
+        const userName = userData.name;
 
         if (newMessage === "") {
-            return
+            return;
         } else {
             const updatedChat = {
                 ...selectedChat,
@@ -75,6 +67,7 @@ function Chats({ logout }) {
 
             if (response.ok) {
                 setNewMessage('');
+                console.log(newMessage);
                 setSelectedChat(updatedChat);
                 fetchChats();
             } else {
@@ -82,7 +75,7 @@ function Chats({ logout }) {
             }
         }
     };
-
+    
     return (
         <div className="home-container">
             <aside className="sidebar">
@@ -129,36 +122,50 @@ function Chats({ logout }) {
                     </div>
                 </header>
                 <div className="chats-container">
-
                     {selectedChat && (
                         <div className="active-chat">
                             <>
-                                <h2 className="chat-titulo">{selectedChat.titulo}</h2>
-                                <div className="chat-usuario">
-                                    <img src={perfilImg} alt="Perfil" className="perfil-user" />
-                                    <h3>{selectedChat.sender}</h3>
+                                <div className="introduction">
+                                    <h2 className="chat-titulo">{selectedChat.titulo}</h2>
+                                    <div className="chat-usuario">
+                                        <img src={perfilImg} alt="Perfil" className="perfil-user" />
+                                        <h3>{selectedChat.sender}</h3>
+                                    </div>
+                                    <div className="chat-message">
+                                        <p>{selectedChat.message}</p>
+                                    </div>                                
                                 </div>
-                                <div className="chat-message">
-                                    <p>{selectedChat.message}</p>
-                                </div>
-                                {selectedChat.chats.map((mensaje, index) => (
+
+                                <div className="conversation">
+                                {selectedChat.chats.map((mensaje, index) => (                                    
                                     <div key={index} className={`chat ${selectedChat.usuarios[index] === userData.name ? 'chat-right' : 'chat-left'}`}>
                                         <div className="chat-usuario-inside">
                                             <img src={perfilImg} alt="Perfil" className="perfil-user-inside" />
                                             <p><strong>{selectedChat.usuarios[index]}</strong></p>
                                         </div>
-                                        <p className="mensaje-usuario">{mensaje}</p>
+                                        <pre className="chat-pre">
+                                            <p className="mensaje-usuario">{mensaje}</p>
+                                        </pre>
                                     </div>
                                 ))}
+                                </div>
                                 <div className="input-boton">
-                                    <textarea
-                                        name="mensaje"
-                                        value={newMessage}
-                                        onChange={e => setNewMessage(e.target.value)}
-                                        className="mensaje-input"
-                                        placeholder="Escribe un mensaje..."
-                                        required
-                                    ></textarea>
+                                <textarea
+                                    name="mensaje"
+                                    value={newMessage}
+                                    onChange={e => setNewMessage(e.target.value)}
+                                    onKeyDown={e => {
+                                        if (e.key === 'Enter' && !e.shiftKey) {
+                                            e.preventDefault();
+                                            handleUpdateChat();
+                                        } else if (e.key === 'Enter' && e.shiftKey) {
+                                            // Aquí puedes manejar el comportamiento de Shift+Enter si es necesario
+                                        }
+                                    }}
+                                    className="mensaje-input" // Asegúrate de agregar esta clase
+                                    placeholder="Escribe un mensaje..."
+                                    required
+                                ></textarea>
                                     <button onClick={handleUpdateChat} className="boton-enviar">Enviar</button>
                                 </div>
                             </>
