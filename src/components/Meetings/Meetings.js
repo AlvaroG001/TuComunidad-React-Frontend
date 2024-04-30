@@ -104,14 +104,14 @@ function Meetings({ logout }) {
                 </Link>
                 <span className="sidebar-label">Chats</span>
 
-                {president && (
+                {/* {president && (
                     <>
                         <Link to="/settings">
                             <img src={settingsButtonImg} alt="Settings" className="settings-button" />
                         </Link>
                         <span className="sidebar-label">Ajustes</span>
                     </>
-                )}
+                )} */}
             </aside>
 
             <main className="main-content">
