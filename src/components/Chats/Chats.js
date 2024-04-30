@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './Chats.css';
 
 import perfilImg from '../Logos/Perfil.png';
@@ -11,6 +11,7 @@ import chatButtonImg from '../Logos/ChatButton.png';
 import settingsButtonImg from '../Logos/SettingsButton.png';
 
 function Chats({ logout }) {
+    const location = useLocation();
     const [president, setPresident] = useState(false);
     const [chats, setChats] = useState([]);
     const [selectedChat, setSelectedChat] = useState(null);
@@ -21,7 +22,10 @@ function Chats({ logout }) {
 
     useEffect(() => {
         fetchChats();
-    }, []);
+        if (location.state?.chat) {
+            setSelectedChat(location.state.chat);
+        }
+    }, [location]);
 
     const fetchChats = async () => {
         const userDataString1 = localStorage.getItem('userData');

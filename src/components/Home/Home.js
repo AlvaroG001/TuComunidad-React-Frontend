@@ -163,6 +163,10 @@ function Home({ logout }) {
     navigate('/votes', { state: { election: election } });
   };
 
+  const handleChatClick = (chat) => {
+    navigate('/chats', { state: { chat: chat } });
+  };
+
 
   return (
     <div className="home-container">
@@ -239,7 +243,7 @@ function Home({ logout }) {
               <h2>CHATS</h2>
               <div className='buttons-container-chats'>
                 {chats.map((chat, index) => (
-                  <button className='buttonChat' key={chat.id} onClick={() => navigate('/chats')}>
+                  <button className='buttonChat' key={chat.id} onClick={() => handleChatClick(chat)}>
                     <img src={perfilImg} alt="Perfil" className="perfil-user" />
                     <div className="text-container">
                       <h3>{chat.sender}</h3>

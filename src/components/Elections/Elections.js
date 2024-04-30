@@ -122,11 +122,6 @@ function Elections({ logout }) {
     };
 
 
-
-
-
-
-
     const deleteElection = async (electionId) => {
         try {
             const response = await fetch(`http://localhost:9000/api/votaciones/${electionId}`, {
