@@ -43,6 +43,7 @@ function CreateElections() {
     };
 
     return (
+        <div className="home-container">
         <div className="create-election-background">
             <div className="create-election-wrapper">
                 <h2>Crear nueva votación</h2>
@@ -76,6 +77,7 @@ function CreateElections() {
                     </div>
                 </form>
             </div>
+        </div>
         </div>
     );
 }

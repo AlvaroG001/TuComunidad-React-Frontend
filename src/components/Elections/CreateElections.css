@@ -1,7 +1,6 @@
 .create-election-background {
     width: 100%;
     height: 100vh;
-    background-color: #056f69; /* Color de fondo de la barra lateral */
     background-size: cover;
     display: flex;
     justify-content: center;

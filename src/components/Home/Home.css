@@ -162,7 +162,7 @@
   margin-bottom: 10px;
   border: none;
   border-radius: 10px; /* Esquinas más suaves */
-  background: #6a898742; /* Fondo sutilmente translúcido */
+  background: #067670; /* Fondo sutilmente translúcido */
   color: #FFFFFF; /* Texto en blanco para contraste */
   display: flex;
   justify-content: space-between;
@@ -171,7 +171,7 @@
 }
 
 .buttonMeeting span {
-  background: #85adaa11; /* Fondo consistente para las fechas */
+  background: #044c48; /* Fondo consistente para las fechas */
   color: #FFFFFF;
   padding: 4px 10px; /* Padding para una mejor legibilidad */
   border-radius: 10px; /* Bordes redondeados */

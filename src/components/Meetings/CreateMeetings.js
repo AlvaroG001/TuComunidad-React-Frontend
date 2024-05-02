@@ -49,6 +49,7 @@ function CreateMeetings() {
     };
 
     return (
+        <div className="home-container">
         <div className="create-meeting-background">
             <div className="create-meeting-wrapper">
                 <h2>Crear nueva reunión</h2>
@@ -72,6 +73,7 @@ function CreateMeetings() {
                     </div>
                 </form>
             </div>
+        </div>
         </div>
     );
 }
