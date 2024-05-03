@@ -12,7 +12,6 @@ import chatButtonImg from '../Logos/ChatButton.png';
 
 function Chats({ logout }) {
     const location = useLocation();
-    const [president, setPresident] = useState(false);
     const [chats, setChats] = useState([]);
     const [selectedChat, setSelectedChat] = useState(null);
     const [newMessage, setNewMessage] = useState('');
@@ -32,7 +31,7 @@ function Chats({ logout }) {
         const userData1 = JSON.parse(userDataString1);
         const communityId = userData1.comunidad.id;
 
-        setPresident(userData1?.president);
+
 
         try {
             const response = await fetch(`http://localhost:9000/api/chats?communityId=${communityId}`);
