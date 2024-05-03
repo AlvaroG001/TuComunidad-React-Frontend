@@ -114,14 +114,12 @@ function Chats({ logout }) {
                 )} */}
             </aside>
             <main className="main-content">
-                <header className="main-header">
+                <header className="main-header-chat">
                     <h1>Chats - {userData.comunidad.name}</h1>
                     <div className="header-buttons">
-                        {president && (
                             <Link to="/create-chats" className="create-meeting-button">
                                 Nuevo Chat
                             </Link>
-                        )}
                         <button onClick={logout} className="logout-button">Cerrar sesión</button>
                     </div>
                 </header>

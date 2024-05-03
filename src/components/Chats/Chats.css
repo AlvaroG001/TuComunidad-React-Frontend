@@ -1,3 +1,13 @@
+.main-header-chat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    padding-left: 50px;
+    color: #ffffff;
+    height: 7%;
+}
+
 .ListChat-button {
     width: 100%;
     padding: 12px 20px;
@@ -33,17 +43,15 @@
 }
 
 .active-chat {
-    flex: 3; /* Ocupa 3/4 del espacio disponible en el contenedor */
+    flex-basis: 70%; /* Ocupa 3/4 del espacio disponible en el contenedor */
     position: relative;
-    flex-basis: 45%;
     background-color: #48a09ba1;
     border-radius: 15px;
     padding: 10px;
     margin-bottom: 10px;
     margin-right: 20px;
-    height: auto;
+    height: 100%;
 }
-
 
 .chat-details {
     flex-basis: 30%;
@@ -80,7 +88,8 @@
     color: #056f69; /* Color oscuro para el texto, asegurando contraste */
     font-weight: bold; /* Fuente en negrita para darle presencia */
     text-align: center; /* Alineación central para darle prominencia */
-    margin-bottom: 20px; /* Espacio debajo del título para separar del contenido */
+    margin-bottom: 5px; /* Espacio debajo del título para separar del contenido */
+    margin-top: 5px;
     padding: 10px; /* Espacio interior para una mejor visualización */
     border-bottom: 3px solid #048f79; /* Línea sutil debajo para destacar */
     background-color: #f8f8f8; /* Fondo claro para contraste */
@@ -99,6 +108,8 @@
 }
 
 .chat-pre{
+    margin-top: 2%;
+    margin-bottom: 2%;
     white-space: pre-wrap;
     word-wrap: break-word;
 }
@@ -149,6 +160,7 @@
     color: #ffff; /* Color de texto blanco */
     margin-bottom: 5px; /* Margen inferior */
     white-space: pre-wrap;
+    margin-top: 1px;
 }
 
 .chat {
@@ -160,9 +172,9 @@
 }
 
 .chat-left {
-    background-color: #46fde536;
-    margin-left: 20px;
-    margin-right: 500px;
+    background-color: #7bd3c793;
+    margin-left: 3%;
+    margin-right: 50%;
     padding: 5px; /* Reducimos el espacio interior */
     margin-bottom: 10px; /* Margen inferior */
     border-radius: 8px; /* Bordes redondeados */
@@ -173,8 +185,8 @@
 
 .chat-right {
     background-color: #087768;
-    margin-right: 20px;
-    margin-left: 500px;
+    margin-right: 3%;
+    margin-left: 50%;
     align-self: flex-end;
     font-family: Arial, sans-serif;
     word-wrap: break-word; /* Permitir saltos de línea dentro de palabras */
@@ -222,6 +234,7 @@ button:hover {
     overflow-y: visible; /* Permite que el contenido de la introducción sea visible sin scroll */
     margin-left: 20px;
     margin-right: 20px;
+    height: 40%;
 }
 
 .conversation {

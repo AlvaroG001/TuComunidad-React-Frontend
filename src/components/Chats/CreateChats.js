@@ -53,6 +53,7 @@ function CreateChat() {
     };
 
     return (
+        <div className="home-container">
         <div className="create-election-background">
             <div className="create-election-wrapper">
                 <h2>Crear nuevo chat</h2>
@@ -80,6 +81,7 @@ function CreateChat() {
                     </div>
                 </form>
             </div>
+        </div>
         </div>
     );
 }
