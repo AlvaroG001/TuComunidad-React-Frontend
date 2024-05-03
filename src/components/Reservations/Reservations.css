@@ -1,73 +1,50 @@
-.main-header {
+/* Estilos para el contenido principal */
+.main-content {
+    flex: 1;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    padding-left: 50px;
-    color: #ffffff;
-}
-
-.header-buttons {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Espacio entre los botones */
-}
-
-.create-reservation-button, .logout-button {
-    text-decoration: none;
-    padding: 10px 20px;
-    background-color: #eceaeab0;
-    color: #ffffff;
-    cursor: pointer;
-    font-size: 14px;
-    border: none;
-    border-radius: 20px;
-    display: inline-block; /* Importante para los enlaces comportarse como botones */
-    text-align: center;
-}
-
-.create-reservation-button:hover, .logout-button:hover {
-    background-color: #e0e0e0;
+    flex-direction: column;
 }
 
 
-
+/* Contenedor del calendario y los detalles de las instalaciones */
 .reservations-container {
     display: flex;
-    justify-content: space-around;
-    padding: 20px;
+    flex-grow: 1;
 }
 
-.reservations-list {
-    flex-basis: 45%;
-    background-color: #056f69; /* Color de fondo para la lista de reuniones */
+/* Estilos para el contenedor del calendario */
+.calendar-container {
+    flex-basis: 80%;
+    padding: 20px;
+    background-color: #1a6d5552; /* Color semi-transparente para el fondo del calendario */
     border-radius: 15px; /* Bordes redondeados */
-    padding: 20px; /* Espacio interior para no tocar los bordes */
-    overflow-y: auto; /* Habilita el desplazamiento si la lista es muy larga */
+    margin: 15px;
+    overflow: hidden; /* Esconde cualquier contenido que se desborde del área asignada */
+    display: flex; /* Habilita flexbox para los elementos internos */
+    align-items: stretch; /* Estira los elementos hijos verticalmente para llenar el contenedor */
+    height: 68%;
 }
-.reservations-h2 {
-    padding: 10px;
+
+/* Detalles de las instalaciones con ajuste automático */
+.reservations-details {
+    flex-basis: 20%;
+    background-color: #05605c;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 15px;
+    overflow-y: auto;
+    height: 50%; /* Establece una altura máxima para evitar desbordamiento excesivo */
+}
+
+.reservations-h2{
+    padding: 5px;
     padding-left:25px;
     font-size: 20px;
     color: white;
 }
 
-
-
-
-.reservation-details {
-    position: relative;
-    flex-basis: 45%;
-    background-color: #48a09c; /* Color de fondo para los detalles de la reunión */
-    border-radius: 15px; /* Bordes redondeados */
-    padding: 20px; /* Espacio interior */
-    overflow-y: auto; /* Habilita el desplazamiento si el contenido es muy largo */
-}
-
-
-
-
-.ListReservation-button {
+/* Estilo de los botones de reservación */
+.buttonReservation {
     width: 100%;
     padding: 12px 20px;
     margin: 0 0 15px 0; /* Asegura un margen uniforme entre botones */
@@ -83,35 +60,276 @@
     align-items: center;
     justify-content: space-between; /* Espaciado interno entre el contenido del botón */
 }
-
-.ListReservation-button:hover {
+.buttonReservation:hover {
     background-color: #056460; /* Color de fondo al pasar el ratón */
     color: #ffffff; /* Color de texto blanco para contraste */
-    transform: scale(1.05); /* Efecto de crecimiento sutil al pasar el ratón */
+    transform: scale(1.01); /* Efecto de crecimiento sutil al pasar el ratón */
 }
 
-.ListReservation-button:active {
+.buttonReservation:active {
     transform: scale(0.95); /* Efecto de reducción al hacer clic */
 }
 
-/* Estilos adicionales para los títulos y párrafos dentro de .meeting-details */
-.reservation-details h2, .meeting-details p {
-    color: #ffffff; /* Texto blanco para contraste */
-    margin: 10px 0; /* Espacio vertical entre elementos */
+
+/* Estilos adicionales para el modal */
+.Modal {
+    max-width: 600px;
+    width: 90%;
+    overflow-y: auto; /* Scroll para contenido largo */
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f7f7f7; /* Fondo claro */
 }
 
-.delete-reservation-button {
-    text-decoration: none;
-    padding: 10px 20px;
-    background-color: #408d89bf; /* Ajusta el color de fondo según tu diseño */
-    color: #ffffff; /* Color del texto */
-    cursor: pointer;
-    font-size: 14px;
+.ModalOverlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
+}
+
+.instalacion-h2{
+    font-size: 24px;
+    color: #056f69;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 5px;
+    padding: 10px;
+    border-bottom: 3px solid #048f79;
+    background-color: #f8f8f8;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Cambia el color del texto de los botones y añade efectos de hover */
+/* Estilos personalizados para los eventos en el calendario */
+.rbc-event {
+    background-color: #fff !important; /* Fondo blanco para los eventos */
+    color: #05605c !important; /* Texto en verde */
+    border: none !important; /* Elimina bordes por defecto */
+    padding: 4px 8px; /* Espaciado interno para el texto */
+    border-radius: 4px; /* Bordes redondeados para los eventos */
+    font-weight: normal; /* Estilo de fuente normal */
+}
+
+.rbc-event-content {
+    overflow: hidden; /* Oculta el contenido que exceda el tamaño del evento */
+    white-space: nowrap; /* Evita que el texto se ajuste a una nueva línea */
+    text-overflow: ellipsis; /* Añade elipsis si el texto es muy largo */
+    color: #05605c !important; /* Asegura que el texto del evento sea verde */
+}
+
+/* Modificaciones adicionales al estilo del botón del calendario */
+.rbc-btn {
+    color: white !important; /* Establece el color del texto a blanco */
+    transition: background-color 0.3s; /* Suaviza la transición del color de fondo */
+}
+
+.rbc-btn:hover {
+    background-color: rgba(0, 128, 0, 0.8) !important; /* Cambia el color de fondo al pasar el ratón por encima */
+}
+
+/* Ajustes al calendario para asegurar la correcta visualización */
+.rbc-calendar {
+    color: #fff;
+    width: 100%; /* Asegura que el ancho sea del 100% del contenedor padre */
+    min-height: 0; /* Reset para que flexbox calcule bien la altura */
+    flex-grow: 1; /* Permite que el calendario crezca para ocupar el espacio disponible */
+}
+
+/* Elimina las líneas de los intervalos de 30 minutos */
+.rbc-timeslot-group {
+    border: none; /* Elimina todos los bordes de los slots por defecto */
+}
+
+/* Restaura el borde superior para cada grupo de slots que comienza una hora */
+.rbc-time-slot {
+    border-top: 1px solid #ddd; /* Color de borde a gusto */
+}
+
+/* Estilos personalizados para el día actual en el calendario */
+.rbc-today {
+    background-color: #eceaea56 !important; /* Color verde opaco para el día actual */
+    font-weight: bold;
+    color: #000 !important; /* Texto en negro para mejor contraste */
+}
+
+/* Asegúrate de que el color del texto y otros elementos dentro de 'rbc-today' sean visibles y coherentes */
+.rbc-today .rbc-event, .rbc-today .rbc-event-label {
+    color: #000; /* Ajusta el color del texto para eventos y etiquetas si es necesario */
+}
+
+.rbc-event-label {
+    color: #05605c !important; /* Establece el color del texto del horario a verde */
+}
+
+/* Contenedor principal del tooltip */
+.event-details {
+    background-color: #05605c; /* Verde oscuro, ajustado para el fondo del tooltip */
+    color: #fff; /* Texto en blanco para mayor contraste */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 10px; /* Padding interno */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra suave para destacar el tooltip */
+    width: 75%; /* Ancho al 100% del contenedor padre */
+    max-width: 100%; /* Ajuste máximo al ancho del contenedor padre */
+    margin-top: 0px; /* Reducido a 5px para estar más cerca del calendario */
+    position: relative; /* Posición relativa para mantenerse en el flujo del documento */
+    margin-left: 15px;
+    top: 0px; /* Mueve el panel hacia la parte superior del contenedor */
+    transform: translateY(-65%); /* Mueve el panel hacia arriba fuera de su contenedor */
+}
+
+/* Imagen del perfil del usuario */
+.perfil-user {
+    width: 50px; /* Tamaño fijo para la imagen */
+    height: 50px; /* Tamaño fijo para la imagen */
+    border-radius: 50%; /* Hacer la imagen circular */
+    margin-right: 10px; /* Espacio a la derecha de la imagen */
+    float: left; /* Flotar a la izquierda para alinear con el texto */
+}
+
+/* Nombre del usuario que realiza la reserva */
+.event-details h2 {
+    margin-bottom: 5px; /* Espacio debajo del título */
+    font-size: 16px; /* Tamaño de fuente adecuado */
+    font-weight: bold; /* Fuente en negrita */
+    overflow: hidden; /* Evita desbordamientos */
+    padding-left: 60px; /* Espacio para no sobreponerse a la imagen */
+}
+
+/* Párrafos para la hora de inicio y fin */
+.event-details p {
+    margin-bottom: 5px; /* Margen debajo de cada párrafo */
+    font-size: 14px; /* Tamaño de fuente menor para información detallada */
+    padding-left: 60px; /* Espacio para no sobreponerse a la imagen */
+    clear: both; /* Asegura que no hay flotantes afectando el layout */
+}
+
+
+
+
+
+
+
+
+.button-modal{
+    width: 80%;
+    padding: 12px 20px;
+    margin-top: 20px; /* Aumentamos el margen superior para separar del textarea */
     border: none;
     border-radius: 20px;
-    display: inline-block; /* Importante para los enlaces comportarse como botones */
-    text-align: center;
-    position: absolute; /* Posicionamiento absoluto dentro del contenedor relativo */
-    top: 10px; /* Ajusta la distancia desde la parte superior del contenedor */
-    right: 10px; /* Ajusta para alinear el botón a la derecha */
+    background-color: #D3D3D3;
+    color: #333;
+    cursor: pointer;
+}
+
+.button-modal:hover {
+    background-color: #BFBFBF; /* Color al pasar el mouse por encima */
+}
+
+.button-modal textarea {
+    transition: all 0.3s ease; /* Suaviza la transición al cambiar de tamaño */
+}
+
+.textarea-focused {
+    height: 100px; /* Tamaño más grande cuando está enfocado */
+}
+
+.create-reservation-background {
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(5, 111, 105, 0.85); /* Color de fondo adaptado */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-reservation-wrapper {
+    background: rgba(5, 111, 105, 0.85); /* Fondo semi-transparente */
+    backdrop-filter: blur(8px); /* Efecto de desenfoque */
+    border-radius: 15px;
+    padding: 40px;
+    width: 100%;
+    max-width: 86%; /* Ajusta según necesites */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.create-reservation-form input, .create-reservation-form select {
+    width: 80%;
+    padding: 12px 20px;
+    margin-bottom: 12px;
+    border: none;
+    border-radius: 20px;
+    background-color: #013220c6; /* Verde oscuro para el fondo */
+    color: white;
+}
+
+.button-modal {
+    width: 80%;
+    padding: 12px 20px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 20px;
+    background-color: #D3D3D3;
+    color: #333;
+    cursor: pointer;
+}
+
+.button-modal:hover {
+    background-color: #BFBFBF; /* Color al pasar el mouse por encima */
+}
+
+.form-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra todos los hijos */
+}
+
+.delete-reservation-background {
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(5, 111, 105, 0.85); /* Color de fondo adaptado */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-reservation-wrapper {
+    background-color: rgba(5, 111, 105, 0.85); /* Color de fondo adaptado */
+    backdrop-filter: blur(8px); /* Efecto de desenfoque */
+    border-radius: 15px;
+    padding: 20px;
+    width: 100%;
+    max-width: 93%; /* Ajusta según necesites */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.event-list-item {
+    background-color: #013220c6; /* Verde oscuro para los items */
+    color: white;
+    padding: 12px 20px;
+    margin-bottom: 12px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.delete-button-modal {
+    padding: 10px 20px;
+    background-color: #D3D3D3;
+    color: #333;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.delete-button-modal:hover {
+    background-color: #BFBFBF; /* Color al pasar el mouse por encima */
 }

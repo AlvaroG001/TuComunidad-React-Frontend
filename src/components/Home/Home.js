@@ -167,6 +167,9 @@ function Home({ logout }) {
     navigate('/chats', { state: { chat: chat } });
   };
 
+  const handleReservationClick = (reserva) => {
+    navigate('/reservations', { state: { reserva: reserva } });
+  };
 
   return (
     <div className="home-container">
@@ -260,27 +263,27 @@ function Home({ logout }) {
               <h2>INSTALACIONES</h2>
               <div className='buttons-container'>
                 {communityDetails.cinema &&
-                  <button className='buttonReservation' onClick={() => navigate('/reservations')}>
+                  <button className='buttonReservation' onClick={() => handleReservationClick('cinema')}>
                     Cine
                   </button>
                 }
                 {communityDetails.gym &&
-                  <button className='buttonReservation' onClick={() => navigate('/reservations')}>
+                  <button className='buttonReservation' onClick={() => handleReservationClick('gym')}>
                     Gimnasio
                   </button>
                 }
                 {communityDetails.library &&
-                  <button className='buttonReservation' onClick={() => navigate('/reservations')}>
+                  <button className='buttonReservation' onClick={() => handleReservationClick('library')}>
                     Biblioteca
                   </button>
                 }
                 {communityDetails.padel &&
-                  <button className='buttonReservation' onClick={() => navigate('/reservations')}>
+                  <button className='buttonReservation' onClick={() => handleReservationClick('padel')}>
                     Pádel
                   </button>
                 }
                 {communityDetails.pool &&
-                  <button className='buttonReservation' onClick={() => navigate('/reservations')}>
+                  <button className='buttonReservation' onClick={() => handleReservationClick('pool')}>
                     Piscina
                   </button>
                 }
