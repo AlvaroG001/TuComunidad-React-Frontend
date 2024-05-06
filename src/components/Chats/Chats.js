@@ -79,6 +79,30 @@ function Chats({ logout }) {
         }
     };
 
+    const deleteChat = async (chatId) => {
+        try {
+            const response = await fetch(`http://localhost:9000/api/chats/${chatId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            if (response.ok) {
+                alert('Votación eliminada con éxito');
+                setChats(chats.filter(e => e.id !== chatId)); // Actualizar la lista de votaciones
+                if (selectedChat.id === chatId) {
+                    setSelectedChat(null); // Quitar la selección si la votación eliminada estaba seleccionada
+                }
+            } else {
+                throw new Error('Failed to delete election');
+            }
+        } catch (error) {
+            console.error('Error al eliminar la votación:', error);
+            alert('Error al eliminar la votación: ' + error.message);
+        }
+
+    }
+
     return (
         <div className="home-container">
             <aside className="sidebar">
@@ -127,7 +151,10 @@ function Chats({ logout }) {
                         <div className="active-chat">
                             <>
                                 <div className="introduction">
-                                    <h2 className="chat-titulo">{selectedChat.titulo}</h2>
+                                    <div className="titulo-boton">
+                                        <h2 className="chat-titulo">{selectedChat.titulo}</h2>                                   
+                                        <button className="delete-chat-button" onClick={() => deleteChat(selectedChat.id)}>Eliminar chat</button>  
+                                    </div>                                 
                                     <div className="chat-usuario">
                                         <img src={perfilImg} alt="Perfil" className="perfil-user" />
                                         <h3>{selectedChat.sender}</h3>

@@ -53,6 +53,22 @@
     height: 100%;
 }
 
+.delete-chat-button {
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #215856bf; /* Ajusta el color de fondo según tu diseño */
+    color: #ffffff; /* Color del texto */
+    cursor: pointer;
+    font-size: 14px;
+    border: none;
+    border-radius: 20px;
+    display: inline-block; /* Importante para los enlaces comportarse como botones */
+    text-align: center;
+    position: absolute; /* Posicionamiento absoluto dentro del contenedor relativo */
+    top: 25px;
+    right: 20px;
+}
+
 .chat-details {
     flex-basis: 30%;
     background-color: #05605c; /* Color de fondo para la lista de reuniones */
@@ -96,8 +112,8 @@
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil para profundidad */
     border-radius: 10px; /* Bordes redondeados suaves */
     max-width: 80%; /* Ancho máximo para contención */
-    margin-left: auto; /* Margen automático para centrado horizontal */
-    margin-right: auto; /* Margen automático para centrado horizontal */
+    top: 10px;
+    left: 10px;
 }
 
 .mensaje-usuario{
