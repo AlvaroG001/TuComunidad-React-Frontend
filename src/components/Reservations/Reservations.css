@@ -170,7 +170,7 @@
 
 /* Contenedor principal del tooltip */
 .event-details {
-    background-color: #05605c; /* Verde oscuro, ajustado para el fondo del tooltip */
+    background-color: #087768; /* Verde oscuro, ajustado para el fondo del tooltip */
     color: #fff; /* Texto en blanco para mayor contraste */
     border-radius: 10px; /* Bordes redondeados */
     padding: 10px; /* Padding interno */
@@ -182,24 +182,31 @@
     margin-left: 15px;
     top: 0px; /* Mueve el panel hacia la parte superior del contenedor */
     transform: translateY(-65%); /* Mueve el panel hacia arriba fuera de su contenedor */
+    font-family: Arial, sans-serif;
+    word-wrap: break-word; /* Permitir saltos de línea dentro de palabras */
+}
+
+.chat-right {
+    background-color: #087768;
+    margin-right: 3%;
+    margin-left: 50%;
+    align-self: flex-end;
+    font-family: Arial, sans-serif;
+    word-wrap: break-word; /* Permitir saltos de línea dentro de palabras */
 }
 
 /* Imagen del perfil del usuario */
 .perfil-user {
-    width: 50px; /* Tamaño fijo para la imagen */
-    height: 50px; /* Tamaño fijo para la imagen */
-    border-radius: 50%; /* Hacer la imagen circular */
-    margin-right: 10px; /* Espacio a la derecha de la imagen */
-    float: left; /* Flotar a la izquierda para alinear con el texto */
+    margin-top: 1px;
+    width: 40px;
+    height: 40px;
 }
 
 /* Nombre del usuario que realiza la reserva */
 .event-details h2 {
-    margin-bottom: 5px; /* Espacio debajo del título */
-    font-size: 16px; /* Tamaño de fuente adecuado */
-    font-weight: bold; /* Fuente en negrita */
-    overflow: hidden; /* Evita desbordamientos */
-    padding-left: 60px; /* Espacio para no sobreponerse a la imagen */
+    margin-left: 5px;
+    margin-top: 10px;
+    font-family: Arial, sans-serif;
 }
 
 /* Párrafos para la hora de inicio y fin */

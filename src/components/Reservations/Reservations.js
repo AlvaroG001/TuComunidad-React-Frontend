@@ -146,7 +146,8 @@ function Reservations({ logout }) {
                 method: 'DELETE'
             });
             if (response.ok) {
-                setEvents(events.filter(reservation => reservationId !== reservationId));
+                // Asegúrate de que la comparación se haga correctamente
+                setEvents(events.filter(reservation => reservation.id !== reservationId));
                 setDeleteModalIsOpen(false);
                 alert('Evento eliminado exitosamente');
             } else {
@@ -158,6 +159,7 @@ function Reservations({ logout }) {
             alert('Error al eliminar el evento: ' + error.message);
         }
     };
+    
 
 
     const openModal = () => setModalIsOpen(true);
