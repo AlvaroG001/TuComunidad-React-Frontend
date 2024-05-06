@@ -8,13 +8,14 @@ import calendarButtonImg from '../Logos/CalendarButton.png';
 import meetingButtonImg from '../Logos/MeetingButton.png';
 import voteButtonImg from '../Logos/VoteButton.png';
 import chatButtonImg from '../Logos/ChatButton.png';
-// import settingsButtonImg from '../Logos/SettingsButton.png';
+import settingsButtonImg from '../Logos/SettingsButton.png';
 
 function Chats({ logout }) {
     const location = useLocation();
     const [chats, setChats] = useState([]);
     const [selectedChat, setSelectedChat] = useState(null);
     const [newMessage, setNewMessage] = useState('');
+    const [admin, setAdmin] = useState(false);
 
     const userDataString = localStorage.getItem('userData');
     const userData = JSON.parse(userDataString);
@@ -30,8 +31,7 @@ function Chats({ logout }) {
         const userDataString1 = localStorage.getItem('userData');
         const userData1 = JSON.parse(userDataString1);
         const communityId = userData1.comunidad.id;
-
-
+        setAdmin(userData1.admin);
 
         try {
             const response = await fetch(`http://localhost:9000/api/chats?communityId=${communityId}`);
@@ -127,14 +127,14 @@ function Chats({ logout }) {
                 </Link>
                 <span className="sidebar-label">Chats</span>
 
-                {/* {president && (
+                {admin && (
                     <>
-                        <Link to="/settings">
+                        <Link to="/admin">
                             <img src={settingsButtonImg} alt="Settings" className="settings-button" />
                         </Link>
-                        <span className="sidebar-label">Ajustes</span>
+                        <span className="sidebar-label">Admin</span>
                     </>
-                )} */}
+                )}
             </aside>
             <main className="main-content">
                 <header className="main-header-chat">

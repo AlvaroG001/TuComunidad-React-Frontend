@@ -7,7 +7,7 @@ import calendarButtonImg from '../Logos/CalendarButton.png';
 import meetingButtonImg from '../Logos/MeetingButton.png';
 import voteButtonImg from '../Logos/VoteButton.png';
 import chatButtonImg from '../Logos/ChatButton.png';
-// import settingsButtonImg from '../Logos/SettingsButton.png';
+import settingsButtonImg from '../Logos/SettingsButton.png';
 
 function Meetings({ logout }) {
     const navigate = useNavigate();
@@ -15,6 +15,8 @@ function Meetings({ logout }) {
     const [president, setPresident] = useState(false);
     const [meetings, setMeetings] = useState([]);
     const [selectedMeeting, setSelectedMeeting] = useState(null);
+    const [admin, setAdmin] = useState(false);
+
 
     const userDataString = localStorage.getItem('userData');
     const userData = JSON.parse(userDataString);
@@ -47,6 +49,7 @@ function Meetings({ logout }) {
         const communityId = userData1.comunidad.id; // Asegúrate de que el objeto y la propiedad sean correctos
         
         setPresident(userData1?.president);
+        setAdmin(userData1?.admin);
     
         try {
             const response = await fetch(`http://localhost:9000/api/reuniones?communityId=${communityId}`);
@@ -104,14 +107,14 @@ function Meetings({ logout }) {
                 </Link>
                 <span className="sidebar-label">Chats</span>
 
-                {/* {president && (
+                {admin && (
                     <>
-                        <Link to="/settings">
+                        <Link to="/admin">
                             <img src={settingsButtonImg} alt="Settings" className="settings-button" />
                         </Link>
-                        <span className="sidebar-label">Ajustes</span>
+                        <span className="sidebar-label">Admin</span>
                     </>
-                )} */}
+                )}
             </aside>
 
             <main className="main-content">

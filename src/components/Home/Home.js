@@ -8,13 +8,13 @@ import calendarButtonImg from '../Logos/CalendarButton.png';
 import meetingButtonImg from '../Logos/MeetingButton.png';
 import voteButtonImg from '../Logos/VoteButton.png';
 import chatButtonImg from '../Logos/ChatButton.png';
-// import settingsButtonImg from '../Logos/SettingsButton.png';
+import settingsButtonImg from '../Logos/SettingsButton.png';
 
 
 function Home({ logout }) {
   const navigate = useNavigate();
   const [communityName, setCommunityName] = useState('Tu Comunidad');
-  // const [president, setPresident] = useState(false);
+  const [admin, setAdmin] = useState(false);
 
   const [meetings, setMeetings] = useState([]);
 
@@ -36,7 +36,8 @@ function Home({ logout }) {
         throw new Error('El nombre de la comunidad no está disponible.');
       }
       if (userData && userData.president !== undefined) {
-        // setPresident(userData.president);
+        console.log(userData)
+        setAdmin(userData.admin);
       } else {
         throw new Error('El estado de presidente no está disponible.');
       }
@@ -195,14 +196,14 @@ function Home({ logout }) {
         </Link>
         <span className="sidebar-label">Chats</span>
 
-        {/* {president && (
+        {admin && (
           <>
-            <Link to="/settings">
+            <Link to="/admin">
               <img src={settingsButtonImg} alt="Settings" className="settings-button" />
             </Link>
-            <span className="sidebar-label">Ajustes</span>
+            <span className="sidebar-label">Admin</span>
           </>
-        )} */}
+        )}
 
         {/* Iconos y enlaces de la barra lateral */}
       </aside>

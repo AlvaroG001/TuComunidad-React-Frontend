@@ -10,6 +10,7 @@ function RegisterForm() {
       door: '',
       floor: '',
       isPresident: false,
+      isAdmin: false,
       comunidad: { id: '' }
   });
   const navigate = useNavigate();

@@ -1,0 +1,63 @@
+/* Admin.css */
+.facilities-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.facility-checkbox {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: #fff; /* Letras en blanco */
+}
+
+.facility-checkbox input[type="checkbox"] {
+    display: none;
+}
+
+.checkmark {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    border-radius: 3px;
+    margin-right: 10px;
+    position: relative;
+    background-color: #013220c6; /* Fondo con transparencia */
+}
+
+.checkmark::after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.facility-checkbox input[type="checkbox"]:checked + .checkmark::after {
+    display: block;
+}
+
+.checkmark::after {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 7px;
+    height: 12px;
+    border: solid #fff; /* Ticks en blanco */
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* Estilos para los labels */
+.facility-label {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #007BFF; /* Fondo azul */
+}
+
+.facility-label:hover {
+    background-color: #013220; /* Cambio de color al pasar el ratón */
+}

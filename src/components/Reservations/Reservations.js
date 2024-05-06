@@ -12,6 +12,8 @@ import calendarButtonImg from '../Logos/CalendarButton.png';
 import meetingButtonImg from '../Logos/MeetingButton.png';
 import voteButtonImg from '../Logos/VoteButton.png';
 import chatButtonImg from '../Logos/ChatButton.png';
+import settingsButtonImg from '../Logos/SettingsButton.png';
+
 
 
 const localizer = momentLocalizer(moment);
@@ -22,17 +24,13 @@ function Reservations({ logout }) {
     const [events, setEvents] = useState([]);
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [title, setTitle] = useState('');
     const [start, setStart] = useState(new Date());
     const [end, setEnd] = useState(new Date());
     const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
     const [instalaciones, setInstalaciones] = useState('');
     const [communityDetails, setCommunityDetails] = useState({});
-
-
-
-    const userDataString = localStorage.getItem('userData');
-    const userData = JSON.parse(userDataString);
+    const [admin, setAdmin] = useState(false);
+    const [nombre, setNombre] = useState('');
 
     const installationNames = {
         cinema: 'Cine',
@@ -79,6 +77,7 @@ function Reservations({ logout }) {
         const userDataString = localStorage.getItem('userData');
         const userData = JSON.parse(userDataString);
         const communityId = userData.comunidad.id;
+        setAdmin(userData.admin);
 
         try {
             const response = await fetch(`http://localhost:9000/api/comunidades/${communityId}`);
@@ -106,13 +105,18 @@ function Reservations({ logout }) {
     }, [instalaciones, location]);
 
     const handleAddEvent = async () => {
+        const userDataString = localStorage.getItem('userData');
+        const userData = JSON.parse(userDataString);
+        setNombre(userData.name);
+        console.log(nombre);
         const event = {
-            title,
+            title: nombre,
             startTime: start,
             endTime: end,
             comunidad: userData.comunidad,
             instalaciones
         };
+        console.log(event);
 
         try {
             const response = await fetch(`http://localhost:9000/api/reservations`, {
@@ -159,7 +163,7 @@ function Reservations({ logout }) {
             alert('Error al eliminar el evento: ' + error.message);
         }
     };
-    
+
 
 
     const openModal = () => setModalIsOpen(true);
@@ -190,14 +194,14 @@ function Reservations({ logout }) {
                     <img src={chatButtonImg} alt="Chat" className="chat-button" />
                 </Link>
                 <span className="sidebar-label">Chats</span>
-                {/* {president && (
+                {admin && (
                     <>
-                        <Link to="/settings">
+                        <Link to="/admin">
                             <img src={settingsButtonImg} alt="Settings" className="settings-button" />
                         </Link>
                         <span className="sidebar-label">Ajustes</span>
                     </>
-                )} */}
+                )}
             </aside>
             <main className="main-content">
                 <header className="main-header">
@@ -229,7 +233,7 @@ function Reservations({ logout }) {
                     </div>
 
                     <div className="reservations-details">
-                        <h3 className="reservations-h2">Instalaciones de "{userData.comunidad.name}"</h3>
+                        <h3 className="reservations-h2">Instalaciones</h3>
                         {communityDetails.cinema && (
                             <button className='buttonReservation' onClick={() => {
                                 console.log('Instalación seleccionada:', 'cinema');
@@ -288,7 +292,7 @@ function Reservations({ logout }) {
                     <div className="create-reservation-wrapper">
                         <h2>Reserva</h2>
                         <form className="create-reservation-form">
-                            <input type="text" placeholder="Nombre" value={title} onChange={e => setTitle(e.target.value)} />
+                            {/* <input type="text" placeholder="Nombre" value={title} onChange={e => setTitle(e.target.value)} /> */}
                             <select value={instalaciones} onChange={e => setInstalaciones(e.target.value)}>
                                 <option value="">Seleccione una instalación</option>
                                 {communityDetails.cinema && <option value="cinema">Cine</option>}

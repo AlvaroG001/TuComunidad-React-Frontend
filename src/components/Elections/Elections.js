@@ -7,7 +7,7 @@ import calendarButtonImg from '../Logos/CalendarButton.png';
 import meetingButtonImg from '../Logos/MeetingButton.png';
 import voteButtonImg from '../Logos/VoteButton.png';
 import chatButtonImg from '../Logos/ChatButton.png';
-// import settingsButtonImg from '../Logos/SettingsButton.png';
+import settingsButtonImg from '../Logos/SettingsButton.png';
 
 function Elections({ logout }) {
     const location = useLocation();
@@ -15,6 +15,7 @@ function Elections({ logout }) {
     const [elections, setElections] = useState([]);
     const [selectedElection, setSelectedElection] = useState(null);
     const [hasVoted, setHasVoted] = useState(false);
+    const [admin, setAdmin] = useState(false);
 
     const [agreeCount, setAgreeCount] = useState();
     const [disagreeCount, setDisagreeCount] = useState();
@@ -29,6 +30,7 @@ function Elections({ logout }) {
         const communityId1 = userData1.comunidad.id; // Asegúrate de que el objeto y la propiedad sean correctos
 
         setPresident(userData1?.president);
+        setAdmin(userData1?.admin);
 
         try {
             const response = await fetch(`http://localhost:9000/api/votaciones?communityId=${communityId1}`);
@@ -176,24 +178,25 @@ function Elections({ logout }) {
                 </Link>
                 <span className="sidebar-label">Chats</span>
 
-                {/* {president && (
+                {admin && (
                     <>
-                        <Link to="/settings">
+                        <Link to="/admin">
                             <img src={settingsButtonImg} alt="Settings" className="settings-button" />
                         </Link>
-                        <span className="sidebar-label">Ajustes</span>
+                        <span className="sidebar-label">Admin</span>
                     </>
-                )} */}
+                )}
             </aside>
 
             <main className="main-content">
                 <header className="main-header">
                     <h1>Votaciones pedientes - {userData.comunidad.name}</h1>
                     <div className="header-buttons">
-                        <Link to="/create-elections" className="create-meeting-button">
-                            Crear Votación
-                        </Link>
-
+                        {president && (
+                            <Link to="/create-elections" className="create-meeting-button">
+                                Crear Votación
+                            </Link>
+                        )}
                         <button onClick={logout} className="logout-button">Cerrar sesión</button>
                     </div>
                 </header>
