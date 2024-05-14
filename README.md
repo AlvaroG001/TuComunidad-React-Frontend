@@ -1,4 +1,4 @@
-# TuComunidad
+# TuComunidad-React-Frontend
 
 ## Descripción
 
@@ -22,11 +22,11 @@ TuComunidad es una aplicación web interactiva desarrollada utilizando React, di
 
 1. **Clonar el repositorio**:
     ```bash
-    git clone https://github.com/AlvaroG001/TuComunidad-API-Java.git
+    git clone [https://github.com/AlvaroG001/TuComunidad-React-Frontend.git](https://github.com/AlvaroG001/TuComunidad-React-Frontend.git)
     ```
 2. **Instalar dependencias**:
     ```bash
-    cd TuComunidad-API-Java
+    cd TuComunidad-React-Frontend
     npm install
     ```
 3. **Iniciar la aplicación**:
@@ -34,12 +34,55 @@ TuComunidad es una aplicación web interactiva desarrollada utilizando React, di
     npm start
     ```
 
+## Configuración
+
+Asegúrate de que el backend está configurado y corriendo en la URL correspondiente. Actualiza el archivo de configuración si es necesario para apuntar al backend correcto.
+
+## Scripts Disponibles
+
+En el directorio del proyecto, puedes ejecutar:
+
+### `npm start`
+
+Inicia la aplicación en modo de desarrollo.  
+Abre [http://localhost:3000](http://localhost:3000) para verlo en tu navegador.
+
+La página se recargará si haces modificaciones.  
+También verás errores de lint en la consola.
+
+### `npm test`
+
+Inicia el corredor de pruebas en modo interactivo.  
+Consulta la sección sobre [pruebas](https://facebook.github.io/create-react-app/docs/running-tests) para más información.
+
+### `npm run build`
+
+Compila la aplicación para producción en la carpeta `build`.  
+Empaqueta React en modo de producción y optimiza la compilación para el mejor rendimiento.
+
+La compilación está minificada y los nombres de los archivos incluyen los hashes.  
+Tu aplicación está lista para ser desplegada.
+
+Consulta la sección sobre [despliegue](https://facebook.github.io/create-react-app/docs/deployment) para más información.
+
+## Estructura del Proyecto
+
+- `src/` - Contiene el código fuente de la aplicación React.
+- `public/` - Contiene los archivos públicos que se copiarán al directorio de compilación.
+- `package.json` - Archivo de configuración del proyecto y dependencias.
+
 ## Contribuir
 
 TuComunidad está abierto a contribuciones. Si tienes ideas para mejorar la aplicación o encuentras algún error, siéntete libre de crear un pull request o abrir un issue.
 
 ## ¡Importante!
 
-TuComunidad emplea una API diseñada en un servidor local el cual hace falta instalarlo y correrlo para poder usar la pagina.
-Lo puede descargar en 
-MAIN + MIGRATION-SERVER + RESERVATION + CHATS 
+TuComunidad emplea una API diseñada en un servidor local el cual hace falta instalarlo y correrlo para poder usar la página. Lo puedes descargar en el [repositorio del backend](https://github.com/AlvaroG001/TuComunidad-SpringBoot-Backend.git).
+
+## Licencia
+
+Este proyecto está bajo la licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+
+---
+
+**TuComunidad** es un proyecto diseñado para facilitar la gestión de comunidades y mejorar la interacción entre los vecinos. ¡Esperamos que encuentres útil esta aplicación!
